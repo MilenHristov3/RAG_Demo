@@ -1,0 +1,7 @@
+psycopg[binary]
+pgvector
+black
+python-dotenv
+pymupdf
+pymupdf4llm
+requests
