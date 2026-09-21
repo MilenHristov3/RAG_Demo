@@ -2,7 +2,17 @@ from pathlib import Path
 import json
 import re
 
-"""legal_structure.py produce structured legal units, but not chunk them yet."""
+# Instrument metadata
+
+
+INSTRUMENT = {
+    "celex": "32024R1689",
+    "eli": "http://data.europa.eu/eli/reg/2024/1689/oj",
+    "title": "Regulation (EU) 2024/1689 (AI Act)",
+    "language": "EN",
+    "publication_date": "2024-07-12",
+}
+
 
 # Regular expressions
 
@@ -13,37 +23,35 @@ CHAPTER_RE = re.compile(
 )
 
 ARTICLE_RE = re.compile(
-    r"^Article\s+(\d+[a-zA-Z]?)\s*$",
+    r"^Article\s+(\d+[A-Za-z]?)\s*$",
     re.IGNORECASE,
 )
 
-PARAGRAPH_RE = re.compile(
-    r"^(\d+)\.\s*(.*)$"
-)
+PARAGRAPH_RE = re.compile(r"^(\d+)\.\s*(.*)$")
 
-POINT_RE = re.compile(
-    r"^\(([a-z]+)\)\s*(.*)$"
-)
-
-SUBPOINT_RE = re.compile(
-    r"^\(([ivxlcdm]+)\)\s*(.*)$",
+# A legal point such as:
+#
+# (a) text
+# (b) text
+# (c) text
+#
+POINT_MARKER_RE = re.compile(
+    r"\(([a-z])\)\s*",
     re.IGNORECASE,
 )
 
 
-
-# Helpers
+# Text cleaning helpers
 
 
 def clean_line(line: str) -> str:
     """
-    Remove Markdown formatting that can interfere with legal structure
-    detection.
+    Clean Markdown formatting from one line.
 
     Examples:
 
         "# Article 1"          -> "Article 1"
-        "## **GENERAL**"       -> "GENERAL"
+        "## **Subject matter**" -> "Subject matter"
         "# _Article 1_"        -> "Article 1"
     """
 
@@ -52,37 +60,68 @@ def clean_line(line: str) -> str:
     # Remove Markdown heading markers
     line = re.sub(r"^#{1,6}\s*", "", line)
 
-    # Remove bold / italic Markdown markers
+    # Remove bold markers
     line = line.replace("**", "")
+
+    # Remove italic markers
     line = line.replace("__", "")
     line = line.replace("*", "")
     line = line.replace("_", "")
 
-    return line.strip()
+    # Remove accidental trailing backticks
+    line = line.rstrip("`").strip()
+
+    return line
 
 
-def is_chapter(line: str) -> bool:
-    return CHAPTER_RE.match(clean_line(line)) is not None
+def normalize_text(text: str) -> str:
+    """
+    Normalize whitespace inside legal text.
+    """
+
+    text = text.replace("\u00a0", " ")
+
+    # Collapse repeated whitespace
+    text = re.sub(r"\s+", " ", text)
+
+    return text.strip()
 
 
-def is_article(line: str) -> bool:
-    return ARTICLE_RE.match(clean_line(line)) is not None
+def remove_list_separator(text: str) -> str:
+    """
+    Remove separators introduced by PDF extraction.
+
+    Examples:
+
+        "- (b) text" -> "(b) text"
+        "– text"     -> "text"
+    """
+
+    text = text.strip()
+
+    text = re.sub(
+        r"^[\-–—]\s*",
+        "",
+        text,
+    )
+
+    return text.strip()
 
 
-def is_paragraph(line: str) -> bool:
-    return PARAGRAPH_RE.match(clean_line(line)) is not None
-
-
-def is_point(line: str) -> bool:
-    return POINT_RE.match(clean_line(line)) is not None
+# Structure detection
 
 
 def extract_chapter(line: str) -> str | None:
     """
-    Return normalized chapter identifier.
+    Extract chapter number.
 
     Example:
-        CHAPTER I -> CHAPTER I
+
+        CHAPTER I
+
+    returns:
+
+        I
     """
 
     line = clean_line(line)
@@ -92,16 +131,20 @@ def extract_chapter(line: str) -> str | None:
     if not match:
         return None
 
-    return f"CHAPTER {match.group(1).upper()}"
+    return match.group(1).upper()
 
 
 def extract_article(line: str) -> str | None:
     """
-    Return normalized article identifier.
+    Extract article number.
 
     Example:
-        Article 1 -> Article 1
-        Article 27a -> Article 27a
+
+        Article 1
+
+    returns:
+
+        1
     """
 
     line = clean_line(line)
@@ -111,20 +154,20 @@ def extract_article(line: str) -> str | None:
     if not match:
         return None
 
-    return f"Article {match.group(1)}"
+    return match.group(1)
 
 
-def extract_paragraph(line: str) -> tuple[int, str] | None:
+def extract_paragraph(line: str) -> tuple[str, str] | None:
     """
     Extract paragraph number and initial text.
 
     Example:
 
-        1. The purpose of this Regulation...
+        2. This Regulation lays down:
 
-    becomes:
+    returns:
 
-        (1, "The purpose of this Regulation...")
+        ("2", "This Regulation lays down:")
     """
 
     line = clean_line(line)
@@ -134,209 +177,461 @@ def extract_paragraph(line: str) -> tuple[int, str] | None:
     if not match:
         return None
 
-    number = int(match.group(1))
-    text = match.group(2).strip()
+    number = match.group(1)
+    text = normalize_text(match.group(2))
 
     return number, text
 
 
-def extract_point(line: str) -> tuple[str, str] | None:
+# Point parsing
+
+
+def split_points(text: str) -> tuple[str, list[dict]]:
     """
-    Extract a legal point.
+    Detect legal points inside a text block.
 
     Example:
 
-        (a) harmonised rules...
+        This Regulation lays down:
+        (a) harmonised rules;
+        (b) prohibitions;
+        (c) requirements;
 
-    becomes:
+    returns:
 
-        ("a", "harmonised rules...")
+        intro:
+            "This Regulation lays down:"
+
+        points:
+            [
+                {
+                    "label": "a",
+                    "text": "harmonised rules;"
+                },
+                {
+                    "label": "b",
+                    "text": "prohibitions;"
+                },
+                {
+                    "label": "c",
+                    "text": "requirements;"
+                }
+            ]
+
+    If there are no legal points, returns:
+
+        text, []
+
+    This is important because ordinary paragraphs must remain ordinary
+    paragraphs.
     """
 
-    line = clean_line(line)
+    text = normalize_text(text)
 
-    match = POINT_RE.match(line)
+    matches = list(POINT_MARKER_RE.finditer(text))
 
-    if not match:
-        return None
+    # No "(a)", "(b)", etc.
+    if not matches:
+        return text, []
 
-    identifier = match.group(1)
-    text = match.group(2).strip()
+    # -------------------------------------------------------------------------
+    # Determine whether these are really legal points.
+    #
+    # We only treat the markers as points if they appear to form a sequence:
+    #
+    # (a) ...
+    # (b) ...
+    #
+    # This prevents random references such as:
+    #
+    # "see Article 5(a)"
+    #
+    # from becoming legal points.
+    # -------------------------------------------------------------------------
 
-    return identifier, text
+    labels = [match.group(1).lower() for match in matches]
+
+    # Expected sequence starts with "a"
+    if labels[0] != "a":
+        return text, []
+
+    # Check sequential ordering:
+    #
+    # a, b, c, d...
+    expected = [chr(ord("a") + i) for i in range(len(labels))]
+
+    if labels != expected:
+        return text, []
+
+    # -------------------------------------------------------------------------
+    # Everything before "(a)" is paragraph introduction.
+    # -------------------------------------------------------------------------
+
+    intro = text[: matches[0].start()].strip()
+
+    points = []
+
+    # -------------------------------------------------------------------------
+    # Extract each point's text.
+    # -------------------------------------------------------------------------
+
+    for index, match in enumerate(matches):
+
+        label = match.group(1).lower()
+
+        start = match.end()
+
+        if index + 1 < len(matches):
+            end = matches[index + 1].start()
+        else:
+            end = len(text)
+
+        point_text = text[start:end].strip()
+
+        point_text = remove_list_separator(point_text)
+
+        point_text = normalize_text(point_text)
+
+        points.append(
+            {
+                "label": label,
+                "text": point_text,
+            }
+        )
+
+    return intro, points
 
 
+# Paragraph handling
 
-# Legal structure parser
 
-
-def parse_legal_structure(markdown: str) -> list[dict]:
+def create_paragraph(
+    number: str,
+    text: str,
+) -> dict:
     """
-    Parse cleaned Markdown into legal structural units.
+    Create a paragraph object.
 
-    Current hierarchy:
+    The function decides whether the paragraph is:
 
-        Chapter
-            Article
-                Paragraph
-                    Point
+        1. A normal paragraph
 
-    The function deliberately does not perform chunking yet.
+    or:
+
+        2. An introductory paragraph containing legal points.
     """
 
-    lines = markdown.splitlines()
+    text = normalize_text(text)
 
-    records = []
+    intro, points = split_points(text)
 
-    current_chapter = None
-    current_chapter_title = None
+    # -------------------------------------------------------------------------
+    # Paragraph contains points
+    # -------------------------------------------------------------------------
 
-    current_article = None
-    current_article_title = None
+    if points:
 
-    current_paragraph = None
-    current_point = None
-
-    current_text = []
-
-    def flush_record():
-        """
-        Save the current legal unit before moving to a new unit.
-        """
-
-        nonlocal current_text
-        nonlocal current_paragraph
-        nonlocal current_point
-
-        if not current_text:
-            return
-
-        text = " ".join(
-            part.strip()
-            for part in current_text
-            if part.strip()
-        ).strip()
-
-        if not text:
-            current_text = []
-            return
-
-        record = {
-            "chapter": current_chapter,
-            "chapter_title": current_chapter_title,
-            "article": current_article,
-            "article_title": current_article_title,
-            "paragraph": current_paragraph,
-            "point": current_point,
-            "text": text,
+        paragraph = {
+            "number": number,
+            "intro": intro,
+            "points": points,
         }
 
-        records.append(record)
+        return paragraph
 
-        current_text = []
+    # -------------------------------------------------------------------------
+    # Ordinary paragraph
+    # -------------------------------------------------------------------------
 
-    for raw_line in lines:
+    paragraph = {
+        "number": number,
+        "text": text,
+    }
 
-        line = clean_line(raw_line)
+    return paragraph
+
+
+# Article parsing
+
+
+def parse_article(
+    lines: list[str],
+    start_index: int,
+) -> tuple[dict, int]:
+    """
+    Parse one complete article.
+
+    Returns:
+
+        article, next_index
+    """
+
+    article_line = clean_line(lines[start_index])
+
+    article_number = extract_article(article_line)
+
+    if article_number is None:
+        raise ValueError(f"Expected Article at line {start_index}: {article_line}")
+
+    index = start_index + 1
+
+    # -------------------------------------------------------------------------
+    # Article title
+    # -------------------------------------------------------------------------
+
+    article_title = None
+
+    while index < len(lines):
+
+        line = clean_line(lines[index])
 
         if not line:
+            index += 1
             continue
 
-        
-        # CHAPTER
-        
+        # Stop if another article/chapter starts
+        if CHAPTER_RE.match(line):
+            break
 
-        chapter = extract_chapter(line)
+        if ARTICLE_RE.match(line):
+            break
 
-        if chapter:
-            flush_record()
+        # Stop when paragraph starts
+        if PARAGRAPH_RE.match(line):
+            break
 
-            current_chapter = chapter
-            current_chapter_title = None
+        article_title = line
 
-            current_article = None
-            current_article_title = None
+        index += 1
 
-            current_paragraph = None
-            current_point = None
+        break
 
+    # -------------------------------------------------------------------------
+    # Paragraphs
+    # -------------------------------------------------------------------------
+
+    paragraphs = []
+
+    current_paragraph_number = None
+    current_paragraph_text = []
+
+    while index < len(lines):
+
+        line = clean_line(lines[index])
+
+        if not line:
+            index += 1
             continue
 
-        
-        # ARTICLE
-        
+        # ---------------------------------------------------------------------
+        # New chapter
+        # ---------------------------------------------------------------------
 
-        article = extract_article(line)
+        if CHAPTER_RE.match(line):
+            break
 
-        if article:
-            flush_record()
+        # ---------------------------------------------------------------------
+        # New article
+        # ---------------------------------------------------------------------
 
-            current_article = article
-            current_article_title = None
+        if ARTICLE_RE.match(line):
+            break
 
-            current_paragraph = None
-            current_point = None
-
-            continue
-
-        
-        # PARAGRAPH
-        
+        # ---------------------------------------------------------------------
+        # New paragraph
+        # ---------------------------------------------------------------------
 
         paragraph = extract_paragraph(line)
 
         if paragraph:
-            flush_record()
 
-            current_paragraph = paragraph[0]
-            current_point = None
+            # Save previous paragraph
+            if current_paragraph_number is not None:
 
-            # If paragraph contains text on same line,
-            # start collecting it.
+                paragraph_object = create_paragraph(
+                    number=current_paragraph_number,
+                    text=" ".join(current_paragraph_text),
+                )
+
+                paragraphs.append(paragraph_object)
+
+            # Start new paragraph
+            current_paragraph_number = paragraph[0]
+
+            current_paragraph_text = []
+
             if paragraph[1]:
-                current_text.append(paragraph[1])
+                current_paragraph_text.append(paragraph[1])
+
+            index += 1
 
             continue
 
-        
-        # POINT
-        
+        # ---------------------------------------------------------------------
+        # Continuation of current paragraph
+        # ---------------------------------------------------------------------
 
-        point = extract_point(line)
+        if current_paragraph_number is not None:
 
-        if point:
-            flush_record()
+            current_paragraph_text.append(line)
 
-            current_point = point[0]
+        index += 1
 
-            if point[1]:
-                current_text.append(point[1])
+    # -------------------------------------------------------------------------
+    # Save final paragraph
+    # -------------------------------------------------------------------------
+
+    if current_paragraph_number is not None:
+
+        paragraph_object = create_paragraph(
+            number=current_paragraph_number,
+            text=" ".join(current_paragraph_text),
+        )
+
+        paragraphs.append(paragraph_object)
+
+    # -------------------------------------------------------------------------
+    # Create article object
+    # -------------------------------------------------------------------------
+
+    article = {
+        "number": article_number,
+        "title": article_title,
+        "paragraphs": paragraphs,
+    }
+
+    return article, index
+
+
+# Chapter parsing
+
+
+def parse_chapter_title(
+    lines: list[str],
+    start_index: int,
+) -> tuple[str | None, int]:
+    """
+    Extract the chapter title.
+
+    Example:
+
+        CHAPTER I
+        GENERAL PROVISIONS
+
+    returns:
+
+        "GENERAL PROVISIONS"
+    """
+
+    index = start_index
+
+    while index < len(lines):
+
+        line = clean_line(lines[index])
+
+        if not line:
+            index += 1
+            continue
+
+        # Do not consume another chapter/article as a title
+        if CHAPTER_RE.match(line):
+            return None, index
+
+        if ARTICLE_RE.match(line):
+            return None, index
+
+        title = line
+
+        return title, index + 1
+
+    return None, index
+
+
+# Full regulation parser
+
+
+def parse_legal_structure(
+    markdown: str,
+) -> list[dict]:
+    """
+    Parse the complete legal document.
+
+    Output hierarchy:
+
+        instrument
+            chapter
+                article
+                    paragraphs
+                        points
+    """
+
+    lines = markdown.splitlines()
+
+    documents = []
+
+    current_chapter_number = None
+    current_chapter_title = None
+
+    index = 0
+
+    while index < len(lines):
+
+        line = clean_line(lines[index])
+
+        if not line:
+            index += 1
+            continue
+
+        # ---------------------------------------------------------------------
+        # Chapter
+        # ---------------------------------------------------------------------
+
+        chapter_number = extract_chapter(line)
+
+        if chapter_number:
+
+            current_chapter_number = chapter_number
+
+            current_chapter_title, next_index = parse_chapter_title(
+                lines,
+                index + 1,
+            )
+
+            index = next_index
 
             continue
 
-        
-        # TITLE DETECTION
-        
+        # ---------------------------------------------------------------------
+        # Article
+        # ---------------------------------------------------------------------
 
-        if current_article and current_article_title is None:
-            current_article_title = line
+        article_number = extract_article(line)
+
+        if article_number:
+
+            article, next_index = parse_article(
+                lines,
+                index,
+            )
+
+            document = {
+                "instrument": INSTRUMENT,
+                "chapter": {
+                    "number": current_chapter_number,
+                    "title": current_chapter_title,
+                },
+                "article": article,
+            }
+
+            documents.append(document)
+
+            index = next_index
+
             continue
 
-        if current_chapter and current_chapter_title is None:
-            current_chapter_title = line
-            continue
+        index += 1
 
-        
-        # NORMAL LEGAL TEXT
-        
-
-        current_text.append(line)
-
-    # Flush final record
-    flush_record()
-
-    return records
-
+    return documents
 
 
 # File handling
@@ -347,15 +642,12 @@ def parse_legal_structure_file(
     output_path: Path,
 ) -> None:
     """
-    Read cleaned Markdown, extract legal structure,
-    and save the result as JSON.
+    Read cleaned Markdown and write structured legal JSON.
     """
 
-    markdown = input_path.read_text(
-        encoding="utf-8"
-    )
+    markdown = input_path.read_text(encoding="utf-8")
 
-    records = parse_legal_structure(markdown)
+    structure = parse_legal_structure(markdown)
 
     output_path.parent.mkdir(
         parents=True,
@@ -364,18 +656,17 @@ def parse_legal_structure_file(
 
     output_path.write_text(
         json.dumps(
-            records,
+            structure,
             ensure_ascii=False,
             indent=2,
         ),
         encoding="utf-8",
     )
 
-    print(f"Input:   {input_path}")
-    print(f"Output:  {output_path}")
-    print(f"Records: {len(records)}")
+    print(f"Input:    {input_path}")
+    print(f"Output:   {output_path}")
+    print(f"Articles: {len(structure)}")
     print("Legal structure extraction completed.")
-
 
 
 # Main
@@ -383,13 +674,9 @@ def parse_legal_structure_file(
 
 if __name__ == "__main__":
 
-    input_file = Path(
-        "data/extracted/eli_reg_2024_1689_oj_EN_TXT.clean.md" #TODO change it to have option to choose file eventually or to accept file name and to keep it
-    )
+    input_file = Path("data/extracted/eli_reg_2024_1689_oj_EN_TXT.clean.md")
 
-    output_file = Path(
-        "data/extracted/eli_reg_2024_1689_oj_EN_TXT.structure.json"
-    )
+    output_file = Path("data/extracted/eli_reg_2024_1689_oj_EN_TXT.structure.json")
 
     parse_legal_structure_file(
         input_path=input_file,
