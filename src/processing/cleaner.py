@@ -1,98 +1,127 @@
 from pathlib import Path
 import re
 
-"""clean formatting/extraction noise without changing the legal wording"""
 
-
-def normalize_whitespace(text: str) -> str:
+def normalize_unicode_whitespace(text: str) -> str:
     """
-    Normalize whitespace while preserving Markdown structure.
+    Normalize common Unicode whitespace characters.
+
+    We intentionally do not modify legal punctuation or wording.
     """
 
-    # Normalize line endings
     text = text.replace("\r\n", "\n")
     text = text.replace("\r", "\n")
 
-    # Replace non-breaking spaces
+    # Non-breaking space
     text = text.replace("\u00a0", " ")
 
-    # Replace other common Unicode whitespace characters
-    text = text.replace("\u2009", " ")  # thin space
-    text = text.replace("\u200a", " ")  # hair space
-    text = text.replace("\u202f", " ")  # narrow no-break space
+    # Thin space
+    text = text.replace("\u2009", " ")
 
-    # Remove trailing whitespace from every line
-    text = "\n".join(line.rstrip() for line in text.splitlines())
+    # Hair space
+    text = text.replace("\u200a", " ")
+
+    # Narrow no-break space
+    text = text.replace("\u202f", " ")
 
     return text
 
 
+def normalize_line_whitespace(text: str) -> str:
+    """
+    Remove unnecessary whitespace at the end of lines
+    while preserving line structure.
+    """
+
+    lines = text.splitlines()
+
+    lines = [line.rstrip() for line in lines]
+
+    return "\n".join(lines)
+
+
 def normalize_superscripts(text: str) -> str:
     """
-    Normalize HTML superscript tags produced by PDF extraction.
+    Convert HTML superscript tags to their text content.
 
     Example:
-        <sup>8</sup> -> 8
 
-    We keep the actual number because it may correspond to a
-    footnote or PDF link that is preserved separately in links.json.
+        <sup>8</sup>
+
+    becomes:
+
+        8
+
+    The PDF link itself is preserved separately in links.json.
     """
 
-    text = re.sub(
+    return re.sub(
         r"<sup>\s*(.*?)\s*</sup>",
         r"\1",
         text,
         flags=re.DOTALL,
     )
 
-    return text
-
 
 def remove_empty_markdown_lines(text: str) -> str:
     """
-    Remove unnecessary empty Markdown formatting lines.
-
-    This does not remove legal text.
+    Remove lines containing only empty Markdown markers.
     """
 
     lines = text.splitlines()
 
-    cleaned_lines = []
+    cleaned = []
 
     for line in lines:
+
         stripped = line.strip()
 
-        # Remove completely empty emphasis markers
-        if stripped in {"**", "__", "*", "_"}:
+        if stripped in {
+            "**",
+            "__",
+            "*",
+            "_",
+        }:
             continue
 
-        cleaned_lines.append(line)
+        cleaned.append(line)
 
-    return "\n".join(cleaned_lines)
+    return "\n".join(cleaned)
 
 
 def collapse_excessive_blank_lines(text: str) -> str:
     """
-    Collapse 3+ consecutive blank lines into a single blank line.
+    Replace 3+ consecutive blank lines with one blank line.
     """
 
-    return re.sub(r"\n{3,}", "\n\n", text)
+    return re.sub(
+        r"\n{3,}",
+        "\n\n",
+        text,
+    )
 
 
 def clean_markdown(text: str) -> str:
     """
-    Main cleaning pipeline.
+    Main Markdown cleaning pipeline.
 
-    The goal is to normalize extraction artifacts while preserving:
-    - legal wording
-    - Markdown headings
-    - article numbering
-    - paragraph numbering
-    - lists
-    - superscript reference numbers
+    Important:
+    This function is intentionally conservative.
+
+    It should NOT:
+        - remove legal numbering
+        - change article numbers
+        - change paragraph numbers
+        - remove legal references
+        - split legal points
+        - detect chapters/articles/annexes
+
+    Those tasks belong to legal_structure.py.
     """
 
-    text = normalize_whitespace(text)
+    text = normalize_unicode_whitespace(text)
+
+    text = normalize_line_whitespace(text)
 
     text = normalize_superscripts(text)
 
@@ -100,10 +129,7 @@ def clean_markdown(text: str) -> str:
 
     text = collapse_excessive_blank_lines(text)
 
-    # Remove whitespace at the beginning and end of the document
-    text = text.strip()
-
-    return text
+    return text.strip()
 
 
 def clean_markdown_file(
@@ -111,14 +137,17 @@ def clean_markdown_file(
     output_path: Path,
 ) -> None:
     """
-    Read a raw Markdown file, clean it, and save the result.
+    Read raw Markdown, clean it, and save a separate file.
     """
 
     text = input_path.read_text(encoding="utf-8")
 
     cleaned_text = clean_markdown(text)
 
-    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.parent.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
 
     output_path.write_text(
         cleaned_text,
@@ -131,9 +160,8 @@ def clean_markdown_file(
 
 
 if __name__ == "__main__":
-    input_file = Path(
-        "data/extracted/eli_reg_2024_1689_oj_EN_TXT.md"  # TODO change it to have option to choose file eventually or to accept file name and to keep it
-    )
+
+    input_file = Path("data/extracted/eli_reg_2024_1689_oj_EN_TXT.md")
 
     output_file = Path("data/extracted/eli_reg_2024_1689_oj_EN_TXT.clean.md")
 
@@ -141,20 +169,3 @@ if __name__ == "__main__":
         input_path=input_file,
         output_path=output_file,
     )
-
-"""
-    
-Important: what it deliberately does not do
-
-I would not make the cleaner responsible for:
-
-detecting Article 1
-detecting Paragraph 1
-detecting CHAPTER I
-changing # Article into a different heading level
-splitting articles
-removing footnote/reference numbers
-removing legal numbering
-modifying legal wording
-identifying links
-"""
