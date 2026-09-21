@@ -3,6 +3,7 @@ import re
 
 """clean formatting/extraction noise without changing the legal wording"""
 
+
 def normalize_whitespace(text: str) -> str:
     """
     Normalize whitespace while preserving Markdown structure.
@@ -131,12 +132,10 @@ def clean_markdown_file(
 
 if __name__ == "__main__":
     input_file = Path(
-        "data/extracted/eli_reg_2024_1689_oj_EN_TXT.md" #TODO change it to have option to choose file eventually or to accept file name and to keep it
+        "data/extracted/eli_reg_2024_1689_oj_EN_TXT.md"  # TODO change it to have option to choose file eventually or to accept file name and to keep it
     )
 
-    output_file = Path(
-        "data/extracted/eli_reg_2024_1689_oj_EN_TXT.clean.md"
-    )
+    output_file = Path("data/extracted/eli_reg_2024_1689_oj_EN_TXT.clean.md")
 
     clean_markdown_file(
         input_path=input_file,

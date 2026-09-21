@@ -65,9 +65,7 @@ def download_url(
 
     output_path = output_dir / filename
 
-    output_path.write_bytes(
-        response.content
-    )
+    output_path.write_bytes(response.content)
 
     print(f"Saved to:       {output_path}")
 

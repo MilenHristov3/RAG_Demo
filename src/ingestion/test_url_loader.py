@@ -2,7 +2,6 @@ from pathlib import Path
 
 import requests
 
-
 if __name__ == "__main__":
     url = input("Enter URL: ").strip()
 
