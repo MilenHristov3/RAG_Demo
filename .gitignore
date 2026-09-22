@@ -1,5 +1,39 @@
+# Environment
 .env
 .venv/
+venv/
+
+# Python
 __pycache__/
 *.pyc
-data/raw/
+*.pyo
+*.pyd
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.mypy_cache/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Data - source files (large PDFs, downloaded HTML)
+data/source/
+
+# Data - extracted/generated files (regeneratable from source)
+data/extracted/
+
+# Logs
+*.log
+
+# Distribution
+dist/
+build/
+*.egg-info/
