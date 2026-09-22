@@ -131,6 +131,69 @@ RAG_Demo/
 └── todo.md
 ```
 
+## Agentic Development (Recommended)
+
+This project is designed for **agentic workflows** — AI agents that can read, write, and reason about code autonomously. We strongly recommend using an agentic harness for development.
+
+### OpenCode
+
+[**OpenCode**](https://opencode.dev) is the preferred agentic harness for this project. It provides:
+
+- **Native agent support** — Built-in agents for exploration, coding, debugging
+- **Model flexibility** — Swap models per task (coding, reasoning, long-context)
+- **Session persistence** — Resume work across sessions
+- **Extensible** — Custom agents, commands, skills, MCP servers
+- **Local-first** — Runs on your machine, your data stays private
+
+#### Installation
+
+See [docs/opencode.md](docs/opencode.md) for full installation instructions.
+
+Quick start:
+```sh
+# macOS
+brew install opencode
+
+# Linux
+curl -fsSL https://opencode.dev/install.sh | sh
+
+# Windows
+scoop install opencode
+```
+
+#### Recommended Models
+
+| Model | Provider | Best For |
+|-------|----------|----------|
+| **Nemotron 3 Ultra** | NVIDIA | Complex reasoning, architecture decisions, code review |
+| **Hy4** | Hyperbolic | Day-to-day coding, refactoring, implementation |
+| **Kimi K3** | Moonshot | Large file analysis, long-context tasks, multilingual |
+
+All three integrate natively with OpenCode. Configure API keys in `~/.config/opencode/opencode.json`.
+
+#### Usage
+
+```sh
+# Start OpenCode in this project
+cd RAG_Demo
+opencode
+
+# Or with a specific model
+opencode -m nvidia/nemotron-3-ultra
+```
+
+### Why Agentic Harnesses?
+
+| Traditional IDE + Copilot | Agentic Harness (OpenCode) |
+|---------------------------|----------------------------|
+| Autocomplete & chat | Autonomous multi-step tasks |
+| Single-file context | Whole-repo understanding |
+| Human drives every step | Agent plans & executes |
+| Limited tool use | Full shell, git, browser, DB access |
+| Session = tab | Session = persistent workspace |
+
+---
+
 ## License
 
 This project processes public EU legal texts available from EUR-Lex under the [EU Public Licence](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689).
