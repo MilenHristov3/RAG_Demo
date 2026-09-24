@@ -34,6 +34,14 @@ POSTGRES_DB=your_database
 POSTGRES_USER=your_user
 POSTGRES_PASSWORD=your_password
 ```
+## Install PostgreSQL and pgvector
+
+Run comands:
+
+```sh
+cd project_namer
+./scripts/setup_docker.sh
+```
 
 ## Verify Installation
 
