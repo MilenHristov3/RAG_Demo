@@ -3,7 +3,10 @@ import json
 import re
 from datetime import datetime
 
+
+# ============================================================
 # Document metadata
+# ============================================================
 
 
 INSTRUMENT = {
@@ -15,7 +18,9 @@ INSTRUMENT = {
 }
 
 
+# ============================================================
 # Regular expressions
+# ============================================================
 
 
 CHAPTER_RE = re.compile(
@@ -51,25 +56,14 @@ POINT_MARKER_RE = re.compile(
     re.IGNORECASE,
 )
 
-# Annex list markers.
-#
-# Examples:
-#   — terrorism,
-#   – terrorism,
-#   - terrorism,
-#   • terrorism,
-#   · terrorism,
-#
-# The marker itself is not stored in the final item.
-ANNEX_DASH_MARKER_RE = re.compile(r"(?<!\w)(?:—|–|-|•|·)\s*")
+ANNEX_DASH_MARKER_RE = re.compile(
+    r"(?<!\w)(?:—|–|-|•|·)\s*"
+)
 
-# A stronger version used to detect a dash-list item when
-# several items have been collapsed onto one line.
-ANNEX_DASH_ITEM_RE = re.compile(r"(?:^|\s)(—|–|-|•|·)\s*")
+ANNEX_DASH_ITEM_RE = re.compile(
+    r"(?:^|\s)(—|–|-|•|·)\s*"
+)
 
-# Used for references such as:
-#   Article 5(1)
-#   Article 5(1), first subparagraph, point (h)(iii)
 ARTICLE_REFERENCE_RE = re.compile(
     r"\bArticle\s+"
     r"(\d+[A-Za-z]?)"
@@ -81,7 +75,6 @@ ARTICLE_REFERENCE_RE = re.compile(
     re.IGNORECASE,
 )
 
-# Used when the text explicitly says "Article 6(1)(a)"
 ARTICLE_SIMPLE_REFERENCE_RE = re.compile(
     r"\bArticle\s+(\d+[A-Za-z]?)"
     r"(?:\((\d+)\))?"
@@ -101,22 +94,24 @@ SECTION_REFERENCE_RE = re.compile(
 )
 
 DONE_AT_RE = re.compile(
-    r"Done\s+at\s+(.+?),\s+" r"(\d{1,2}\s+\w+\s+\d{4})\.",
+    r"Done\s+at\s+(.+?),\s+"
+    r"(\d{1,2}\s+\w+\s+\d{4})\.",
     re.IGNORECASE,
 )
 
 SIGNATURE_RE = re.compile(
     r"For\s+the\s+"
     r"(European Parliament|Council)"
-    r"\s+"
-    r"The\s+President"
+    r"\s+The\s+President"
     r"\s+"
     r"([A-Z]\.\s*[A-ZÀ-ÖØ-Ý]+)",
     re.IGNORECASE,
 )
 
 
+# ============================================================
 # Basic helpers
+# ============================================================
 
 
 def clean_line(line: str) -> str:
@@ -124,18 +119,32 @@ def clean_line(line: str) -> str:
     Remove Markdown formatting that is useful during PDF
     extraction but not required in the structural JSON.
     """
+
     line = line.strip()
 
     # Markdown heading markers
-    line = re.sub(r"^#{1,6}\s*", "", line)
+    line = re.sub(
+        r"^#{1,6}\s*",
+        "",
+        line,
+    )
 
     # Common emphasis markers
     line = line.replace("**", "")
     line = line.replace("__", "")
 
     # Markdown italic markers only at the edges.
-    line = re.sub(r"^[_*]+", "", line)
-    line = re.sub(r"[_*]+$", "", line)
+    line = re.sub(
+        r"^[_*]+",
+        "",
+        line,
+    )
+
+    line = re.sub(
+        r"[_*]+$",
+        "",
+        line,
+    )
 
     return line.strip()
 
@@ -144,12 +153,17 @@ def normalize_text(text: str) -> str:
     """
     Normalize whitespace without changing legal wording.
     """
+
     text = text.replace("\u00a0", " ")
     text = text.replace("\u2009", " ")
     text = text.replace("\u200a", " ")
     text = text.replace("\u202f", " ")
 
-    text = re.sub(r"\s+", " ", text)
+    text = re.sub(
+        r"\s+",
+        " ",
+        text,
+    )
 
     return text.strip()
 
@@ -158,6 +172,7 @@ def remove_list_separator(text: str) -> str:
     """
     Remove an accidental leading list separator.
     """
+
     return re.sub(
         r"^\s*(?:—|–|-|•|·)\s*",
         "",
@@ -170,8 +185,10 @@ def roman_to_int(value: str) -> int:
     Convert a Roman numeral to an integer.
 
     Used only for stable IDs such as:
+
         ANNEX II -> aiact:annex2
     """
+
     values = {
         "I": 1,
         "V": 5,
@@ -200,32 +217,14 @@ def roman_to_int(value: str) -> int:
     return total
 
 
+# ============================================================
 # Reference extraction
+# ============================================================
 
 
 def extract_references(text: str) -> list[dict]:
     """
     Extract legal references from a piece of text.
-
-    Examples:
-
-        Article 5(1)
-
-        Article 5(1), first subparagraph,
-        point (h)(iii)
-
-    Result:
-
-        {
-            "type": "article",
-            "target": "5",
-            "paragraph": "1",
-            "subparagraph": "first",
-            "point": "h",
-            "subpoint": "iii"
-        }
-
-    References are extracted conservatively.
     """
 
     references = []
@@ -234,7 +233,9 @@ def extract_references(text: str) -> list[dict]:
     # Chapter + Section references
     # --------------------------------------------------------
 
-    section_matches = list(SECTION_REFERENCE_RE.finditer(text))
+    section_matches = list(
+        SECTION_REFERENCE_RE.finditer(text)
+    )
 
     section_spans = []
 
@@ -288,10 +289,9 @@ def extract_references(text: str) -> list[dict]:
     for match in CHAPTER_REFERENCE_RE.finditer(text):
         chapter_number = match.group(1).upper()
 
-        # Do not add a generic Chapter III reference when
-        # "Chapter III Section 4" was already represented.
         is_section_reference = any(
-            span[0] <= match.start() < span[1] for span in section_spans
+            span[0] <= match.start() < span[1]
+            for span in section_spans
         )
 
         if not is_section_reference:
@@ -305,33 +305,92 @@ def extract_references(text: str) -> list[dict]:
     return references
 
 
+# ============================================================
 # Point parsing
+# ============================================================
 
 
 def looks_like_point_sequence(text: str) -> bool:
     """
-    Detect whether text contains legal points such as:
+    Detect whether text contains a legal point sequence:
 
         (a) ...
         (b) ...
         (c) ...
 
-    We require a sequence starting at (a), because references
-    such as Article 6(1)(a) must NOT be treated as paragraph
-    points.
+    The sequence must begin with (a).
     """
 
-    matches = list(POINT_MARKER_RE.finditer(text))
+    matches = list(
+        POINT_MARKER_RE.finditer(text)
+    )
 
     if not matches:
         return False
 
-    first_label = matches[0].group(1).lower()
-
-    return first_label == "a"
+    return matches[0].group(1).lower() == "a"
 
 
-def split_legal_points(text: str) -> tuple[str, list[dict]]:
+def get_sequential_point_matches(
+    text: str,
+) -> list[re.Match]:
+    """
+    Return a genuine sequential legal point sequence.
+
+    Example:
+
+        (a) ...
+        (b) ...
+        (c) ...
+
+    Only a sequence beginning with (a) is accepted.
+
+    This is important because references such as:
+
+        Article 6(1)(a)
+
+    must not be interpreted as list points.
+    """
+
+    matches = list(
+        POINT_MARKER_RE.finditer(text)
+    )
+
+    if not matches:
+        return []
+
+    valid_matches = []
+
+    for match in matches:
+        label = match.group(1).lower()
+
+        if not valid_matches:
+            if label == "a":
+                valid_matches.append(match)
+
+            continue
+
+        previous_label = (
+            valid_matches[-1]
+            .group(1)
+            .lower()
+        )
+
+        expected = chr(
+            ord(previous_label) + 1
+        )
+
+        if label == expected:
+            valid_matches.append(match)
+        else:
+            break
+
+    return valid_matches
+
+
+def split_legal_points(
+    text: str,
+) -> tuple[str, list[dict]]:
     """
     Split:
 
@@ -342,25 +401,18 @@ def split_legal_points(text: str) -> tuple[str, list[dict]]:
         intro
         points
 
-    Only sequences beginning with (a) are considered.
-
-    This prevents references such as:
-
-        Article 6(1)(a)
-
-    from becoming points.
+    Only sequential point lists beginning with (a)
+    are considered.
     """
 
-    matches = list(POINT_MARKER_RE.finditer(text))
+    matches = get_sequential_point_matches(text)
 
     if not matches:
         return text.strip(), []
 
-    # Only treat this as a point list if it begins with (a).
-    if matches[0].group(1).lower() != "a":
-        return text.strip(), []
-
-    intro = text[: matches[0].start()].strip()
+    intro = text[
+        : matches[0].start()
+    ].strip()
 
     points = []
 
@@ -374,25 +426,33 @@ def split_legal_points(text: str) -> tuple[str, list[dict]]:
         else:
             end = len(text)
 
-        point_text = text[start:end].strip()
+        point_text = text[
+            start:end
+        ].strip()
 
-        if point_text:
-            point = {
-                "label": label,
-                "text": normalize_text(point_text),
-            }
+        if not point_text:
+            continue
 
-            references = extract_references(point_text)
+        point = {
+            "label": label,
+            "text": normalize_text(point_text),
+        }
 
-            if references:
-                point["references"] = references
+        references = extract_references(
+            point_text
+        )
 
-            points.append(point)
+        if references:
+            point["references"] = references
+
+        points.append(point)
 
     return intro, points
 
 
+# ============================================================
 # Paragraph parsing
+# ============================================================
 
 
 def extract_paragraph(
@@ -402,16 +462,7 @@ def extract_paragraph(
     """
     Parse a paragraph block.
 
-    Important:
     We never invent a paragraph number.
-
-    If the source has no explicit number:
-
-        "number": None
-
-    but we still maintain:
-
-        "index": 1
     """
 
     block = normalize_text(block)
@@ -434,33 +485,30 @@ def extract_paragraph(
 
     if points:
         if intro:
-            paragraph["intro"] = normalize_text(intro)
+            paragraph["intro"] = normalize_text(
+                intro
+            )
 
         paragraph["points"] = points
+
     else:
-        paragraph["text"] = normalize_text(body)
+        paragraph["text"] = normalize_text(
+            body
+        )
 
     return paragraph
 
 
+# ============================================================
 # Closing / signatures
+# ============================================================
 
 
-def parse_closing(text: str) -> tuple[str, dict | None]:
+def parse_closing(
+    text: str,
+) -> tuple[str, dict | None]:
     """
     Extract the formal closing block from an article.
-
-    Example:
-
-        Done at Brussels, 13 June 2024.
-
-        For the European Parliament
-        The President
-        R. METSOLA
-
-        For the Council
-        The President
-        M. MICHEL
     """
 
     match = DONE_AT_RE.search(text)
@@ -489,15 +537,25 @@ def parse_closing(text: str) -> tuple[str, dict | None]:
         "signatories": [],
     }
 
-    remaining = text[: match.start()].strip()
+    remaining = text[
+        : match.start()
+    ].strip()
 
-    after_done = text[match.end() :].strip()
+    after_done = text[
+        match.end():
+    ].strip()
 
-    signature_matches = list(SIGNATURE_RE.finditer(after_done))
+    signature_matches = list(
+        SIGNATURE_RE.finditer(
+            after_done
+        )
+    )
 
     for signature_match in signature_matches:
         body = signature_match.group(1)
-        name = normalize_text(signature_match.group(2))
+        name = normalize_text(
+            signature_match.group(2)
+        )
 
         closing["signatories"].append(
             {
@@ -510,7 +568,9 @@ def parse_closing(text: str) -> tuple[str, dict | None]:
     return remaining, closing
 
 
+# ============================================================
 # Article parsing
+# ============================================================
 
 
 def parse_article(
@@ -537,10 +597,6 @@ def parse_article(
     if chapter:
         article["chapter"] = chapter
 
-    # --------------------------------------------------------
-    # Find article title.
-    # --------------------------------------------------------
-
     body_lines = []
 
     title = None
@@ -551,8 +607,6 @@ def parse_article(
         if not line:
             continue
 
-        # If the title has not been found yet, the first
-        # non-empty line is treated as the article title.
         if title is None:
             title = normalize_text(line)
             continue
@@ -562,29 +616,11 @@ def parse_article(
     if title:
         article["title"] = title
 
-    # --------------------------------------------------------
-    # Join body.
-    # --------------------------------------------------------
-
-    body = normalize_text(" ".join(body_lines))
-
-    # --------------------------------------------------------
-    # Closing.
-    # --------------------------------------------------------
+    body = normalize_text(
+        " ".join(body_lines)
+    )
 
     body, closing = parse_closing(body)
-
-    # --------------------------------------------------------
-    # Paragraph splitting.
-    #
-    # Numbered paragraphs:
-    #
-    #   1. ...
-    #   2. ...
-    #
-    # If there are no numbered paragraphs, preserve the
-    # existing unnumbered behavior.
-    # --------------------------------------------------------
 
     numbered_matches = list(
         re.finditer(
@@ -598,7 +634,9 @@ def parse_article(
     if numbered_matches:
         blocks = []
 
-        for index, match in enumerate(numbered_matches):
+        for index, match in enumerate(
+            numbered_matches
+        ):
             start = match.start()
 
             if match.group(0).startswith(" "):
@@ -606,18 +644,30 @@ def parse_article(
 
             content_start = match.end()
 
-            if index + 1 < len(numbered_matches):
-                end = numbered_matches[index + 1].start()
+            if index + 1 < len(
+                numbered_matches
+            ):
+                end = numbered_matches[
+                    index + 1
+                ].start()
             else:
                 end = len(body)
 
             paragraph_number = match.group(1)
 
-            paragraph_text = body[content_start:end].strip()
+            paragraph_text = body[
+                content_start:end
+            ].strip()
 
-            blocks.append(f"{paragraph_number}. {paragraph_text}")
+            blocks.append(
+                f"{paragraph_number}. "
+                f"{paragraph_text}"
+            )
 
-        for index, block in enumerate(blocks, start=1):
+        for index, block in enumerate(
+            blocks,
+            start=1,
+        ):
             paragraphs.append(
                 extract_paragraph(
                     block,
@@ -626,23 +676,11 @@ def parse_article(
             )
 
     else:
-        # ----------------------------------------------------
-        # Unnumbered article body.
-        #
-        # Existing behavior is preserved, but we additionally
-        # handle a common legal pattern:
-        #
-        #   Sentence.
-        #   Sentence.
-        #   However:
-        #   (a) ...
-        #   (b) ...
-        #   Sentence after points.
-        #
-        # This is particularly important for Article 113.
-        # ----------------------------------------------------
-
-        paragraphs = parse_unnumbered_article_body(body)
+        paragraphs = (
+            parse_unnumbered_article_body(
+                body
+            )
+        )
 
     if paragraphs:
         article["paragraphs"] = paragraphs
@@ -659,20 +697,6 @@ def parse_unnumbered_article_body(
     """
     Parse article text where the source does not provide
     explicit paragraph numbers.
-
-    The function is intentionally conservative.
-
-    It recognizes the common pattern:
-
-        sentence.
-        sentence.
-        However:
-        (a) ...
-        (b) ...
-        (c) ...
-        sentence after points.
-
-    It does not invent paragraph numbers.
     """
 
     body = normalize_text(body)
@@ -680,35 +704,11 @@ def parse_unnumbered_article_body(
     if not body:
         return []
 
-    # --------------------------------------------------------
-    # Locate a point sequence.
-    # --------------------------------------------------------
-
-    point_matches = list(POINT_MARKER_RE.finditer(body))
-
-    valid_point_matches = []
-
-    if point_matches:
-        for match in point_matches:
-            label = match.group(1).lower()
-
-            if not valid_point_matches:
-                if label == "a":
-                    valid_point_matches.append(match)
-            else:
-                previous_label = valid_point_matches[-1].group(1).lower()
-
-                expected = chr(ord(previous_label) + 1)
-
-                if label == expected:
-                    valid_point_matches.append(match)
-                else:
-                    break
-
-    # --------------------------------------------------------
-    # If no real point sequence exists, the whole body is one
-    # unnumbered paragraph.
-    # --------------------------------------------------------
+    valid_point_matches = (
+        get_sequential_point_matches(
+            body
+        )
+    )
 
     if not valid_point_matches:
         return [
@@ -719,69 +719,52 @@ def parse_unnumbered_article_body(
             }
         ]
 
-    # --------------------------------------------------------
-    # Text before the point sequence.
-    # --------------------------------------------------------
+    before_points = body[
+        : valid_point_matches[0].start()
+    ].strip()
 
-    before_points = body[: valid_point_matches[0].start()].strip()
-
-    # Text after the point sequence.
-    last_point_end = len(body)
-
-    # Find where the final recognized point ends.
     final_match = valid_point_matches[-1]
 
-    after_last_point = body[final_match.end() :]
-
-    # --------------------------------------------------------
-    # If the final point was followed by another point-like
-    # reference, do not treat it as post-point text.
-    #
-    # At this stage the sequence has already been validated.
-    # --------------------------------------------------------
+    after_last_point = body[
+        final_match.end():
+    ]
 
     point_entries = []
 
-    for index, match in enumerate(valid_point_matches):
+    for index, match in enumerate(
+        valid_point_matches
+    ):
         start = match.end()
 
-        if index + 1 < len(valid_point_matches):
-            end = valid_point_matches[index + 1].start()
+        if index + 1 < len(
+            valid_point_matches
+        ):
+            end = valid_point_matches[
+                index + 1
+            ].start()
         else:
             end = len(body)
 
-        point_text = body[start:end].strip()
+        point_text = body[
+            start:end
+        ].strip()
 
         point_entries.append(
             {
                 "label": match.group(1).lower(),
-                "text": normalize_text(point_text),
+                "text": normalize_text(
+                    point_text
+                ),
             }
         )
 
-    # --------------------------------------------------------
-    # The last point may contain a sentence that belongs to a
-    # following unnumbered paragraph.
-    #
-    # For the current legal document, we recognize a strong
-    # boundary:
-    #
-    #   ;
-    #   This Regulation shall ...
-    #
-    # However, we avoid aggressive sentence splitting because
-    # legal sentences must not be arbitrarily divided.
-    # --------------------------------------------------------
-
     paragraphs = []
 
-    # If there is clear text before the first point, it becomes
-    # paragraph 1.
     if before_points:
-        intro_text = normalize_text(before_points)
+        intro_text = normalize_text(
+            before_points
+        )
 
-        # "However:" belongs with the point paragraph rather
-        # than becoming a standalone paragraph.
         if re.search(
             r"(?:^|\s)However:\s*$",
             intro_text,
@@ -797,20 +780,20 @@ def parse_unnumbered_article_body(
             if prefix_without_however:
                 paragraphs.append(
                     {
-                        "index": len(paragraphs) + 1,
+                        "index": 1,
                         "number": None,
                         "text": prefix_without_however,
                     }
                 )
 
-            point_paragraph = {
-                "index": len(paragraphs) + 1,
-                "number": None,
-                "intro": "However:",
-                "points": point_entries,
-            }
-
-            paragraphs.append(point_paragraph)
+            paragraphs.append(
+                {
+                    "index": len(paragraphs) + 1,
+                    "number": None,
+                    "intro": "However:",
+                    "points": point_entries,
+                }
+            )
 
         else:
             paragraphs.append(
@@ -838,26 +821,11 @@ def parse_unnumbered_article_body(
             }
         )
 
-    # --------------------------------------------------------
-    # Important special case:
-    #
-    # Article 113 contains text after the point sequence:
-    #
-    #   This Regulation shall be binding ...
-    #
-    # It must become a separate paragraph.
-    #
-    # We only split when the remaining text is clearly a new
-    # sentence rather than continuation of the final point.
-    # --------------------------------------------------------
-
-    trailing = normalize_text(after_last_point)
+    trailing = normalize_text(
+        after_last_point
+    )
 
     if trailing:
-        # Remove the point text from the final point when
-        # there is an obvious new legal sentence after it.
-        #
-        # This is deliberately conservative.
         boundary_match = re.search(
             r"(?:;\s*)"
             r"(This Regulation\b|"
@@ -869,15 +837,21 @@ def parse_unnumbered_article_body(
         )
 
         if boundary_match:
-            # Usually the final point ends with ';' and the
-            # following paragraph begins with a new sentence.
-            point_part = trailing[: boundary_match.start() + 1].strip()
+            point_part = trailing[
+                : boundary_match.start() + 1
+            ].strip()
 
-            following_part = trailing[boundary_match.start() + 1 :].strip()
+            following_part = trailing[
+                boundary_match.start() + 1:
+            ].strip()
 
             if point_part:
-                point_entries[-1]["text"] = normalize_text(
-                    point_entries[-1]["text"] + " " + point_part
+                point_entries[-1]["text"] = (
+                    normalize_text(
+                        point_entries[-1]["text"]
+                        + " "
+                        + point_part
+                    )
                 )
 
             if following_part:
@@ -890,16 +864,14 @@ def parse_unnumbered_article_body(
                 )
 
         else:
-            # No safe boundary detected, so keep the text with
-            # the final point.
             if point_entries:
-                point_entries[-1]["text"] = normalize_text(
-                    point_entries[-1]["text"] + " " + trailing
+                point_entries[-1]["text"] = (
+                    normalize_text(
+                        point_entries[-1]["text"]
+                        + " "
+                        + trailing
+                    )
                 )
-
-    # --------------------------------------------------------
-    # Rebuild indexes after optional insertion.
-    # --------------------------------------------------------
 
     for index, paragraph in enumerate(
         paragraphs,
@@ -910,38 +882,17 @@ def parse_unnumbered_article_body(
     return paragraphs
 
 
+# ============================================================
 # Annex list-item parsing
+# ============================================================
 
 
-def split_dash_list_items(text: str) -> list[dict]:
+def split_dash_list_items(
+    text: str,
+) -> list[dict]:
     """
     Split an unnumbered legal list introduced by dash/dot
     markers.
-
-    Supported markers:
-
-        —
-        –
-        -
-        •
-        ·
-
-    Example:
-
-        — terrorism,
-        — trafficking in human beings,
-        — rape,
-
-    becomes:
-
-        [
-            {"index": 1, "label": None, "text": "terrorism,"},
-            {"index": 2, "label": None, "text": "trafficking in human beings,"},
-            {"index": 3, "label": None, "text": "rape,"}
-        ]
-
-    It also handles PDF extraction where the entire list has
-    been collapsed onto one line.
     """
 
     text = normalize_text(text)
@@ -949,22 +900,32 @@ def split_dash_list_items(text: str) -> list[dict]:
     if not text:
         return []
 
-    matches = list(ANNEX_DASH_ITEM_RE.finditer(text))
+    matches = list(
+        ANNEX_DASH_ITEM_RE.finditer(
+            text
+        )
+    )
 
     if not matches:
         return []
 
     items = []
 
-    for index, match in enumerate(matches):
+    for index, match in enumerate(
+        matches
+    ):
         start = match.end()
 
         if index + 1 < len(matches):
-            end = matches[index + 1].start()
+            end = matches[
+                index + 1
+            ].start()
         else:
             end = len(text)
 
-        item_text = text[start:end].strip()
+        item_text = text[
+            start:end
+        ].strip()
 
         if not item_text:
             continue
@@ -973,7 +934,9 @@ def split_dash_list_items(text: str) -> list[dict]:
             {
                 "index": len(items) + 1,
                 "label": None,
-                "text": normalize_text(item_text),
+                "text": normalize_text(
+                    item_text
+                ),
             }
         )
 
@@ -985,15 +948,14 @@ def parse_annex_references(
 ) -> list[dict]:
     """
     Extract references from an annex introduction.
-
-    This is intentionally generic because `intro` + `references`
-    can occur in other legal structures too.
     """
 
     return extract_references(intro)
 
 
+# ============================================================
 # Cited act parsing
+# ============================================================
 
 
 def extract_cited_act(
@@ -1001,13 +963,6 @@ def extract_cited_act(
 ) -> dict | None:
     """
     Extract a cited EU legal act from annex item text.
-
-    Example:
-
-        Directive 2006/42/EC of the European Parliament
-        and of the Council of 17 May 2006 on machinery
-        (OJ L 157, 9.6.2006, p. 24);
-
     """
 
     pattern = re.compile(
@@ -1038,7 +993,9 @@ def extract_cited_act(
         re.IGNORECASE,
     )
 
-    match = pattern.search(normalize_text(text))
+    match = pattern.search(
+        normalize_text(text)
+    )
 
     if not match:
         return None
@@ -1076,19 +1033,497 @@ def extract_cited_act(
     if short_title:
         short_title = short_title.strip()
 
-        # Avoid accidentally capturing large text blocks.
         if len(short_title) <= 120:
-            cited_act["short_title"] = short_title
+            cited_act["short_title"] = (
+                short_title
+            )
 
     oj_reference = match.group(7)
 
     if oj_reference:
-        cited_act["oj_reference"] = oj_reference.strip()
+        cited_act["oj_reference"] = (
+            oj_reference.strip()
+        )
 
     return cited_act
 
 
+# ============================================================
+# Generic nested numbered-item detection
+# ============================================================
+
+
+def find_numbered_items(
+    text: str,
+) -> list[re.Match]:
+    """
+    Find numbered legal items such as:
+
+        1. ...
+        2. ...
+        3. ...
+
+    The numbering is detected independently of the Annex
+    number or document-specific content.
+    """
+
+    return list(
+        re.finditer(
+            r"(?:^|\s)(\d+)\.\s+",
+            text,
+        )
+    )
+
+
+def split_nested_subpoints(
+    text: str,
+) -> tuple[str, list[dict]]:
+    """
+    Detect a genuine nested legal point sequence:
+
+        (a) ...
+        (b) ...
+        (c) ...
+
+    Returns:
+
+        prefix,
+        subpoints
+
+    The sequence must begin with (a) and continue
+    sequentially.
+    """
+
+    text = normalize_text(text)
+
+    matches = get_sequential_point_matches(text)
+
+    if not matches:
+        return text, []
+
+    prefix = text[
+        :matches[0].start()
+    ].strip()
+
+    subpoints = []
+
+    for index, match in enumerate(matches):
+
+        start = match.end()
+
+        if index + 1 < len(matches):
+            end = matches[
+                index + 1
+            ].start()
+        else:
+            end = len(text)
+
+        subpoint_text = text[
+            start:end
+        ].strip()
+
+        if not subpoint_text:
+            continue
+
+        subpoint = {
+            "label": match.group(1).lower(),
+            "text": normalize_text(
+                subpoint_text
+            ),
+        }
+
+        references = extract_references(
+            subpoint_text
+        )
+
+        if references:
+            subpoint["references"] = references
+
+        subpoints.append(subpoint)
+
+    return prefix, subpoints
+
+
+def split_subpoint_note(
+    text: str,
+) -> tuple[str, str | None]:
+    """
+    Detect an explanatory exception/note belonging to
+    a legal subpoint.
+
+    Examples:
+
+        This shall not include ...
+
+        This shall not apply ...
+
+        This does not include ...
+
+        This does not apply ...
+
+        except that ...
+
+        except where ...
+
+        provided that ...
+
+        unless ...
+    """
+
+    text = normalize_text(text)
+
+    note_pattern = re.compile(
+        r"\s+("
+        r"This shall not include\b.*"
+        r"|This shall not apply\b.*"
+        r"|This does not include\b.*"
+        r"|This does not apply\b.*"
+        r"|except that\b.*"
+        r"|except where\b.*"
+        r"|provided that\b.*"
+        r"|unless\b.*"
+        r")",
+        re.IGNORECASE,
+    )
+
+    match = note_pattern.search(text)
+
+    if not match:
+        return text, None
+
+    main_text = text[
+        :match.start()
+    ].strip()
+
+    note_text = match.group(1).strip()
+
+    if not main_text:
+        return text, None
+
+    return (
+        normalize_text(main_text),
+        normalize_text(note_text),
+    )
+
+
+def split_category_heading(
+    prefix: str,
+) -> tuple[str, str | None]:
+    """
+    Split the text before the first subpoint into:
+
+        category
+        intro
+
+    Examples:
+
+        Biometrics, in so far as their use is permitted
+        under relevant Union or national law:
+
+    becomes:
+
+        category:
+            Biometrics
+
+        intro:
+            Biometrics, in so far as their use is permitted
+            under relevant Union or national law:
+
+    Another example:
+
+        Education and vocational training:
+
+    becomes:
+
+        category:
+            Education and vocational training
+
+        intro:
+            Education and vocational training:
+
+    This is generic and does not depend on Annex III.
+    """
+
+    prefix = normalize_text(prefix)
+
+    if not prefix:
+        return "", None
+
+    without_colon = prefix.rstrip(":").strip()
+
+    # --------------------------------------------------------
+    # Heading with a qualification.
+    #
+    # Example:
+    #
+    # Biometrics, in so far as ...
+    # --------------------------------------------------------
+
+    comma_match = re.match(
+        r"^([^,]+),\s+(.+)$",
+        without_colon,
+    )
+
+    if comma_match:
+
+        category = normalize_text(
+            comma_match.group(1)
+        )
+
+        # Avoid interpreting long ordinary prose as a
+        # category merely because it contains a comma.
+        if len(category.split()) <= 12:
+            return (
+                category,
+                normalize_text(prefix),
+            )
+
+    # --------------------------------------------------------
+    # Simple heading ending in a colon.
+    #
+    # Example:
+    #
+    # Education and vocational training:
+    # --------------------------------------------------------
+
+    if prefix.endswith(":"):
+
+        return (
+            without_colon,
+            normalize_text(prefix),
+        )
+
+    # --------------------------------------------------------
+    # No obvious heading structure.
+    # --------------------------------------------------------
+
+    return (
+        without_colon,
+        None,
+    )
+
+
+def parse_nested_numbered_item(
+    number: str,
+    body: str,
+) -> dict:
+    """
+    Parse one numbered legal item.
+
+    Possible result:
+
+        {
+            "number": "1",
+            "category": "...",
+            "intro": "...",
+            "subpoints": [...]
+        }
+
+    or:
+
+        {
+            "number": "2",
+            "category": "...",
+            "text": "...",
+            "subpoints": []
+        }
+
+    No Annex-specific knowledge is used.
+    """
+
+    body = normalize_text(body)
+
+    item = {
+        "number": number,
+    }
+
+    if not body:
+        return item
+
+    # --------------------------------------------------------
+    # Does this numbered item contain a real nested
+    # (a), (b), (c) sequence?
+    # --------------------------------------------------------
+
+    prefix, subpoints = (
+        split_nested_subpoints(body)
+    )
+
+    if subpoints:
+
+        category, intro = (
+            split_category_heading(prefix)
+        )
+
+        if category:
+            item["category"] = category
+
+        if intro:
+            item["intro"] = intro
+
+        cleaned_subpoints = []
+
+        for subpoint in subpoints:
+
+            main_text, note = (
+                split_subpoint_note(
+                    subpoint["text"]
+                )
+            )
+
+            subpoint["text"] = main_text
+
+            if note:
+                subpoint["note"] = note
+
+            cleaned_subpoints.append(
+                subpoint
+            )
+
+        item["subpoints"] = (
+            cleaned_subpoints
+        )
+
+        return item
+
+    # --------------------------------------------------------
+    # No nested subpoints.
+    #
+    # Detect:
+    #
+    #     Category: description
+    #
+    # Example:
+    #
+    #     Critical infrastructure: AI systems...
+    # --------------------------------------------------------
+
+    colon_match = re.match(
+        r"^([^:]{1,150}):\s*(.+)$",
+        body,
+    )
+
+    if colon_match:
+
+        category = normalize_text(
+            colon_match.group(1)
+        )
+
+        description = normalize_text(
+            colon_match.group(2)
+        )
+
+        item["category"] = category
+
+        item["text"] = normalize_text(
+            f"{category}: {description}"
+        )
+
+        item["subpoints"] = []
+
+        references = extract_references(
+            body
+        )
+
+        if references:
+            item["references"] = references
+
+        cited_act = extract_cited_act(
+            body
+        )
+
+        if cited_act:
+            item["cited_act"] = cited_act
+
+        return item
+
+    # --------------------------------------------------------
+    # Plain numbered item.
+    # --------------------------------------------------------
+
+    item["text"] = body
+
+    item["subpoints"] = []
+
+    references = extract_references(
+        body
+    )
+
+    if references:
+        item["references"] = references
+
+    cited_act = extract_cited_act(
+        body
+    )
+
+    if cited_act:
+        item["cited_act"] = cited_act
+
+    return item
+
+
+def parse_generic_nested_numbered_items(
+    text: str,
+) -> list[dict]:
+    """
+    Parse numbered legal items and automatically detect
+    nested subpoints.
+
+    This function is completely generic.
+
+    It does not know:
+
+        - which Annex it is parsing
+        - which document it is parsing
+        - which categories exist
+
+    It simply detects the structure present in the text.
+    """
+
+    text = normalize_text(text)
+
+    numbered_matches = (
+        find_numbered_items(text)
+    )
+
+    if not numbered_matches:
+        return []
+
+    items = []
+
+    for index, match in enumerate(
+        numbered_matches
+    ):
+
+        if index + 1 < len(
+            numbered_matches
+        ):
+            end = numbered_matches[
+                index + 1
+            ].start()
+        else:
+            end = len(text)
+
+        body = text[
+            match.end():end
+        ].strip()
+
+        if not body:
+            continue
+
+        item = parse_nested_numbered_item(
+            match.group(1),
+            body,
+        )
+
+        items.append(item)
+
+    return items
+
+
+# ============================================================
 # Annex parsing
+# ============================================================
 
 
 def parse_annex(
@@ -1098,36 +1533,22 @@ def parse_annex(
     """
     Parse an Annex.
 
-    Existing numbered-section behavior remains supported.
+    Supported structures:
 
-    Additional behavior:
+        1. Section-based annexes
+        2. Dash/dot lists
+        3. Numbered lists
+        4. Numbered lists with nested (a), (b), (c)
+           subpoints
+        5. Notes/exceptions attached to subpoints
 
-        Annex II
-        Title
-        Intro:
-        — item
-        — item
-        — item
-
-    becomes:
-
-        {
-          "type": "annex",
-          "id": "aiact:annex2",
-          "number": "II",
-          "title": "...",
-          "intro": "...",
-          "references": [...],
-          "items": [...]
-        }
-
-    Annexes with sections continue to use:
-
-        sections: [...]
-
+    The parser is generic and does not contain
+    Annex-specific logic.
     """
 
-    annex_id_number = roman_to_int(annex_number)
+    annex_id_number = roman_to_int(
+        annex_number
+    )
 
     annex = {
         "type": "annex",
@@ -1135,50 +1556,84 @@ def parse_annex(
         "number": annex_number,
     }
 
-    cleaned_lines = [clean_line(line) for line in lines if clean_line(line)]
+    cleaned_lines = [
+        clean_line(line)
+        for line in lines
+        if clean_line(line)
+    ]
 
     if not cleaned_lines:
         return annex
 
     # --------------------------------------------------------
-    # Annex title
+    # Title
     # --------------------------------------------------------
 
-    annex["title"] = normalize_text(cleaned_lines[0])
+    annex["title"] = normalize_text(
+        cleaned_lines[0]
+    )
 
     remaining_lines = cleaned_lines[1:]
 
+    if not remaining_lines:
+        return annex
+
     # --------------------------------------------------------
-    # First check for Section-based annexes.
+    # Section-based Annex
     #
-    # This preserves the existing Annex I behavior.
+    # Preserve existing behavior.
     # --------------------------------------------------------
 
     section_indexes = []
 
-    for index, line in enumerate(remaining_lines):
+    for index, line in enumerate(
+        remaining_lines
+    ):
         if SECTION_RE.match(line):
             section_indexes.append(index)
 
     if section_indexes:
+
         sections = []
 
-        for section_index, start in enumerate(section_indexes):
-            end = (
-                section_indexes[section_index + 1]
-                if section_index + 1 < len(section_indexes)
-                else len(remaining_lines)
+        for section_index, start in enumerate(
+            section_indexes
+        ):
+
+            if (
+                section_index + 1
+                < len(section_indexes)
+            ):
+                end = section_indexes[
+                    section_index + 1
+                ]
+            else:
+                end = len(
+                    remaining_lines
+                )
+
+            section_lines = (
+                remaining_lines[
+                    start:end
+                ]
             )
 
-            section_lines = remaining_lines[start:end]
-
-            section_match = SECTION_RE.match(section_lines[0])
+            section_match = (
+                SECTION_RE.match(
+                    section_lines[0]
+                )
+            )
 
             if not section_match:
                 continue
 
-            label = section_match.group(1).upper()
-            section_title = normalize_text(section_match.group(2))
+            label = section_match.group(
+                1
+            ).upper()
+
+            section_title = normalize_text(
+                section_match.group(2)
+            )
 
             section = {
                 "label": label,
@@ -1186,37 +1641,22 @@ def parse_annex(
                 "items": [],
             }
 
-            item_lines = section_lines[1:]
-
-            # Existing numbered items
-            section_text = normalize_text(" ".join(item_lines))
-
-            item_matches = list(
-                re.finditer(
-                    r"(?:^|\s)(\d+)\.\s+",
-                    section_text,
+            item_text = normalize_text(
+                " ".join(
+                    section_lines[1:]
                 )
             )
 
-            for item_index, match in enumerate(item_matches):
-                if item_index + 1 < len(item_matches):
-                    end_position = item_matches[item_index + 1].start()
-                else:
-                    end_position = len(section_text)
+            section_items = (
+                parse_generic_nested_numbered_items(
+                    item_text
+                )
+            )
 
-                item_text = section_text[match.end() : end_position].strip()
-
-                item = {
-                    "number": match.group(1),
-                    "text": normalize_text(item_text),
-                }
-
-                cited_act = extract_cited_act(item["text"])
-
-                if cited_act:
-                    item["cited_act"] = cited_act
-
-                section["items"].append(item)
+            if section_items:
+                section["items"] = (
+                    section_items
+                )
 
             sections.append(section)
 
@@ -1225,85 +1665,77 @@ def parse_annex(
         return annex
 
     # --------------------------------------------------------
-    # No sections.
+    # IMPORTANT:
     #
-    # This is where Annex II lives.
+    # Check numbered structure BEFORE checking dash lists.
     #
-    # We support:
+    # This is the key fix.
     #
-    #   title
-    #   intro
-    #   references
-    #   dash/dot list
+    # Annex III is:
     #
-    # while preserving other existing annex behavior.
+    #     intro
+    #     1. ...
+    #     2. ...
+    #     3. ...
+    #
+    # We must identify the "1." boundary first.
     # --------------------------------------------------------
 
-    remaining_text = normalize_text(" ".join(remaining_lines))
+    remaining_text = normalize_text(
+        " ".join(remaining_lines)
+    )
 
-    if not remaining_text:
-        return annex
-
-    # --------------------------------------------------------
-    # Detect the beginning of an unnumbered dash/dot list.
-    # --------------------------------------------------------
-
-    list_matches = list(ANNEX_DASH_ITEM_RE.finditer(remaining_text))
-
-    if list_matches:
-        intro = remaining_text[: list_matches[0].start()].strip()
-
-        list_text = remaining_text[list_matches[0].start() :].strip()
-
-        if intro:
-            annex["intro"] = normalize_text(intro)
-
-            references = parse_annex_references(intro)
-
-            if references:
-                annex["references"] = references
-
-        items = split_dash_list_items(list_text)
-
-        if items:
-            annex["items"] = items
-
-        return annex
-
-    # --------------------------------------------------------
-    # Existing numbered-item behavior for annexes without
-    # sections.
-    # --------------------------------------------------------
-
-    numbered_matches = list(
-        re.finditer(
-            r"(?:^|\s)(\d+)\.\s+",
-            remaining_text,
+    numbered_matches = (
+        find_numbered_items(
+            remaining_text
         )
     )
 
     if numbered_matches:
-        items = []
 
-        for index, match in enumerate(numbered_matches):
-            if index + 1 < len(numbered_matches):
-                end = numbered_matches[index + 1].start()
-            else:
-                end = len(remaining_text)
+        first_numbered_match = (
+            numbered_matches[0]
+        )
 
-            item_text = remaining_text[match.end() : end].strip()
+        # ----------------------------------------------------
+        # Everything before the first numbered item is the
+        # actual annex introduction.
+        # ----------------------------------------------------
 
-            item = {
-                "number": match.group(1),
-                "text": normalize_text(item_text),
-            }
+        intro = remaining_text[
+            :first_numbered_match.start()
+        ].strip()
 
-            cited_act = extract_cited_act(item["text"])
+        if intro:
 
-            if cited_act:
-                item["cited_act"] = cited_act
+            annex["intro"] = normalize_text(
+                intro
+            )
 
-            items.append(item)
+            references = (
+                parse_annex_references(
+                    intro
+                )
+            )
+
+            if references:
+                annex["references"] = (
+                    references
+                )
+
+        # ----------------------------------------------------
+        # Parse the numbered items.
+        # ----------------------------------------------------
+
+        numbered_text = remaining_text[
+            first_numbered_match.start():
+        ]
+
+        items = (
+            parse_generic_nested_numbered_items(
+                numbered_text
+            )
+        )
 
         if items:
             annex["items"] = items
@@ -1311,8 +1743,57 @@ def parse_annex(
         return annex
 
     # --------------------------------------------------------
-    # If neither a dash-list nor numbered list exists, retain
-    # the text rather than silently losing it.
+    # No numbered structure.
+    #
+    # Now check dash/dot lists.
+    # --------------------------------------------------------
+
+    list_matches = list(
+        ANNEX_DASH_ITEM_RE.finditer(
+            remaining_text
+        )
+    )
+
+    if list_matches:
+
+        intro = remaining_text[
+            :list_matches[0].start()
+        ].strip()
+
+        list_text = remaining_text[
+            list_matches[0].start():
+        ].strip()
+
+        if intro:
+
+            annex["intro"] = normalize_text(
+                intro
+            )
+
+            references = (
+                parse_annex_references(
+                    intro
+                )
+            )
+
+            if references:
+                annex["references"] = (
+                    references
+                )
+
+        items = split_dash_list_items(
+            list_text
+        )
+
+        if items:
+            annex["items"] = items
+
+        return annex
+
+    # --------------------------------------------------------
+    # No recognized list structure.
+    #
+    # Preserve the text rather than dropping it.
     # --------------------------------------------------------
 
     annex["text"] = remaining_text
@@ -1320,24 +1801,31 @@ def parse_annex(
     return annex
 
 
+# ============================================================
 # Chapter parsing
+# ============================================================
 
 
 def extract_chapter(
     number: str,
     title: str | None,
 ) -> dict:
+
     chapter = {
         "number": number.upper(),
     }
 
     if title:
-        chapter["title"] = normalize_text(title)
+        chapter["title"] = normalize_text(
+            title
+        )
 
     return chapter
 
 
+# ============================================================
 # Document structure parsing
+# ============================================================
 
 
 def parse_document(
@@ -1351,15 +1839,9 @@ def parse_document(
         CHAPTER
         Article
         ANNEX
-
-    Existing article and annex behavior is preserved.
     """
 
     raw_lines = markdown.splitlines()
-
-    # --------------------------------------------------------
-    # Normalize lines.
-    # --------------------------------------------------------
 
     lines = []
 
@@ -1382,25 +1864,40 @@ def parse_document(
         # Chapter
         # ----------------------------------------------------
 
-        chapter_match = CHAPTER_RE.match(line)
+        chapter_match = CHAPTER_RE.match(
+            line
+        )
 
         if chapter_match:
-            chapter_number = chapter_match.group(1).upper()
+            chapter_number = (
+                chapter_match.group(1).upper()
+            )
 
             chapter_title = None
 
             if (
                 index + 1 < len(lines)
-                and not CHAPTER_RE.match(lines[index + 1])
-                and not ARTICLE_RE.match(lines[index + 1])
-                and not ANNEX_RE.match(lines[index + 1])
+                and not CHAPTER_RE.match(
+                    lines[index + 1]
+                )
+                and not ARTICLE_RE.match(
+                    lines[index + 1]
+                )
+                and not ANNEX_RE.match(
+                    lines[index + 1]
+                )
             ):
-                chapter_title = lines[index + 1]
+                chapter_title = lines[
+                    index + 1
+                ]
+
                 index += 1
 
-            current_chapter = extract_chapter(
-                chapter_number,
-                chapter_title,
+            current_chapter = (
+                extract_chapter(
+                    chapter_number,
+                    chapter_title,
+                )
             )
 
             index += 1
@@ -1410,10 +1907,14 @@ def parse_document(
         # Article
         # ----------------------------------------------------
 
-        article_match = ARTICLE_RE.match(line)
+        article_match = ARTICLE_RE.match(
+            line
+        )
 
         if article_match:
-            article_number = article_match.group(1)
+            article_number = (
+                article_match.group(1)
+            )
 
             article_lines = []
 
@@ -1422,16 +1923,24 @@ def parse_document(
             while index < len(lines):
                 next_line = lines[index]
 
-                if CHAPTER_RE.match(next_line):
+                if CHAPTER_RE.match(
+                    next_line
+                ):
                     break
 
-                if ARTICLE_RE.match(next_line):
+                if ARTICLE_RE.match(
+                    next_line
+                ):
                     break
 
-                if ANNEX_RE.match(next_line):
+                if ANNEX_RE.match(
+                    next_line
+                ):
                     break
 
-                article_lines.append(next_line)
+                article_lines.append(
+                    next_line
+                )
 
                 index += 1
 
@@ -1449,10 +1958,14 @@ def parse_document(
         # Annex
         # ----------------------------------------------------
 
-        annex_match = ANNEX_RE.match(line)
+        annex_match = ANNEX_RE.match(
+            line
+        )
 
         if annex_match:
-            annex_number = annex_match.group(1).upper()
+            annex_number = (
+                annex_match.group(1).upper()
+            )
 
             annex_lines = []
 
@@ -1461,16 +1974,24 @@ def parse_document(
             while index < len(lines):
                 next_line = lines[index]
 
-                if CHAPTER_RE.match(next_line):
+                if CHAPTER_RE.match(
+                    next_line
+                ):
                     break
 
-                if ARTICLE_RE.match(next_line):
+                if ARTICLE_RE.match(
+                    next_line
+                ):
                     break
 
-                if ANNEX_RE.match(next_line):
+                if ANNEX_RE.match(
+                    next_line
+                ):
                     break
 
-                annex_lines.append(next_line)
+                annex_lines.append(
+                    next_line
+                )
 
                 index += 1
 
@@ -1488,7 +2009,9 @@ def parse_document(
     return elements
 
 
+# ============================================================
 # File handling
+# ============================================================
 
 
 def parse_structure_file(
@@ -1500,9 +2023,13 @@ def parse_structure_file(
     and save JSON.
     """
 
-    markdown = input_path.read_text(encoding="utf-8")
+    markdown = input_path.read_text(
+        encoding="utf-8"
+    )
 
-    elements = parse_document(markdown)
+    elements = parse_document(
+        markdown
+    )
 
     output = {
         "instrument": INSTRUMENT,
@@ -1525,17 +2052,30 @@ def parse_structure_file(
 
     print(f"Input:   {input_path}")
     print(f"Output:  {output_path}")
-    print(f"Elements parsed: {len(elements)}")
-    print("Legal structure extraction completed.")
+    print(
+        f"Elements parsed: {len(elements)}"
+    )
+    print(
+        "Legal structure extraction completed."
+    )
 
 
+# ============================================================
 # Main
+# ============================================================
 
 
 if __name__ == "__main__":
-    input_file = Path("data/extracted/eli_reg_2024_1689_oj_EN_TXT.clean.md")
 
-    output_file = Path("data/extracted/eli_reg_2024_1689_oj_EN_TXT.structure.json")
+    input_file = Path(
+        "data/extracted/"
+        "eli_reg_2024_1689_oj_EN_TXT.clean.md"
+    )
+
+    output_file = Path(
+        "data/extracted/"
+        "eli_reg_2024_1689_oj_EN_TXT.structure.json"
+    )
 
     parse_structure_file(
         input_path=input_file,
