@@ -234,39 +234,7 @@
             },
             {
               "label": "c",
-              "text": "the placing on the market, the putting into service or the use of AI systems for the evaluation or classification of natural persons or groups of persons over a certain period of time based on their social behaviour or known, inferred or predicted personal or personality characteristics, with the social score leading to either or both of the following: -"
-            },
-            {
-              "label": "i",
-              "text": "detrimental or unfavourable treatment of certain natural persons or groups of persons in social contexts that are unrelated to the contexts in which the data was originally generated or collected; - (ii) detrimental or unfavourable treatment of certain natural persons or groups of persons that is unjustified or disproportionate to their social behaviour or its gravity; -"
-            },
-            {
-              "label": "d",
-              "text": "the placing on the market, the putting into service for this specific purpose, or the use of an AI system for making risk assessments of natural persons in order to assess or predict the risk of a natural person committing a criminal offence, based solely on the profiling of a natural person or on assessing their personality traits and characteristics; this prohibition shall not apply to AI systems used to support the human assessment of the involvement of a person in a criminal activity, which is already based on objective and verifiable facts directly linked to a criminal activity; -"
-            },
-            {
-              "label": "e",
-              "text": "the placing on the market, the putting into service for this specific purpose, or the use of AI systems that create or expand facial recognition databases through the untargeted scraping of facial images from the internet or CCTV footage; -"
-            },
-            {
-              "label": "f",
-              "text": "the placing on the market, the putting into service for this specific purpose, or the use of AI systems to infer emotions of a natural person in the areas of workplace and education institutions, except where the use of the AI system is intended to be put in place or into the market for medical or safety reasons; -"
-            },
-            {
-              "label": "g",
-              "text": "the placing on the market, the putting into service for this specific purpose, or the use of biometric categorisation systems that categorise individually natural persons based on their biometric data to deduce or infer their race, political opinions, trade union membership, religious or philosophical beliefs, sex life or sexual orientation; this prohibition does not cover any labelling or filtering of lawfully acquired biometric datasets, such as images, based on biometric data or categorizing of biometric data in the area of law enforcement; -"
-            },
-            {
-              "label": "h",
-              "text": "the use of ‘real-time’ remote biometric identification systems in publicly accessible spaces for the purposes of law enforcement, unless and in so far as such use is strictly necessary for one of the following objectives: -"
-            },
-            {
-              "label": "i",
-              "text": "the targeted search for specific victims of abduction, trafficking in human beings or sexual exploitation of human beings, as well as the search for missing persons; - (ii) the prevention of a specific, substantial and imminent threat to the life or physical safety of natural persons or a genuine and present or genuine and foreseeable threat of a terrorist attack; - (iii) the localisation or identification of a person suspected of having committed a criminal offence, for the purpose of conducting a criminal investigation or prosecution or executing a criminal penalty for offences referred to in Annex II and punishable in the Member State concerned by a custodial sentence or a detention order for a maximum period of at least four years. Point"
-            },
-            {
-              "label": "h",
-              "text": "of the first subparagraph is without prejudice to Article 9 of Regulation (EU) 2016/679 for the processing of biometric data for purposes other than law enforcement.",
+              "text": "the placing on the market, the putting into service or the use of AI systems for the evaluation or classification of natural persons or groups of persons over a certain period of time based on their social behaviour or known, inferred or predicted personal or personality characteristics, with the social score leading to either or both of the following: - (i) detrimental or unfavourable treatment of certain natural persons or groups of persons in social contexts that are unrelated to the contexts in which the data was originally generated or collected; - (ii) detrimental or unfavourable treatment of certain natural persons or groups of persons that is unjustified or disproportionate to their social behaviour or its gravity; - (d) the placing on the market, the putting into service for this specific purpose, or the use of an AI system for making risk assessments of natural persons in order to assess or predict the risk of a natural person committing a criminal offence, based solely on the profiling of a natural person or on assessing their personality traits and characteristics; this prohibition shall not apply to AI systems used to support the human assessment of the involvement of a person in a criminal activity, which is already based on objective and verifiable facts directly linked to a criminal activity; - (e) the placing on the market, the putting into service for this specific purpose, or the use of AI systems that create or expand facial recognition databases through the untargeted scraping of facial images from the internet or CCTV footage; - (f) the placing on the market, the putting into service for this specific purpose, or the use of AI systems to infer emotions of a natural person in the areas of workplace and education institutions, except where the use of the AI system is intended to be put in place or into the market for medical or safety reasons; - (g) the placing on the market, the putting into service for this specific purpose, or the use of biometric categorisation systems that categorise individually natural persons based on their biometric data to deduce or infer their race, political opinions, trade union membership, religious or philosophical beliefs, sex life or sexual orientation; this prohibition does not cover any labelling or filtering of lawfully acquired biometric datasets, such as images, based on biometric data or categorizing of biometric data in the area of law enforcement; - (h) the use of ‘real-time’ remote biometric identification systems in publicly accessible spaces for the purposes of law enforcement, unless and in so far as such use is strictly necessary for one of the following objectives: - (i) the targeted search for specific victims of abduction, trafficking in human beings or sexual exploitation of human beings, as well as the search for missing persons; - (ii) the prevention of a specific, substantial and imminent threat to the life or physical safety of natural persons or a genuine and present or genuine and foreseeable threat of a terrorist attack; - (iii) the localisation or identification of a person suspected of having committed a criminal offence, for the purpose of conducting a criminal investigation or prosecution or executing a criminal penalty for offences referred to in Annex II and punishable in the Member State concerned by a custodial sentence or a detention order for a maximum period of at least four years. Point (h) of the first subparagraph is without prejudice to Article 9 of Regulation (EU) 2016/679 for the processing of biometric data for purposes other than law enforcement.",
               "references": [
                 {
                   "type": "article",
@@ -279,7 +247,23 @@
         {
           "index": 2,
           "number": "2",
-          "text": "The use of ‘real-time’ remote biometric identification systems in publicly accessible spaces for the purposes of law enforcement for any of the objectives referred to in paragraph 1, first subparagraph, point (h), shall be deployed for the purposes set out in that point only to confirm the identity of the specifically targeted individual, and it shall take into account the following elements: - (a) the nature of the situation giving rise to the possible use, in particular the seriousness, probability and scale of the harm that would be caused if the system were not used; - (b) the consequences of the use of the system for the rights and freedoms of all persons concerned, in particular the seriousness, probability and scale of those consequences. In addition, the use of ‘real-time’ remote biometric identification systems in publicly accessible spaces for the purposes of law enforcement for any of the objectives referred to in paragraph 1, first subparagraph, point (h), of this Article shall comply with necessary and proportionate safeguards and conditions in relation to the use in accordance with the national law authorising the use thereof, in particular as regards the temporal, geographic and personal limitations. The use of the ‘real-time’ remote biometric identification system in publicly accessible spaces shall be authorised only if the law enforcement authority has completed a fundamental rights impact assessment as provided for in Article 27 and has registered the system in the EU database according to Article"
+          "intro": "The use of ‘real-time’ remote biometric identification systems in publicly accessible spaces for the purposes of law enforcement for any of the objectives referred to in paragraph 1, first subparagraph, point (h), shall be deployed for the purposes set out in that point only to confirm the identity of the specifically targeted individual, and it shall take into account the following elements: -",
+          "points": [
+            {
+              "label": "a",
+              "text": "the nature of the situation giving rise to the possible use, in particular the seriousness, probability and scale of the harm that would be caused if the system were not used; -"
+            },
+            {
+              "label": "b",
+              "text": "the consequences of the use of the system for the rights and freedoms of all persons concerned, in particular the seriousness, probability and scale of those consequences. In addition, the use of ‘real-time’ remote biometric identification systems in publicly accessible spaces for the purposes of law enforcement for any of the objectives referred to in paragraph 1, first subparagraph, point (h), of this Article shall comply with necessary and proportionate safeguards and conditions in relation to the use in accordance with the national law authorising the use thereof, in particular as regards the temporal, geographic and personal limitations. The use of the ‘real-time’ remote biometric identification system in publicly accessible spaces shall be authorised only if the law enforcement authority has completed a fundamental rights impact assessment as provided for in Article 27 and has registered the system in the EU database according to Article",
+              "references": [
+                {
+                  "type": "article",
+                  "target": "27"
+                }
+              ]
+            }
+          ]
         },
         {
           "index": 3,
@@ -369,19 +353,7 @@
             },
             {
               "label": "b",
-              "text": ", that AI system shall be considered to be high-risk where both of the following conditions are fulfilled: -"
-            },
-            {
-              "label": "a",
-              "text": "the AI system is intended to be used as a safety component of a product, or the AI system is itself a product, covered by the Union harmonisation legislation listed in Annex I; -"
-            },
-            {
-              "label": "b",
-              "text": "the product whose safety component pursuant to point"
-            },
-            {
-              "label": "a",
-              "text": "is the AI system, or the AI system itself as a product, is required to undergo a third-party conformity assessment, with a view to the placing on the market or the putting into service of that product pursuant to the Union harmonisation legislation listed in Annex I."
+              "text": ", that AI system shall be considered to be high-risk where both of the following conditions are fulfilled: - (a) the AI system is intended to be used as a safety component of a product, or the AI system is itself a product, covered by the Union harmonisation legislation listed in Annex I; - (b) the product whose safety component pursuant to point (a) is the AI system, or the AI system itself as a product, is required to undergo a third-party conformity assessment, with a view to the placing on the market or the putting into service of that product pursuant to the Union harmonisation legislation listed in Annex I."
             }
           ]
         },
@@ -468,7 +440,53 @@
         {
           "index": 2,
           "number": "2",
-          "text": "When assessing the condition under paragraph 1, point (b), the Commission shall take into account the following criteria: - (a) the intended purpose of the AI system; - (b) the extent to which an AI system has been used or is likely to be used; - (c) the nature and amount of the data processed and used by the AI system, in particular whether special categories of personal data are processed; - (d) the extent to which the AI system acts autonomously and the possibility for a human to override a decision or recommendations that may lead to potential harm; - (e) the extent to which the use of an AI system has already caused harm to health and safety, has had an adverse impact on fundamental rights or has given rise to significant concerns in relation to the likelihood of such harm or adverse impact, as demonstrated, for example, by reports or documented allegations submitted to national competent authorities or by other reports, as appropriate; - (f) the potential extent of such harm or such adverse impact, in particular in terms of its intensity and its ability to affect multiple persons or to disproportionately affect a particular group of persons; - (g) the extent to which persons who are potentially harmed or suffer an adverse impact are dependent on the outcome produced with an AI system, in particular because for practical or legal reasons it is not reasonably possible to opt-out from that outcome; - (h) the extent to which there is an imbalance of power, or the persons who are potentially harmed or suffer an adverse impact are in a vulnerable position in relation to the deployer of an AI system, in particular due to status, authority, knowledge, economic or social circumstances, or age; - (i) the extent to which the outcome produced involving an AI system is easily corrigible or reversible, taking into account the technical solutions available to correct or reverse it, whereby outcomes having an adverse impact on health, safety or fundamental rights, shall not be considered to be easily corrigible or reversible; - (j) the magnitude and likelihood of benefit of the deployment of the AI system for individuals, groups, or society at large, including possible improvements in product safety; - (k) the extent to which existing Union law provides for: - (i) effective measures of redress in relation to the risks posed by an AI system, with the exclusion of claims for damages; - (ii) effective measures to prevent or substantially minimise those risks."
+          "intro": "When assessing the condition under paragraph 1, point (b), the Commission shall take into account the following criteria: -",
+          "points": [
+            {
+              "label": "a",
+              "text": "the intended purpose of the AI system; -"
+            },
+            {
+              "label": "b",
+              "text": "the extent to which an AI system has been used or is likely to be used; -"
+            },
+            {
+              "label": "c",
+              "text": "the nature and amount of the data processed and used by the AI system, in particular whether special categories of personal data are processed; -"
+            },
+            {
+              "label": "d",
+              "text": "the extent to which the AI system acts autonomously and the possibility for a human to override a decision or recommendations that may lead to potential harm; -"
+            },
+            {
+              "label": "e",
+              "text": "the extent to which the use of an AI system has already caused harm to health and safety, has had an adverse impact on fundamental rights or has given rise to significant concerns in relation to the likelihood of such harm or adverse impact, as demonstrated, for example, by reports or documented allegations submitted to national competent authorities or by other reports, as appropriate; -"
+            },
+            {
+              "label": "f",
+              "text": "the potential extent of such harm or such adverse impact, in particular in terms of its intensity and its ability to affect multiple persons or to disproportionately affect a particular group of persons; -"
+            },
+            {
+              "label": "g",
+              "text": "the extent to which persons who are potentially harmed or suffer an adverse impact are dependent on the outcome produced with an AI system, in particular because for practical or legal reasons it is not reasonably possible to opt-out from that outcome; -"
+            },
+            {
+              "label": "h",
+              "text": "the extent to which there is an imbalance of power, or the persons who are potentially harmed or suffer an adverse impact are in a vulnerable position in relation to the deployer of an AI system, in particular due to status, authority, knowledge, economic or social circumstances, or age; -"
+            },
+            {
+              "label": "i",
+              "text": "the extent to which the outcome produced involving an AI system is easily corrigible or reversible, taking into account the technical solutions available to correct or reverse it, whereby outcomes having an adverse impact on health, safety or fundamental rights, shall not be considered to be easily corrigible or reversible; -"
+            },
+            {
+              "label": "j",
+              "text": "the magnitude and likelihood of benefit of the deployment of the AI system for individuals, groups, or society at large, including possible improvements in product safety; -"
+            },
+            {
+              "label": "k",
+              "text": "the extent to which existing Union law provides for: - (i) effective measures of redress in relation to the risks posed by an AI system, with the exclusion of claims for damages; - (ii) effective measures to prevent or substantially minimise those risks."
+            }
+          ]
         },
         {
           "index": 3,
@@ -549,11 +567,7 @@
             },
             {
               "label": "d",
-              "text": "the adoption of appropriate and targeted risk management measures designed to address the risks identified pursuant to point"
-            },
-            {
-              "label": "a",
-              "text": "."
+              "text": "the adoption of appropriate and targeted risk management measures designed to address the risks identified pursuant to point (a)."
             }
           ]
         },
@@ -570,7 +584,27 @@
         {
           "index": 5,
           "number": "5",
-          "text": "The risk management measures referred to in paragraph 2, point (d), shall be such that the relevant residual risk associated with each hazard, as well as the overall residual risk of the high-risk AI systems is judged to be acceptable. In identifying the most appropriate risk management measures, the following shall be ensured: - (a) elimination or reduction of risks identified and evaluated pursuant to paragraph 2 in as far as technically feasible through adequate design and development of the high-risk AI system; - (b) where appropriate, implementation of adequate mitigation and control measures addressing risks that cannot be eliminated; - (c) provision of information required pursuant to Article 13 and, where appropriate, training to deployers. With a view to eliminating or reducing risks related to the use of the high-risk AI system, due consideration shall be given to the technical knowledge, experience, education, the training to be expected by the deployer, and the presumable context in which the system is intended to be used."
+          "intro": "The risk management measures referred to in paragraph 2, point (d), shall be such that the relevant residual risk associated with each hazard, as well as the overall residual risk of the high-risk AI systems is judged to be acceptable. In identifying the most appropriate risk management measures, the following shall be ensured: -",
+          "points": [
+            {
+              "label": "a",
+              "text": "elimination or reduction of risks identified and evaluated pursuant to paragraph 2 in as far as technically feasible through adequate design and development of the high-risk AI system; -"
+            },
+            {
+              "label": "b",
+              "text": "where appropriate, implementation of adequate mitigation and control measures addressing risks that cannot be eliminated; -"
+            },
+            {
+              "label": "c",
+              "text": "provision of information required pursuant to Article 13 and, where appropriate, training to deployers. With a view to eliminating or reducing risks related to the use of the high-risk AI system, due consideration shall be given to the technical knowledge, experience, education, the training to be expected by the deployer, and the presumable context in which the system is intended to be used.",
+              "references": [
+                {
+                  "type": "article",
+                  "target": "13"
+                }
+              ]
+            }
+          ]
         },
         {
           "index": 6,
@@ -645,15 +679,7 @@
             },
             {
               "label": "g",
-              "text": "appropriate measures to detect, prevent and mitigate possible biases identified according to point"
-            },
-            {
-              "label": "f",
-              "text": "; -"
-            },
-            {
-              "label": "h",
-              "text": "the identification of relevant data gaps or shortcomings that prevent compliance with this Regulation, and how those gaps and shortcomings can be addressed."
+              "text": "appropriate measures to detect, prevent and mitigate possible biases identified according to point (f); - (h) the identification of relevant data gaps or shortcomings that prevent compliance with this Regulation, and how those gaps and shortcomings can be addressed."
             }
           ]
         },
@@ -670,7 +696,33 @@
         {
           "index": 5,
           "number": "5",
-          "text": "To the extent that it is strictly necessary for the purpose of ensuring bias detection and correction in relation to the high-risk AI systems in accordance with paragraph (2), points (f) and (g) of this Article, the providers of such systems may exceptionally process special categories of personal data, subject to appropriate safeguards for the fundamental rights and freedoms of natural persons. In addition to the provisions set out in Regulations (EU) 2016/679 and (EU) 2018/1725 and Directive (EU) 2016/680, all the following conditions must be met in order for such processing to occur: - (a) the bias detection and correction cannot be effectively fulfilled by processing other data, including synthetic or anonymised data; - (b) the special categories of personal data are subject to technical limitations on the re-use of the personal data, and state-of-the-art security and privacy-preserving measures, including pseudonymisation; - (c) the special categories of personal data are subject to measures to ensure that the personal data processed are secured, protected, subject to suitable safeguards, including strict controls and documentation of the access, to avoid misuse and ensure that only authorised persons have access to those personal data with appropriate confidentiality obligations; - (d) the special categories of personal data are not to be transmitted, transferred or otherwise accessed by other parties; - (e) the special categories of personal data are deleted once the bias has been corrected or the personal data has reached the end of its retention period, whichever comes first; - (f) the records of processing activities pursuant to Regulations (EU) 2016/679 and (EU) 2018/1725 and Directive (EU) 2016/680 include the reasons why the processing of special categories of personal data was strictly necessary to detect and correct biases, and why that objective could not be achieved by processing other data."
+          "intro": "To the extent that it is strictly necessary for the purpose of ensuring bias detection and correction in relation to the high-risk AI systems in accordance with paragraph (2), points (f) and (g) of this Article, the providers of such systems may exceptionally process special categories of personal data, subject to appropriate safeguards for the fundamental rights and freedoms of natural persons. In addition to the provisions set out in Regulations (EU) 2016/679 and (EU) 2018/1725 and Directive (EU) 2016/680, all the following conditions must be met in order for such processing to occur: -",
+          "points": [
+            {
+              "label": "a",
+              "text": "the bias detection and correction cannot be effectively fulfilled by processing other data, including synthetic or anonymised data; -"
+            },
+            {
+              "label": "b",
+              "text": "the special categories of personal data are subject to technical limitations on the re-use of the personal data, and state-of-the-art security and privacy-preserving measures, including pseudonymisation; -"
+            },
+            {
+              "label": "c",
+              "text": "the special categories of personal data are subject to measures to ensure that the personal data processed are secured, protected, subject to suitable safeguards, including strict controls and documentation of the access, to avoid misuse and ensure that only authorised persons have access to those personal data with appropriate confidentiality obligations; -"
+            },
+            {
+              "label": "d",
+              "text": "the special categories of personal data are not to be transmitted, transferred or otherwise accessed by other parties; -"
+            },
+            {
+              "label": "e",
+              "text": "the special categories of personal data are deleted once the bias has been corrected or the personal data has reached the end of its retention period, whichever comes first; -"
+            },
+            {
+              "label": "f",
+              "text": "the records of processing activities pursuant to Regulations (EU) 2016/679 and (EU) 2018/1725 and Directive (EU) 2016/680 include the reasons why the processing of special categories of personal data was strictly necessary to detect and correct biases, and why that objective could not be achieved by processing other data."
+            }
+          ]
         },
         {
           "index": 6,
@@ -767,23 +819,7 @@
           "points": [
             {
               "label": "a",
-              "text": ", of Annex III, the logging capabilities shall provide, at a minimum: -"
-            },
-            {
-              "label": "a",
-              "text": "recording of the period of each use of the system (start date and time and end date and time of each use); -"
-            },
-            {
-              "label": "b",
-              "text": "the reference database against which input data has been checked by the system; -"
-            },
-            {
-              "label": "c",
-              "text": "the input data for which the search has led to a match; -"
-            },
-            {
-              "label": "d",
-              "text": "the identification of the natural persons involved in the verification of the results, as referred to in Article 14(5).",
+              "text": ", of Annex III, the logging capabilities shall provide, at a minimum: - (a) recording of the period of each use of the system (start date and time and end date and time of each use); - (b) the reference database against which input data has been checked by the system; - (c) the input data for which the search has led to a match; - (d) the identification of the natural persons involved in the verification of the results, as referred to in Article 14(5).",
               "references": [
                 {
                   "type": "article",
@@ -827,11 +863,7 @@
             },
             {
               "label": "b",
-              "text": "the characteristics, capabilities and limitations of performance of the high-risk AI system, including: -"
-            },
-            {
-              "label": "i",
-              "text": "its intended purpose; - (ii) the level of accuracy, including its metrics, robustness and cybersecurity referred to in Article 15 against which the high-risk AI system has been tested and validated and which can be expected, and any known and foreseeable circumstances that may have an impact on that expected level of accuracy, robustness and cybersecurity; - (iii) any known or foreseeable circumstance, related to the use of the high-risk AI system in accordance with its intended purpose or under conditions of reasonably foreseeable misuse, which may lead to risks to the health and safety or fundamental rights referred to in Article 9(2); - (iv) where applicable, the technical capabilities and characteristics of the high-risk AI system to provide information that is relevant to explain its output; -",
+              "text": "the characteristics, capabilities and limitations of performance of the high-risk AI system, including: - (i) its intended purpose; - (ii) the level of accuracy, including its metrics, robustness and cybersecurity referred to in Article 15 against which the high-risk AI system has been tested and validated and which can be expected, and any known and foreseeable circumstances that may have an impact on that expected level of accuracy, robustness and cybersecurity; - (iii) any known or foreseeable circumstance, related to the use of the high-risk AI system in accordance with its intended purpose or under conditions of reasonably foreseeable misuse, which may lead to risks to the health and safety or fundamental rights referred to in Article 9(2); - (iv) where applicable, the technical capabilities and characteristics of the high-risk AI system to provide information that is relevant to explain its output; - (v) when appropriate, its performance regarding specific persons or groups of persons on which the system is intended to be used; - (vi) when appropriate, specifications for the input data, or any other relevant information in terms of the training, validation and testing data sets used, taking into account the intended purpose of the high-risk AI system; - (vii) where applicable, information to enable deployers to interpret the output of the high-risk AI system and use it appropriately; - (c) the changes to the high-risk AI system and its performance which have been pre-determined by the provider at the moment of the initial conformity assessment, if any; - (d) the human oversight measures referred to in Article 14, including the technical measures put in place to facilitate the interpretation of the outputs of the high-risk AI systems by the deployers; - (e) the computational and hardware resources needed, the expected lifetime of the high-risk AI system and any necessary maintenance and care measures, including their frequency, to ensure the proper functioning of that AI system, including as regards software updates; - (f) where relevant, a description of the mechanisms included within the high-risk AI system that allows deployers to properly collect, store and interpret the logs in accordance with Article 12.",
               "references": [
                 {
                   "type": "article",
@@ -841,35 +873,11 @@
                   "type": "article",
                   "target": "9",
                   "paragraph": "2"
-                }
-              ]
-            },
-            {
-              "label": "v",
-              "text": "when appropriate, its performance regarding specific persons or groups of persons on which the system is intended to be used; - (vi) when appropriate, specifications for the input data, or any other relevant information in terms of the training, validation and testing data sets used, taking into account the intended purpose of the high-risk AI system; - (vii) where applicable, information to enable deployers to interpret the output of the high-risk AI system and use it appropriately; -"
-            },
-            {
-              "label": "c",
-              "text": "the changes to the high-risk AI system and its performance which have been pre-determined by the provider at the moment of the initial conformity assessment, if any; -"
-            },
-            {
-              "label": "d",
-              "text": "the human oversight measures referred to in Article 14, including the technical measures put in place to facilitate the interpretation of the outputs of the high-risk AI systems by the deployers; -",
-              "references": [
+                },
                 {
                   "type": "article",
                   "target": "14"
-                }
-              ]
-            },
-            {
-              "label": "e",
-              "text": "the computational and hardware resources needed, the expected lifetime of the high-risk AI system and any necessary maintenance and care measures, including their frequency, to ensure the proper functioning of that AI system, including as regards software updates; -"
-            },
-            {
-              "label": "f",
-              "text": "where relevant, a description of the mechanisms included within the high-risk AI system that allows deployers to properly collect, store and interpret the logs in accordance with Article 12.",
-              "references": [
+                },
                 {
                   "type": "article",
                   "target": "12"
@@ -1355,27 +1363,13 @@
             },
             {
               "label": "c",
-              "text": "provide a competent authority, upon a reasoned request, with all the information and documentation, including that referred to in point"
-            },
-            {
-              "label": "b",
-              "text": "of this subparagraph, necessary to demonstrate the conformity of a high-risk AI system with the requirements set out in Section 2, including access to the logs, as referred to in Article 12(1), automatically generated by the high-risk AI system, to the extent such logs are under the control of the provider; -",
+              "text": "provide a competent authority, upon a reasoned request, with all the information and documentation, including that referred to in point (b) of this subparagraph, necessary to demonstrate the conformity of a high-risk AI system with the requirements set out in Section 2, including access to the logs, as referred to in Article 12(1), automatically generated by the high-risk AI system, to the extent such logs are under the control of the provider; - (d) cooperate with competent authorities, upon a reasoned request, in any action the latter take in relation to the high-risk AI system, in particular to reduce and mitigate the risks posed by the high-risk AI system; - (e) where applicable, comply with the registration obligations referred to in Article 49(1), or, if the registration is carried out by the provider itself, ensure that the information referred to in point 3 of Section A of Annex VIII is correct. The mandate shall empower the authorised representative to be addressed, in addition to or instead of the provider, by the competent authorities, on all issues related to ensuring compliance with this Regulation.",
               "references": [
                 {
                   "type": "article",
                   "target": "12",
                   "paragraph": "1"
-                }
-              ]
-            },
-            {
-              "label": "d",
-              "text": "cooperate with competent authorities, upon a reasoned request, in any action the latter take in relation to the high-risk AI system, in particular to reduce and mitigate the risks posed by the high-risk AI system; -"
-            },
-            {
-              "label": "e",
-              "text": "where applicable, comply with the registration obligations referred to in Article 49(1), or, if the registration is carried out by the provider itself, ensure that the information referred to in point 3 of Section A of Annex VIII is correct. The mandate shall empower the authorised representative to be addressed, in addition to or instead of the provider, by the competent authorities, on all issues related to ensuring compliance with this Regulation.",
-              "references": [
+                },
                 {
                   "type": "article",
                   "target": "49",
@@ -1686,7 +1680,31 @@
         {
           "index": 1,
           "number": "1",
-          "text": "Prior to deploying a high-risk AI system referred to in Article 6(2), with the exception of high-risk AI systems intended to be used in the area listed in point 2 of Annex III, deployers that are bodies governed by public law, or are private entities providing public services, and deployers of high-risk AI systems referred to in points 5 (b) and (c) of Annex III, shall perform an assessment of the impact on fundamental rights that the use of such system may produce. For that purpose, deployers shall perform an assessment consisting of: - (a) a description of the deployer’s processes in which the high-risk AI system will be used in line with its intended purpose; - (b) a description of the period of time within which, and the frequency with which, each high-risk AI system is intended to be used; - (c) the categories of natural persons and groups likely to be affected by its use in the specific context; - (d) the specific risks of harm likely to have an impact on the categories of natural persons or groups of persons identified pursuant to point (c) of this paragraph, taking into account the information given by the provider pursuant to Article 13; - (e) a description of the implementation of human oversight measures, according to the instructions for use; - (f) the measures to be taken in the case of the materialisation of those risks, including the arrangements for internal governance and complaint mechanisms."
+          "intro": "Prior to deploying a high-risk AI system referred to in Article 6(2), with the exception of high-risk AI systems intended to be used in the area listed in point 2 of Annex III, deployers that are bodies governed by public law, or are private entities providing public services, and deployers of high-risk AI systems referred to in points 5 (b) and (c) of Annex III, shall perform an assessment of the impact on fundamental rights that the use of such system may produce. For that purpose, deployers shall perform an assessment consisting of: -",
+          "points": [
+            {
+              "label": "a",
+              "text": "a description of the deployer’s processes in which the high-risk AI system will be used in line with its intended purpose; -"
+            },
+            {
+              "label": "b",
+              "text": "a description of the period of time within which, and the frequency with which, each high-risk AI system is intended to be used; -"
+            },
+            {
+              "label": "c",
+              "text": "the categories of natural persons and groups likely to be affected by its use in the specific context; -"
+            },
+            {
+              "label": "d",
+              "text": "the specific risks of harm likely to have an impact on the categories of natural persons or groups of persons identified pursuant to point (c) of this paragraph, taking into account the information given by the provider pursuant to Article 13; - (e) a description of the implementation of human oversight measures, according to the instructions for use; - (f) the measures to be taken in the case of the materialisation of those risks, including the arrangements for internal governance and complaint mechanisms.",
+              "references": [
+                {
+                  "type": "article",
+                  "target": "13"
+                }
+              ]
+            }
+          ]
         },
         {
           "index": 2,
@@ -2225,8 +2243,13 @@
           "points": [
             {
               "label": "a",
-              "text": "the Commission has requested, pursuant to Article 10(1) of Regulation (EU) No 1025/2012, one or more European standardisation organisations to draft a harmonised standard for the requirements set out in Section 2 of this Chapter, or, as applicable, for the obligations set out in Sections 2 and 3 of Chapter V, and: -",
+              "text": "the Commission has requested, pursuant to Article 10(1) of Regulation (EU) No 1025/2012, one or more European standardisation organisations to draft a harmonised standard for the requirements set out in Section 2 of this Chapter, or, as applicable, for the obligations set out in Sections 2 and 3 of Chapter V, and: - (i) the request has not been accepted by any of the European standardisation organisations; or - (ii) the harmonised standards addressing that request are not delivered within the deadline set in accordance with Article 10(1) of Regulation (EU) No 1025/2012; or - (iii) the relevant harmonised standards insufficiently address fundamental rights concerns; or - (iv) the harmonised standards do not comply with the request; and - (b) no reference to harmonised standards covering the requirements referred to in Section 2 of this Chapter or, as applicable, the obligations referred to in Sections 2 and 3 of Chapter V has been published in the _Official Journal of the European Union_ in accordance with Regulation (EU) No 1025/2012, and no such reference is expected to be published within a reasonable period. When drafting the common specifications, the Commission shall consult the advisory forum referred to in Article",
               "references": [
+                {
+                  "type": "article",
+                  "target": "10",
+                  "paragraph": "1"
+                },
                 {
                   "type": "article",
                   "target": "10",
@@ -2235,24 +2258,7 @@
                 {
                   "type": "chapter",
                   "target": "V"
-                }
-              ]
-            },
-            {
-              "label": "i",
-              "text": "the request has not been accepted by any of the European standardisation organisations; or - (ii) the harmonised standards addressing that request are not delivered within the deadline set in accordance with Article 10(1) of Regulation (EU) No 1025/2012; or - (iii) the relevant harmonised standards insufficiently address fundamental rights concerns; or - (iv) the harmonised standards do not comply with the request; and -",
-              "references": [
-                {
-                  "type": "article",
-                  "target": "10",
-                  "paragraph": "1"
-                }
-              ]
-            },
-            {
-              "label": "b",
-              "text": "no reference to harmonised standards covering the requirements referred to in Section 2 of this Chapter or, as applicable, the obligations referred to in Sections 2 and 3 of Chapter V has been published in the _Official Journal of the European Union_ in accordance with Regulation (EU) No 1025/2012, and no such reference is expected to be published within a reasonable period. When drafting the common specifications, the Commission shall consult the advisory forum referred to in Article",
-              "references": [
+                },
                 {
                   "type": "chapter",
                   "target": "V"
@@ -2336,11 +2342,7 @@
             },
             {
               "label": "b",
-              "text": "the assessment of the quality management system and the assessment of the technical documentation, with the involvement of a notified body, referred to in Annex VII. In demonstrating the compliance of a high-risk AI system with the requirements set out in Section 2, the provider shall follow the conformity assessment procedure set out in Annex VII where: -"
-            },
-            {
-              "label": "a",
-              "text": "harmonised standards referred to in Article 40 do not exist, and common specifications referred to in Article 41 are not available; -",
+              "text": "the assessment of the quality management system and the assessment of the technical documentation, with the involvement of a notified body, referred to in Annex VII. In demonstrating the compliance of a high-risk AI system with the requirements set out in Section 2, the provider shall follow the conformity assessment procedure set out in Annex VII where: - (a) harmonised standards referred to in Article 40 do not exist, and common specifications referred to in Article 41 are not available; - (b) the provider has not applied, or has applied only part of, the harmonised standard; - (c) the common specifications referred to in point (a) exist, but the provider has not applied them; - (d) one or more of the harmonised standards referred to in point (a) has been published with a restriction, and only on the part of the standard that was restricted. For the purposes of the conformity assessment procedure referred to in Annex VII, the provider may choose any of the notified bodies. However, where the high-risk AI system is intended to be put into service by law enforcement, immigration or asylum authorities or by Union institutions, bodies, offices or agencies, the market surveillance authority referred to in Article 74(8) or (9), as applicable, shall act as a notified body.",
               "references": [
                 {
                   "type": "article",
@@ -2349,29 +2351,7 @@
                 {
                   "type": "article",
                   "target": "41"
-                }
-              ]
-            },
-            {
-              "label": "b",
-              "text": "the provider has not applied, or has applied only part of, the harmonised standard; -"
-            },
-            {
-              "label": "c",
-              "text": "the common specifications referred to in point"
-            },
-            {
-              "label": "a",
-              "text": "exist, but the provider has not applied them; -"
-            },
-            {
-              "label": "d",
-              "text": "one or more of the harmonised standards referred to in point"
-            },
-            {
-              "label": "a",
-              "text": "has been published with a restriction, and only on the part of the standard that was restricted. For the purposes of the conformity assessment procedure referred to in Annex VII, the provider may choose any of the notified bodies. However, where the high-risk AI system is intended to be put into service by law enforcement, immigration or asylum authorities or by Union institutions, bodies, offices or agencies, the market surveillance authority referred to in Article 74(8) or (9), as applicable, shall act as a notified body.",
-              "references": [
+                },
                 {
                   "type": "article",
                   "target": "74",
@@ -2775,11 +2755,7 @@
             },
             {
               "label": "b",
-              "text": "based on a decision of the Commission, _ex officio_ or following a qualified alert from the scientific panel, it has capabilities or an impact equivalent to those set out in point"
-            },
-            {
-              "label": "a",
-              "text": "having regard to the criteria set out in Annex XIII."
+              "text": "based on a decision of the Commission, _ex officio_ or following a qualified alert from the scientific panel, it has capabilities or an impact equivalent to those set out in point (a) having regard to the criteria set out in Annex XIII."
             }
           ]
         },
@@ -2888,15 +2864,7 @@
             },
             {
               "label": "b",
-              "text": "draw up, keep up-to-date and make available information and documentation to providers of AI systems who intend to integrate the general-purpose AI model into their AI systems. Without prejudice to the need to observe and protect intellectual property rights and confidential business information or trade secrets in accordance with Union and national law, the information and documentation shall: -"
-            },
-            {
-              "label": "i",
-              "text": "enable providers of AI systems to have a good understanding of the capabilities and limitations of the general-purpose AI model and to comply with their obligations pursuant to this Regulation; and - (ii) contain, at a minimum, the elements set out in Annex XII; -"
-            },
-            {
-              "label": "c",
-              "text": "put in place a policy to comply with Union law on copyright and related rights, and in particular to identify and comply with, including through state-of-the-art technologies, a reservation of rights expressed pursuant to Article 4(3) of Directive (EU) 2019/790;",
+              "text": "draw up, keep up-to-date and make available information and documentation to providers of AI systems who intend to integrate the general-purpose AI model into their AI systems. Without prejudice to the need to observe and protect intellectual property rights and confidential business information or trade secrets in accordance with Union and national law, the information and documentation shall: - (i) enable providers of AI systems to have a good understanding of the capabilities and limitations of the general-purpose AI model and to comply with their obligations pursuant to this Regulation; and - (ii) contain, at a minimum, the elements set out in Annex XII; - (c) put in place a policy to comply with Union law on copyright and related rights, and in particular to identify and comply with, including through state-of-the-art technologies, a reservation of rights expressed pursuant to Article 4(3) of Directive (EU) 2019/790; (d) draw up and make publicly available a sufficiently detailed summary about the content used for training of the general-purpose AI model, according to a template provided by the AI Office.",
               "references": [
                 {
                   "type": "article",
@@ -2904,10 +2872,6 @@
                   "paragraph": "3"
                 }
               ]
-            },
-            {
-              "label": "d",
-              "text": "draw up and make publicly available a sufficiently detailed summary about the content used for training of the general-purpose AI model, according to a template provided by the AI Office."
             }
           ]
         },
@@ -2998,15 +2962,7 @@
             },
             {
               "label": "c",
-              "text": "provide the AI Office, upon a reasoned request, with all the information and documentation, including that referred to in point"
-            },
-            {
-              "label": "b",
-              "text": ", necessary to demonstrate compliance with the obligations in this Chapter; -"
-            },
-            {
-              "label": "d",
-              "text": "cooperate with the AI Office and competent authorities, upon a reasoned request, in any action they take in relation to the general-purpose AI model, including when the model is integrated into AI systems placed on the market or put into service in the Union."
+              "text": "provide the AI Office, upon a reasoned request, with all the information and documentation, including that referred to in point (b), necessary to demonstrate compliance with the obligations in this Chapter; - (d) cooperate with the AI Office and competent authorities, upon a reasoned request, in any action they take in relation to the general-purpose AI model, including when the model is integrated into AI systems placed on the market or put into service in the Union."
             }
           ]
         },
@@ -3099,7 +3055,7 @@
           "points": [
             {
               "label": "a",
-              "text": "the means to ensure that the information referred to in Article 53(1), points",
+              "text": "the means to ensure that the information referred to in Article 53(1), points (a) and (b), is kept up to date in light of market and technological developments; - (b) the adequate level of detail for the summary about the content used for training; - (c) the identification of the type and nature of the systemic risks at Union level, including their sources, where appropriate; - (d) the measures, procedures and modalities for the assessment and management of the systemic risks at Union level, including the documentation thereof, which shall be proportionate to the risks, take into consideration their severity and probability and take into account the specific challenges of tackling those risks in light of the possible ways in which such risks may emerge and materialise along the AI value chain.",
               "references": [
                 {
                   "type": "article",
@@ -3107,26 +3063,6 @@
                   "paragraph": "1"
                 }
               ]
-            },
-            {
-              "label": "a",
-              "text": "and"
-            },
-            {
-              "label": "b",
-              "text": ", is kept up to date in light of market and technological developments; -"
-            },
-            {
-              "label": "b",
-              "text": "the adequate level of detail for the summary about the content used for training; -"
-            },
-            {
-              "label": "c",
-              "text": "the identification of the type and nature of the systemic risks at Union level, including their sources, where appropriate; -"
-            },
-            {
-              "label": "d",
-              "text": "the measures, procedures and modalities for the assessment and management of the systemic risks at Union level, including the documentation thereof, which shall be proportionate to the risks, take into consideration their severity and probability and take into account the specific challenges of tackling those risks in light of the possible ways in which such risks may emerge and materialise along the AI value chain."
             }
           ]
         },
@@ -3415,29 +3351,7 @@
           "points": [
             {
               "label": "a",
-              "text": "AI systems shall be developed for safeguarding substantial public interest by a public authority or another natural or legal person and in one or more of the following areas: -"
-            },
-            {
-              "label": "i",
-              "text": "public safety and public health, including disease detection, diagnosis prevention, control and treatment and improvement of health care systems; - (ii) a high level of protection and improvement of the quality of the environment, protection of biodiversity, protection against pollution, green transition measures, climate change mitigation and adaptation measures; - (iii) energy sustainability; - (iv) safety and resilience of transport systems and mobility, critical infrastructure and networks; -"
-            },
-            {
-              "label": "v",
-              "text": "efficiency and quality of public administration and public services; -"
-            },
-            {
-              "label": "b",
-              "text": "the data processed are necessary for complying with one or more of the requirements referred to in Chapter III, Section 2 where those requirements cannot effectively be fulfilled by processing anonymised, synthetic or other non-personal data; -",
-              "references": [
-                {
-                  "type": "chapter",
-                  "target": "III"
-                }
-              ]
-            },
-            {
-              "label": "c",
-              "text": "there are effective monitoring mechanisms to identify if any high risks to the rights and freedoms of the data subjects, as referred to in Article 35 of Regulation (EU) 2016/679 and in Article 39 of Regulation (EU) 2018/1725, may arise during the sandbox experimentation, as well as response mechanisms to promptly mitigate those risks and, where necessary, stop the processing; -",
+              "text": "AI systems shall be developed for safeguarding substantial public interest by a public authority or another natural or legal person and in one or more of the following areas: - (i) public safety and public health, including disease detection, diagnosis prevention, control and treatment and improvement of health care systems; - (ii) a high level of protection and improvement of the quality of the environment, protection of biodiversity, protection against pollution, green transition measures, climate change mitigation and adaptation measures; - (iii) energy sustainability; - (iv) safety and resilience of transport systems and mobility, critical infrastructure and networks; - (v) efficiency and quality of public administration and public services; - (b) the data processed are necessary for complying with one or more of the requirements referred to in Chapter III, Section 2 where those requirements cannot effectively be fulfilled by processing anonymised, synthetic or other non-personal data; - (c) there are effective monitoring mechanisms to identify if any high risks to the rights and freedoms of the data subjects, as referred to in Article 35 of Regulation (EU) 2016/679 and in Article 39 of Regulation (EU) 2018/1725, may arise during the sandbox experimentation, as well as response mechanisms to promptly mitigate those risks and, where necessary, stop the processing; - (d) any personal data to be processed in the context of the sandbox are in a functionally separate, isolated and protected data processing environment under the control of the prospective provider and only authorised persons have access to those data; - (e) providers can further share the originally collected data only in accordance with Union data protection law; any personal data created in the sandbox cannot be shared outside the sandbox; - (f) any processing of personal data in the context of the sandbox neither leads to measures or decisions affecting the data subjects nor does it affect the application of their rights laid down in Union law on the protection of personal data; - (g) any personal data processed in the context of the sandbox are protected by means of appropriate technical and organisational measures and deleted once the participation in the sandbox has terminated or the personal data has reached the end of its retention period; - (h) the logs of the processing of personal data in the context of the sandbox are kept for the duration of the participation in the sandbox, unless provided otherwise by Union or national law; - (i) a complete and detailed description of the process and rationale behind the training, testing and validation of the AI system is kept together with the testing results as part of the technical documentation referred to in Annex IV; - (j) a short summary of the AI project developed in the sandbox, its objectives and expected results is published on the website of the competent authorities; this obligation shall not cover sensitive operational data in relation to the activities of law enforcement, border control, immigration or asylum authorities.",
               "references": [
                 {
                   "type": "article",
@@ -3446,36 +3360,12 @@
                 {
                   "type": "article",
                   "target": "39"
+                },
+                {
+                  "type": "chapter",
+                  "target": "III"
                 }
               ]
-            },
-            {
-              "label": "d",
-              "text": "any personal data to be processed in the context of the sandbox are in a functionally separate, isolated and protected data processing environment under the control of the prospective provider and only authorised persons have access to those data; -"
-            },
-            {
-              "label": "e",
-              "text": "providers can further share the originally collected data only in accordance with Union data protection law; any personal data created in the sandbox cannot be shared outside the sandbox; -"
-            },
-            {
-              "label": "f",
-              "text": "any processing of personal data in the context of the sandbox neither leads to measures or decisions affecting the data subjects nor does it affect the application of their rights laid down in Union law on the protection of personal data; -"
-            },
-            {
-              "label": "g",
-              "text": "any personal data processed in the context of the sandbox are protected by means of appropriate technical and organisational measures and deleted once the participation in the sandbox has terminated or the personal data has reached the end of its retention period; -"
-            },
-            {
-              "label": "h",
-              "text": "the logs of the processing of personal data in the context of the sandbox are kept for the duration of the participation in the sandbox, unless provided otherwise by Union or national law; -"
-            },
-            {
-              "label": "i",
-              "text": "a complete and detailed description of the process and rationale behind the training, testing and validation of the AI system is kept together with the testing results as part of the technical documentation referred to in Annex IV; -"
-            },
-            {
-              "label": "j",
-              "text": "a short summary of the AI project developed in the sandbox, its objectives and expected results is published on the website of the competent authorities; this obligation shall not cover sensitive operational data in relation to the activities of law enforcement, border control, immigration or asylum authorities."
             }
           ]
         },
@@ -3552,58 +3442,22 @@
             },
             {
               "label": "d",
-              "text": ", with a Union-wide unique single identification number and with the information specified therein; the provider or prospective provider of high-risk AI systems referred to in point 2 of Annex III has registered the testing in real-world conditions in accordance with Article 49(5); -",
+              "text": ", with a Union-wide unique single identification number and with the information specified therein; the provider or prospective provider of high-risk AI systems referred to in point 2 of Annex III has registered the testing in real-world conditions in accordance with Article 49(5); - (d) the provider or prospective provider conducting the testing in real world conditions is established in the Union or has appointed a legal representative who is established in the Union; - (e) data collected and processed for the purpose of the testing in real world conditions shall be transferred to third countries only provided that appropriate and applicable safeguards under Union law are implemented; - (f) the testing in real world conditions does not last longer than necessary to achieve its objectives and in any case not longer than six months, which may be extended for an additional period of six months, subject to prior notification by the provider or prospective provider to the market surveillance authority, accompanied by an explanation of the need for such an extension; - (g) the subjects of the testing in real world conditions who are persons belonging to vulnerable groups due to their age or disability, are appropriately protected; - (h) where a provider or prospective provider organises the testing in real world conditions in cooperation with one or more deployers or prospective deployers, the latter have been informed of all aspects of the testing that are relevant to their decision to participate, and given the relevant instructions for use of the AI system referred to in Article 13; the provider or prospective provider and the deployer or prospective deployer shall conclude an agreement specifying their roles and responsibilities with a view to ensuring compliance with the provisions for testing in real world conditions under this Regulation and under other applicable Union and national law; - (i) the subjects of the testing in real world conditions have given informed consent in accordance with Article 61, or in the case of law enforcement, where the seeking of informed consent would prevent the AI system from being tested, the testing itself and the outcome of the testing in the real world conditions shall not have any negative effect on the subjects, and their personal data shall be deleted after the test is performed; - (j) the testing in real world conditions is effectively overseen by the provider or prospective provider, as well as by deployers or prospective deployers through persons who are suitably qualified in the relevant field and have the necessary capacity, training and authority to perform their tasks; - (k) the predictions, recommendations or decisions of the AI system can be effectively reversed and disregarded.",
               "references": [
                 {
                   "type": "article",
                   "target": "49",
                   "paragraph": "5"
-                }
-              ]
-            },
-            {
-              "label": "d",
-              "text": "the provider or prospective provider conducting the testing in real world conditions is established in the Union or has appointed a legal representative who is established in the Union; -"
-            },
-            {
-              "label": "e",
-              "text": "data collected and processed for the purpose of the testing in real world conditions shall be transferred to third countries only provided that appropriate and applicable safeguards under Union law are implemented; -"
-            },
-            {
-              "label": "f",
-              "text": "the testing in real world conditions does not last longer than necessary to achieve its objectives and in any case not longer than six months, which may be extended for an additional period of six months, subject to prior notification by the provider or prospective provider to the market surveillance authority, accompanied by an explanation of the need for such an extension; -"
-            },
-            {
-              "label": "g",
-              "text": "the subjects of the testing in real world conditions who are persons belonging to vulnerable groups due to their age or disability, are appropriately protected; -"
-            },
-            {
-              "label": "h",
-              "text": "where a provider or prospective provider organises the testing in real world conditions in cooperation with one or more deployers or prospective deployers, the latter have been informed of all aspects of the testing that are relevant to their decision to participate, and given the relevant instructions for use of the AI system referred to in Article 13; the provider or prospective provider and the deployer or prospective deployer shall conclude an agreement specifying their roles and responsibilities with a view to ensuring compliance with the provisions for testing in real world conditions under this Regulation and under other applicable Union and national law; -",
-              "references": [
+                },
                 {
                   "type": "article",
                   "target": "13"
-                }
-              ]
-            },
-            {
-              "label": "i",
-              "text": "the subjects of the testing in real world conditions have given informed consent in accordance with Article 61, or in the case of law enforcement, where the seeking of informed consent would prevent the AI system from being tested, the testing itself and the outcome of the testing in the real world conditions shall not have any negative effect on the subjects, and their personal data shall be deleted after the test is performed; -",
-              "references": [
+                },
                 {
                   "type": "article",
                   "target": "61"
                 }
               ]
-            },
-            {
-              "label": "j",
-              "text": "the testing in real world conditions is effectively overseen by the provider or prospective provider, as well as by deployers or prospective deployers through persons who are suitably qualified in the relevant field and have the necessary capacity, training and authority to perform their tasks; -"
-            },
-            {
-              "label": "k",
-              "text": "the predictions, recommendations or decisions of the AI system can be effectively reversed and disregarded."
             }
           ]
         },
@@ -3672,18 +3526,15 @@
             },
             {
               "label": "e",
-              "text": "the Union-wide unique single identification number of the testing in real world conditions in accordance with Article 60(4) point",
+              "text": "the Union-wide unique single identification number of the testing in real world conditions in accordance with Article 60(4) point (c), and the contact details of the provider or its legal representative from whom further information can be obtained.",
               "references": [
                 {
                   "type": "article",
                   "target": "60",
-                  "paragraph": "4"
+                  "paragraph": "4",
+                  "point": "c"
                 }
               ]
-            },
-            {
-              "label": "c",
-              "text": ", and the contact details of the provider or its legal representative from whom further information can be obtained."
             }
           ]
         },
@@ -4024,40 +3875,18 @@
           "points": [
             {
               "label": "a",
-              "text": "supporting the implementation and enforcement of this Regulation as regards general-purpose AI models and systems, in particular by: -"
-            },
-            {
-              "label": "i",
-              "text": "alerting the AI Office of possible systemic risks at Union level of general-purpose AI models, in accordance with Article 90; - (ii) contributing to the development of tools and methodologies for evaluating capabilities of general-purpose AI models and systems, including through benchmarks; - (iii) providing advice on the classification of general-purpose AI models with systemic risk; - (iv) providing advice on the classification of various general-purpose AI models and systems; -",
+              "text": "supporting the implementation and enforcement of this Regulation as regards general-purpose AI models and systems, in particular by: - (i) alerting the AI Office of possible systemic risks at Union level of general-purpose AI models, in accordance with Article 90; - (ii) contributing to the development of tools and methodologies for evaluating capabilities of general-purpose AI models and systems, including through benchmarks; - (iii) providing advice on the classification of general-purpose AI models with systemic risk; - (iv) providing advice on the classification of various general-purpose AI models and systems; - (v) contributing to the development of tools and templates; - (b) supporting the work of market surveillance authorities, at their request; - (c) supporting cross-border market surveillance activities as referred to in Article 74(11), without prejudice to the powers of market surveillance authorities; - (d) supporting the AI Office in carrying out its duties in the context of the Union safeguard procedure pursuant to Article",
               "references": [
                 {
                   "type": "article",
                   "target": "90"
-                }
-              ]
-            },
-            {
-              "label": "v",
-              "text": "contributing to the development of tools and templates; -"
-            },
-            {
-              "label": "b",
-              "text": "supporting the work of market surveillance authorities, at their request; -"
-            },
-            {
-              "label": "c",
-              "text": "supporting cross-border market surveillance activities as referred to in Article 74(11), without prejudice to the powers of market surveillance authorities; -",
-              "references": [
+                },
                 {
                   "type": "article",
                   "target": "74",
                   "paragraph": "11"
                 }
               ]
-            },
-            {
-              "label": "d",
-              "text": "supporting the AI Office in carrying out its duties in the context of the Union safeguard procedure pursuant to Article"
             }
           ]
         },
@@ -5132,18 +4961,15 @@
             },
             {
               "label": "b",
-              "text": "to investigate systemic risks at Union level of general-purpose AI models with systemic risk, in particular following a qualified alert from the scientific panel in accordance with Article 90(1), point",
+              "text": "to investigate systemic risks at Union level of general-purpose AI models with systemic risk, in particular following a qualified alert from the scientific panel in accordance with Article 90(1), point (a).",
               "references": [
                 {
                   "type": "article",
                   "target": "90",
-                  "paragraph": "1"
+                  "paragraph": "1",
+                  "point": "a"
                 }
               ]
-            },
-            {
-              "label": "a",
-              "text": "."
             }
           ]
         },
@@ -6221,83 +6047,112 @@
           "items": [
             {
               "number": "1",
-              "text": "Directive 2006/42/EC of the European Parliament and of the Council of 17 May 2006 on machinery, and amending Directive 95/16/EC (OJ L 157, 9.6.2006, p. 24);"
+              "text": "Directive 2006/42/EC of the European Parliament and of the Council of 17 May 2006 on machinery, and amending Directive 95/16/EC (OJ L 157, 9.6.2006, p. 24);",
+              "subpoints": []
             },
             {
               "number": "2",
-              "text": "Directive 2009/48/EC of the European Parliament and of the Council of 18 June 2009 on the safety of toys (OJ L 170, 30.6.2009, p. 1);"
+              "text": "Directive 2009/48/EC of the European Parliament and of the Council of 18 June 2009 on the safety of toys (OJ L 170, 30.6.2009, p. 1);",
+              "subpoints": []
             },
             {
               "number": "3",
-              "text": "Directive 2013/53/EU of the European Parliament and of the Council of 20 November 2013 on recreational craft and personal watercraft and repealing Directive 94/25/EC (OJ L 354, 28.12.2013, p. 90);"
+              "text": "Directive 2013/53/EU of the European Parliament and of the Council of 20 November 2013 on recreational craft and personal watercraft and repealing Directive 94/25/EC (OJ L 354, 28.12.2013, p. 90);",
+              "subpoints": []
             },
             {
               "number": "4",
-              "text": "Directive 2014/33/EU of the European Parliament and of the Council of 26 February 2014 on the harmonisation of the laws of the Member States relating to lifts and safety components for lifts (OJ L 96, 29.3.2014, p. 251);"
+              "text": "Directive 2014/33/EU of the European Parliament and of the Council of 26 February 2014 on the harmonisation of the laws of the Member States relating to lifts and safety components for lifts (OJ L 96, 29.3.2014, p. 251);",
+              "subpoints": []
             },
             {
               "number": "5",
-              "text": "Directive 2014/34/EU of the European Parliament and of the Council of 26 February 2014 on the harmonisation of the laws of the Member States relating to equipment and protective systems intended for use in potentially explosive atmospheres (OJ L 96, 29.3.2014, p. 309);"
+              "text": "Directive 2014/34/EU of the European Parliament and of the Council of 26 February 2014 on the harmonisation of the laws of the Member States relating to equipment and protective systems intended for use in potentially explosive atmospheres (OJ L 96, 29.3.2014, p. 309);",
+              "subpoints": []
             },
             {
               "number": "6",
-              "text": "Directive 2014/53/EU of the European Parliament and of the Council of 16 April 2014 on the harmonisation of the laws of the Member States relating to the making available on the market of radio equipment and repealing Directive 1999/5/EC (OJ L 153, 22.5.2014, p. 62);"
+              "text": "Directive 2014/53/EU of the European Parliament and of the Council of 16 April 2014 on the harmonisation of the laws of the Member States relating to the making available on the market of radio equipment and repealing Directive 1999/5/EC (OJ L 153, 22.5.2014, p. 62);",
+              "subpoints": []
             },
             {
               "number": "7",
-              "text": "Directive 2014/68/EU of the European Parliament and of the Council of 15 May 2014 on the harmonisation of the laws of the Member States relating to the making available on the market of pressure equipment (OJ L 189, 27.6.2014, p. 164);"
+              "text": "Directive 2014/68/EU of the European Parliament and of the Council of 15 May 2014 on the harmonisation of the laws of the Member States relating to the making available on the market of pressure equipment (OJ L 189, 27.6.2014, p. 164);",
+              "subpoints": []
             },
             {
               "number": "8",
-              "text": "Regulation (EU) 2016/424 of the European Parliament and of the Council of 9 March 2016 on cableway installations and repealing Directive 2000/9/EC (OJ L 81, 31.3.2016, p. 1);"
+              "text": "Regulation (EU) 2016/424 of the European Parliament and of the Council of 9 March 2016 on cableway installations and repealing Directive 2000/9/EC (OJ L 81, 31.3.2016, p. 1);",
+              "subpoints": []
             },
             {
               "number": "9",
-              "text": "Regulation (EU) 2016/425 of the European Parliament and of the Council of 9 March 2016 on personal protective equipment and repealing Council Directive 89/686/EEC (OJ L 81, 31.3.2016, p. 51);"
+              "text": "Regulation (EU) 2016/425 of the European Parliament and of the Council of 9 March 2016 on personal protective equipment and repealing Council Directive 89/686/EEC (OJ L 81, 31.3.2016, p. 51);",
+              "subpoints": []
             },
             {
               "number": "10",
-              "text": "Regulation (EU) 2016/426 of the European Parliament and of the Council of 9 March 2016 on appliances burning gaseous fuels and repealing Directive 2009/142/EC (OJ L 81, 31.3.2016, p. 99);"
+              "text": "Regulation (EU) 2016/426 of the European Parliament and of the Council of 9 March 2016 on appliances burning gaseous fuels and repealing Directive 2009/142/EC (OJ L 81, 31.3.2016, p. 99);",
+              "subpoints": []
             },
             {
               "number": "11",
-              "text": "Regulation (EU) 2017/745 of the European Parliament and of the Council of 5 April 2017 on medical devices, amending Directive 2001/83/EC, Regulation (EC) No 178/2002 and Regulation (EC) No 1223/2009 and repealing Council Directives 90/385/EEC and 93/42/EEC (OJ L 117, 5.5.2017, p. 1);"
+              "text": "Regulation (EU) 2017/745 of the European Parliament and of the Council of 5 April 2017 on medical devices, amending Directive 2001/83/EC, Regulation (EC) No 178/2002 and Regulation (EC) No 1223/2009 and repealing Council Directives 90/385/EEC and 93/42/EEC (OJ L 117, 5.5.2017, p. 1);",
+              "subpoints": []
             },
             {
               "number": "12",
-              "text": "Regulation (EU) 2017/746 of the European Parliament and of the Council of 5 April 2017 on _in vitro_ diagnostic medical devices and repealing Directive 98/79/EC and Commission Decision 2010/227/EU (OJ L 117, 5.5.2017, p. 176). Section B. List of other Union harmonisation legislation"
+              "text": "Regulation (EU) 2017/746 of the European Parliament and of the Council of 5 April 2017 on _in vitro_ diagnostic medical devices and repealing Directive 98/79/EC and Commission Decision 2010/227/EU (OJ L 117, 5.5.2017, p. 176). Section B. List of other Union harmonisation legislation",
+              "subpoints": []
             },
             {
               "number": "13",
-              "text": "Regulation (EC) No 300/2008 of the European Parliament and of the Council of 11 March 2008 on common rules in the field of civil aviation security and repealing Regulation (EC) No 2320/2002 (OJ L 97, 9.4.2008, p. 72);"
+              "text": "Regulation (EC) No 300/2008 of the European Parliament and of the Council of 11 March 2008 on common rules in the field of civil aviation security and repealing Regulation (EC) No 2320/2002 (OJ L 97, 9.4.2008, p. 72);",
+              "subpoints": []
             },
             {
               "number": "14",
-              "text": "Regulation (EU) No 168/2013 of the European Parliament and of the Council of 15 January 2013 on the approval and market surveillance of two- or three-wheel vehicles and quadricycles (OJ L 60, 2.3.2013, p. 52);"
+              "text": "Regulation (EU) No 168/2013 of the European Parliament and of the Council of 15 January 2013 on the approval and market surveillance of two- or three-wheel vehicles and quadricycles (OJ L 60, 2.3.2013, p. 52);",
+              "subpoints": []
             },
             {
               "number": "15",
-              "text": "Regulation (EU) No 167/2013 of the European Parliament and of the Council of 5 February 2013 on the approval and market surveillance of agricultural and forestry vehicles (OJ L 60, 2.3.2013, p. 1);"
+              "text": "Regulation (EU) No 167/2013 of the European Parliament and of the Council of 5 February 2013 on the approval and market surveillance of agricultural and forestry vehicles (OJ L 60, 2.3.2013, p. 1);",
+              "subpoints": []
             },
             {
               "number": "16",
-              "text": "Directive 2014/90/EU of the European Parliament and of the Council of 23 July 2014 on marine equipment and repealing Council Directive 96/98/EC (OJ L 257, 28.8.2014, p. 146);"
+              "text": "Directive 2014/90/EU of the European Parliament and of the Council of 23 July 2014 on marine equipment and repealing Council Directive 96/98/EC (OJ L 257, 28.8.2014, p. 146);",
+              "subpoints": []
             },
             {
               "number": "17",
-              "text": "Directive (EU) 2016/797 of the European Parliament and of the Council of 11 May 2016 on the interoperability of the rail system within the European Union (OJ L 138, 26.5.2016, p. 44);"
+              "text": "Directive (EU) 2016/797 of the European Parliament and of the Council of 11 May 2016 on the interoperability of the rail system within the European Union (OJ L 138, 26.5.2016, p. 44);",
+              "subpoints": []
             },
             {
               "number": "18",
-              "text": "Regulation (EU) 2018/858 of the European Parliament and of the Council of 30 May 2018 on the approval and market surveillance of motor vehicles and their trailers, and of systems, components and separate technical units intended for such vehicles, amending Regulations (EC) No 715/2007 and (EC) No 595/2009 and repealing Directive 2007/46/EC (OJ L 151, 14.6.2018, p. 1);"
+              "text": "Regulation (EU) 2018/858 of the European Parliament and of the Council of 30 May 2018 on the approval and market surveillance of motor vehicles and their trailers, and of systems, components and separate technical units intended for such vehicles, amending Regulations (EC) No 715/2007 and (EC) No 595/2009 and repealing Directive 2007/46/EC (OJ L 151, 14.6.2018, p. 1);",
+              "subpoints": []
             },
             {
               "number": "19",
-              "text": "Regulation (EU) 2019/2144 of the European Parliament and of the Council of 27 November 2019 on type-approval requirements for motor vehicles and their trailers, and systems, components and separate technical units intended for such vehicles, as regards their general safety and the protection of vehicle occupants and vulnerable road users, amending Regulation (EU) 2018/858 of the European Parliament and of the Council and repealing Regulations (EC) No 78/2009, (EC) No 79/2009 and (EC) No 661/2009 of the European Parliament and of the Council and Commission Regulations (EC) No 631/2009, (EU) No 406/2010, (EU) No 672/2010, (EU) No 1003/2010, (EU) No 1005/2010, (EU) No 1008/2010, (EU) No 1009/2010, (EU) No 19/2011, (EU) No 109/2011, (EU) No 458/2011, (EU) No 65/2012, (EU) No 130/2012, (EU) No 347/2012, (EU) No 351/2012, (EU) No 1230/2012 and (EU) 2015/166 (OJ L 325, 16.12.2019, p. 1);"
+              "text": "Regulation (EU) 2019/2144 of the European Parliament and of the Council of 27 November 2019 on type-approval requirements for motor vehicles and their trailers, and systems, components and separate technical units intended for such vehicles, as regards their general safety and the protection of vehicle occupants and vulnerable road users, amending Regulation (EU) 2018/858 of the European Parliament and of the Council and repealing Regulations (EC) No 78/2009, (EC) No 79/2009 and (EC) No 661/2009 of the European Parliament and of the Council and Commission Regulations (EC) No 631/2009, (EU) No 406/2010, (EU) No 672/2010, (EU) No 1003/2010, (EU) No 1005/2010, (EU) No 1008/2010, (EU) No 1009/2010, (EU) No 19/2011, (EU) No 109/2011, (EU) No 458/2011, (EU) No 65/2012, (EU) No 130/2012, (EU) No 347/2012, (EU) No 351/2012, (EU) No 1230/2012 and (EU) 2015/166 (OJ L 325, 16.12.2019, p. 1);",
+              "subpoints": []
             },
             {
               "number": "20",
-              "text": "Regulation (EU) 2018/1139 of the European Parliament and of the Council of 4 July 2018 on common rules in the field of civil aviation and establishing a European Union Aviation Safety Agency, and amending Regulations (EC) No 2111/2005, (EC) No 1008/2008, (EU) No 996/2010, (EU) No 376/2014 and Directives 2014/30/EU and 2014/53/EU of the European Parliament and of the Council, and repealing Regulations (EC) No 552/2004 and (EC) No 216/2008 of the European Parliament and of the Council and Council Regulation (EEC) No 3922/91 (OJ L 212, 22.8.2018, p. 1), in so far as the design, production and placing on the market of aircrafts referred to in Article 2(1), points (a) and (b) thereof, where it concerns unmanned aircraft and their engines, propellers, parts and equipment to control them remotely, are concerned."
+              "category": "Regulation (EU) 2018/1139 of the European Parliament and of the Council of 4 July 2018 on common rules in the field of civil aviation and establishing a European Union Aviation Safety Agency, and amending Regulations (EC) No 2111/2005, (EC) No 1008/2008, (EU) No 996/2010, (EU) No 376/2014 and Directives 2014/30/EU and 2014/53/EU of the European Parliament and of the Council, and repealing Regulations (EC) No 552/2004 and (EC) No 216/2008 of the European Parliament and of the Council and Council Regulation (EEC) No 3922/91 (OJ L 212, 22.8.2018, p. 1), in so far as the design, production and placing on the market of aircrafts referred to in Article 2(1), points",
+              "subpoints": [
+                {
+                  "label": "a",
+                  "text": "and"
+                },
+                {
+                  "label": "b",
+                  "text": "thereof, where it concerns unmanned aircraft and their engines, propellers, parts and equipment to control them remotely, are concerned."
+                }
+              ]
             }
           ]
         }
@@ -6407,7 +6262,7 @@
       "id": "aiact:annex3",
       "number": "III",
       "title": "High-risk AI systems referred to in Article 6(2)",
-      "intro": "High-risk AI systems pursuant to Article 6(2) are the AI systems listed in any of the following areas: 1. Biometrics, in so far as their use is permitted under relevant Union or national law:",
+      "intro": "High-risk AI systems pursuant to Article 6(2) are the AI systems listed in any of the following areas:",
       "references": [
         {
           "type": "article",
@@ -6417,124 +6272,168 @@
       ],
       "items": [
         {
-          "index": 1,
-          "label": null,
-          "text": "(a) remote biometric identification systems. This shall not include AI systems intended to be used for biometric verification the sole purpose of which is to confirm that a specific natural person is the person he or she claims to be;"
+          "number": "1",
+          "category": "Biometrics",
+          "intro": "Biometrics, in so far as their use is permitted under relevant Union or national law: -",
+          "subpoints": [
+            {
+              "label": "a",
+              "text": "remote biometric identification systems.",
+              "note": "This shall not include AI systems intended to be used for biometric verification the sole purpose of which is to confirm that a specific natural person is the person he or she claims to be; -"
+            },
+            {
+              "label": "b",
+              "text": "AI systems intended to be used for biometric categorisation, according to sensitive or protected attributes or characteristics based on the inference of those attributes or characteristics; -"
+            },
+            {
+              "label": "c",
+              "text": "AI systems intended to be used for emotion recognition."
+            }
+          ]
         },
         {
-          "index": 2,
-          "label": null,
-          "text": "(b) AI systems intended to be used for biometric categorisation, according to sensitive or protected attributes or characteristics based on the inference of those attributes or characteristics;"
+          "number": "2",
+          "category": "Critical infrastructure",
+          "text": "Critical infrastructure: AI systems intended to be used as safety components in the management and operation of critical digital infrastructure, road traffic, or in the supply of water, gas, heating or electricity.",
+          "subpoints": []
         },
         {
-          "index": 3,
-          "label": null,
-          "text": "(c) AI systems intended to be used for emotion recognition. 2. Critical infrastructure: AI systems intended to be used as safety components in the management and operation of critical digital infrastructure, road traffic, or in the supply of water, gas, heating or electricity. 3. Education and vocational training:"
+          "number": "3",
+          "category": "Education and vocational training: -",
+          "subpoints": [
+            {
+              "label": "a",
+              "text": "AI systems intended to be used to determine access or admission or to assign natural persons to educational and vocational training institutions at all levels; -"
+            },
+            {
+              "label": "b",
+              "text": "AI systems intended to be used to evaluate learning outcomes, including when those outcomes are used to steer the learning process of natural persons in educational and vocational training institutions at all levels; -"
+            },
+            {
+              "label": "c",
+              "text": "AI systems intended to be used for the purpose of assessing the appropriate level of education that an individual will receive or will be able to access, in the context of or within educational and vocational training institutions at all levels; -"
+            },
+            {
+              "label": "d",
+              "text": "AI systems intended to be used for monitoring and detecting prohibited behaviour of students during tests in the context of or within educational and vocational training institutions at all levels."
+            }
+          ]
         },
         {
-          "index": 4,
-          "label": null,
-          "text": "(a) AI systems intended to be used to determine access or admission or to assign natural persons to educational and vocational training institutions at all levels;"
+          "number": "4",
+          "category": "Employment",
+          "intro": "Employment, workers’ management and access to self-employment: -",
+          "subpoints": [
+            {
+              "label": "a",
+              "text": "AI systems intended to be used for the recruitment or selection of natural persons, in particular to place targeted job advertisements, to analyse and filter job applications, and to evaluate candidates; -"
+            },
+            {
+              "label": "b",
+              "text": "AI systems intended to be used to make decisions affecting terms of work-related relationships, the promotion or termination of work-related contractual relationships, to allocate tasks based on individual behaviour or personal traits or characteristics or to monitor and evaluate the performance and behaviour of persons in such relationships."
+            }
+          ]
         },
         {
-          "index": 5,
-          "label": null,
-          "text": "(b) AI systems intended to be used to evaluate learning outcomes, including when those outcomes are used to steer the learning process of natural persons in educational and vocational training institutions at all levels;"
+          "number": "5",
+          "category": "Access to and enjoyment of essential private services and essential public services and benefits: -",
+          "subpoints": [
+            {
+              "label": "a",
+              "text": "AI systems intended to be used by public authorities or on behalf of public authorities to evaluate the eligibility of natural persons for essential public assistance benefits and services, including healthcare services, as well as to grant, reduce, revoke, or reclaim such benefits and services; -"
+            },
+            {
+              "label": "b",
+              "text": "AI systems intended to be used to evaluate the creditworthiness of natural persons or establish their credit score, with the exception of AI systems used for the purpose of detecting financial fraud; -"
+            },
+            {
+              "label": "c",
+              "text": "AI systems intended to be used for risk assessment and pricing in relation to natural persons in the case of life and health insurance; -"
+            },
+            {
+              "label": "d",
+              "text": "AI systems intended to evaluate and classify emergency calls by natural persons or to be used to dispatch, or to establish priority in the dispatching of, emergency first response services, including by police, firefighters and medical aid, as well as of emergency healthcare patient triage systems."
+            }
+          ]
         },
         {
-          "index": 6,
-          "label": null,
-          "text": "(c) AI systems intended to be used for the purpose of assessing the appropriate level of education that an individual will receive or will be able to access, in the context of or within educational and vocational training institutions at all levels;"
+          "number": "6",
+          "category": "Law enforcement",
+          "intro": "Law enforcement, in so far as their use is permitted under relevant Union or national law: -",
+          "subpoints": [
+            {
+              "label": "a",
+              "text": "AI systems intended to be used by or on behalf of law enforcement authorities, or by Union institutions, bodies, offices or agencies in support of law enforcement authorities or on their behalf to assess the risk of a natural person becoming the victim of criminal offences; -"
+            },
+            {
+              "label": "b",
+              "text": "AI systems intended to be used by or on behalf of law enforcement authorities or by Union institutions, bodies, offices or agencies in support of law enforcement authorities as polygraphs or similar tools; -"
+            },
+            {
+              "label": "c",
+              "text": "AI systems intended to be used by or on behalf of law enforcement authorities, or by Union institutions, bodies, offices or agencies, in support of law enforcement authorities to evaluate the reliability of evidence in the course of the investigation or prosecution of criminal offences; -"
+            },
+            {
+              "label": "d",
+              "text": "AI systems intended to be used by law enforcement authorities or on their behalf or by Union institutions, bodies, offices or agencies in support of law enforcement authorities for assessing the risk of a natural person offending or re-offending not solely on the basis of the profiling of natural persons as referred to in Article 3(4) of Directive (EU) 2016/680, or to assess personality traits and characteristics or past criminal behaviour of natural persons or groups; -",
+              "references": [
+                {
+                  "type": "article",
+                  "target": "3",
+                  "paragraph": "4"
+                }
+              ]
+            },
+            {
+              "label": "e",
+              "text": "AI systems intended to be used by or on behalf of law enforcement authorities or by Union institutions, bodies, offices or agencies in support of law enforcement authorities for the profiling of natural persons as referred to in Article 3(4) of Directive (EU) 2016/680 in the course of the detection, investigation or prosecution of criminal offences.",
+              "references": [
+                {
+                  "type": "article",
+                  "target": "3",
+                  "paragraph": "4"
+                }
+              ]
+            }
+          ]
         },
         {
-          "index": 7,
-          "label": null,
-          "text": "(d) AI systems intended to be used for monitoring and detecting prohibited behaviour of students during tests in the context of or within educational and vocational training institutions at all levels. 4. Employment, workers’ management and access to self-employment:"
+          "number": "7",
+          "category": "Migration",
+          "intro": "Migration, asylum and border control management, in so far as their use is permitted under relevant Union or national law: -",
+          "subpoints": [
+            {
+              "label": "a",
+              "text": "AI systems intended to be used by or on behalf of competent public authorities or by Union institutions, bodies, offices or agencies as polygraphs or similar tools; -"
+            },
+            {
+              "label": "b",
+              "text": "AI systems intended to be used by or on behalf of competent public authorities or by Union institutions, bodies, offices or agencies to assess a risk, including a security risk, a risk of irregular migration, or a health risk, posed by a natural person who intends to enter or who has entered into the territory of a Member State; -"
+            },
+            {
+              "label": "c",
+              "text": "AI systems intended to be used by or on behalf of competent public authorities or by Union institutions, bodies, offices or agencies to assist competent public authorities for the examination of applications for asylum, visa or residence permits and for associated complaints with regard to the eligibility of the natural persons applying for a status, including related assessments of the reliability of evidence; -"
+            },
+            {
+              "label": "d",
+              "text": "AI systems intended to be used by or on behalf of competent public authorities, or by Union institutions, bodies, offices or agencies, in the context of migration, asylum or border control management, for the purpose of detecting, recognising or identifying natural persons, with the exception of the verification of travel documents."
+            }
+          ]
         },
         {
-          "index": 8,
-          "label": null,
-          "text": "(a) AI systems intended to be used for the recruitment or selection of natural persons, in particular to place targeted job advertisements, to analyse and filter job applications, and to evaluate candidates;"
-        },
-        {
-          "index": 9,
-          "label": null,
-          "text": "(b) AI systems intended to be used to make decisions affecting terms of work-related relationships, the promotion or termination of work-related contractual relationships, to allocate tasks based on individual behaviour or personal traits or characteristics or to monitor and evaluate the performance and behaviour of persons in such relationships. 5. Access to and enjoyment of essential private services and essential public services and benefits:"
-        },
-        {
-          "index": 10,
-          "label": null,
-          "text": "(a) AI systems intended to be used by public authorities or on behalf of public authorities to evaluate the eligibility of natural persons for essential public assistance benefits and services, including healthcare services, as well as to grant, reduce, revoke, or reclaim such benefits and services;"
-        },
-        {
-          "index": 11,
-          "label": null,
-          "text": "(b) AI systems intended to be used to evaluate the creditworthiness of natural persons or establish their credit score, with the exception of AI systems used for the purpose of detecting financial fraud;"
-        },
-        {
-          "index": 12,
-          "label": null,
-          "text": "(c) AI systems intended to be used for risk assessment and pricing in relation to natural persons in the case of life and health insurance;"
-        },
-        {
-          "index": 13,
-          "label": null,
-          "text": "(d) AI systems intended to evaluate and classify emergency calls by natural persons or to be used to dispatch, or to establish priority in the dispatching of, emergency first response services, including by police, firefighters and medical aid, as well as of emergency healthcare patient triage systems. 6. Law enforcement, in so far as their use is permitted under relevant Union or national law:"
-        },
-        {
-          "index": 14,
-          "label": null,
-          "text": "(a) AI systems intended to be used by or on behalf of law enforcement authorities, or by Union institutions, bodies, offices or agencies in support of law enforcement authorities or on their behalf to assess the risk of a natural person becoming the victim of criminal offences;"
-        },
-        {
-          "index": 15,
-          "label": null,
-          "text": "(b) AI systems intended to be used by or on behalf of law enforcement authorities or by Union institutions, bodies, offices or agencies in support of law enforcement authorities as polygraphs or similar tools;"
-        },
-        {
-          "index": 16,
-          "label": null,
-          "text": "(c) AI systems intended to be used by or on behalf of law enforcement authorities, or by Union institutions, bodies, offices or agencies, in support of law enforcement authorities to evaluate the reliability of evidence in the course of the investigation or prosecution of criminal offences;"
-        },
-        {
-          "index": 17,
-          "label": null,
-          "text": "(d) AI systems intended to be used by law enforcement authorities or on their behalf or by Union institutions, bodies, offices or agencies in support of law enforcement authorities for assessing the risk of a natural person offending or re-offending not solely on the basis of the profiling of natural persons as referred to in Article 3(4) of Directive (EU) 2016/680, or to assess personality traits and characteristics or past criminal behaviour of natural persons or groups;"
-        },
-        {
-          "index": 18,
-          "label": null,
-          "text": "(e) AI systems intended to be used by or on behalf of law enforcement authorities or by Union institutions, bodies, offices or agencies in support of law enforcement authorities for the profiling of natural persons as referred to in Article 3(4) of Directive (EU) 2016/680 in the course of the detection, investigation or prosecution of criminal offences. 7. Migration, asylum and border control management, in so far as their use is permitted under relevant Union or national law:"
-        },
-        {
-          "index": 19,
-          "label": null,
-          "text": "(a) AI systems intended to be used by or on behalf of competent public authorities or by Union institutions, bodies, offices or agencies as polygraphs or similar tools;"
-        },
-        {
-          "index": 20,
-          "label": null,
-          "text": "(b) AI systems intended to be used by or on behalf of competent public authorities or by Union institutions, bodies, offices or agencies to assess a risk, including a security risk, a risk of irregular migration, or a health risk, posed by a natural person who intends to enter or who has entered into the territory of a Member State;"
-        },
-        {
-          "index": 21,
-          "label": null,
-          "text": "(c) AI systems intended to be used by or on behalf of competent public authorities or by Union institutions, bodies, offices or agencies to assist competent public authorities for the examination of applications for asylum, visa or residence permits and for associated complaints with regard to the eligibility of the natural persons applying for a status, including related assessments of the reliability of evidence;"
-        },
-        {
-          "index": 22,
-          "label": null,
-          "text": "(d) AI systems intended to be used by or on behalf of competent public authorities, or by Union institutions, bodies, offices or agencies, in the context of migration, asylum or border control management, for the purpose of detecting, recognising or identifying natural persons, with the exception of the verification of travel documents. 8. Administration of justice and democratic processes:"
-        },
-        {
-          "index": 23,
-          "label": null,
-          "text": "(a) AI systems intended to be used by a judicial authority or on their behalf to assist a judicial authority in researching and interpreting facts and the law and in applying the law to a concrete set of facts, or to be used in a similar way in alternative dispute resolution;"
-        },
-        {
-          "index": 24,
-          "label": null,
-          "text": "(b) AI systems intended to be used for influencing the outcome of an election or referendum or the voting behaviour of natural persons in the exercise of their vote in elections or referenda. This does not include AI systems to the output of which natural persons are not directly exposed, such as tools used to organise, optimise or structure political campaigns from an administrative or logistical point of view."
+          "number": "8",
+          "category": "Administration of justice and democratic processes: -",
+          "subpoints": [
+            {
+              "label": "a",
+              "text": "AI systems intended to be used by a judicial authority or on their behalf to assist a judicial authority in researching and interpreting facts and the law and in applying the law to a concrete set of facts, or to be used in a similar way in alternative dispute resolution; -"
+            },
+            {
+              "label": "b",
+              "text": "AI systems intended to be used for influencing the outcome of an election or referendum or the voting behaviour of natural persons in the exercise of their vote in elections or referenda.",
+              "note": "This does not include AI systems to the output of which natural persons are not directly exposed, such as tools used to organise, optimise or structure political campaigns from an administrative or logistical point of view."
+            }
+          ]
         }
       ]
     },
@@ -6543,7 +6442,7 @@
       "id": "aiact:annex4",
       "number": "IV",
       "title": "Technical documentation referred to in Article 11(1)",
-      "intro": "The technical documentation referred to in Article 11(1) shall contain at least the following information, as applicable to the relevant AI system: 1. A general description of the AI system including:",
+      "intro": "The technical documentation referred to in Article 11(1) shall contain at least the following information, as applicable to the relevant AI system:",
       "references": [
         {
           "type": "article",
@@ -6553,84 +6452,165 @@
       ],
       "items": [
         {
-          "index": 1,
-          "label": null,
-          "text": "(a) its intended purpose, the name of the provider and the version of the system reflecting its relation to previous versions;"
+          "number": "1",
+          "category": "A general description of the AI system including: -",
+          "subpoints": [
+            {
+              "label": "a",
+              "text": "its intended purpose, the name of the provider and the version of the system reflecting its relation to previous versions; -"
+            },
+            {
+              "label": "b",
+              "text": "how the AI system interacts with, or can be used to interact with, hardware or software, including with other AI systems, that are not part of the AI system itself, where applicable; -"
+            },
+            {
+              "label": "c",
+              "text": "the versions of relevant software or firmware, and any requirements related to version updates; -"
+            },
+            {
+              "label": "d",
+              "text": "the description of all the forms in which the AI system is placed on the market or put into service, such as software packages embedded into hardware, downloads, or APIs; -"
+            },
+            {
+              "label": "e",
+              "text": "the description of the hardware on which the AI system is intended to run; -"
+            },
+            {
+              "label": "f",
+              "text": "where the AI system is a component of products, photographs or illustrations showing external features, the marking and internal layout of those products; -"
+            },
+            {
+              "label": "g",
+              "text": "a basic description of the user-interface provided to the deployer; -"
+            },
+            {
+              "label": "h",
+              "text": "instructions for use for the deployer, and a basic description of the user-interface provided to the deployer, where applicable;"
+            }
+          ]
         },
         {
-          "index": 2,
-          "label": null,
-          "text": "(b) how the AI system interacts with, or can be used to interact with, hardware or software, including with other AI systems, that are not part of the AI system itself, where applicable;"
+          "number": "2",
+          "category": "A detailed description of the elements of the AI system and of the process for its development, including: -",
+          "subpoints": [
+            {
+              "label": "a",
+              "text": "the methods and steps performed for the development of the AI system, including, where relevant, recourse to pre-trained systems or tools provided by third parties and how those were used, integrated or modified by the provider; -"
+            },
+            {
+              "label": "b",
+              "text": "the design specifications of the system, namely the general logic of the AI system and of the algorithms; the key design choices including the rationale and assumptions made, including with regard to persons or groups of persons in respect of who, the system is intended to be used; the main classification choices; what the system is designed to optimise for, and the relevance of the different parameters; the description of the expected output and output quality of the system; the decisions about any possible trade-off made regarding the technical solutions adopted to comply with the requirements set out in Chapter III, Section 2; -",
+              "references": [
+                {
+                  "type": "chapter",
+                  "target": "III"
+                }
+              ]
+            },
+            {
+              "label": "c",
+              "text": "the description of the system architecture explaining how software components build on or feed into each other and integrate into the overall processing; the computational resources used to develop, train, test and validate the AI system; -"
+            },
+            {
+              "label": "d",
+              "text": "where relevant, the data requirements in terms of datasheets describing the training methodologies and techniques and the training data sets used, including a general description of these data sets, information about their provenance, scope and main characteristics; how the data was obtained and selected; labelling procedures (e.g. for supervised learning), data cleaning methodologies (e.g. outliers detection); -"
+            },
+            {
+              "label": "e",
+              "text": "assessment of the human oversight measures needed in accordance with Article 14, including an assessment of the technical measures needed to facilitate the interpretation of the outputs of AI systems by the deployers, in accordance with Article 13(3), point (d); - (f) where applicable, a detailed description of pre-determined changes to the AI system and its performance, together with all the relevant information related to the technical solutions adopted to ensure continuous compliance of the AI system with the relevant requirements set out in Chapter III, Section 2; - (g) the validation and testing procedures used, including information about the validation and testing data used and their main characteristics; metrics used to measure accuracy, robustness and compliance with other relevant requirements set out in Chapter III, Section 2, as well as potentially discriminatory impacts; test logs and all test reports dated and signed by the responsible persons, including with regard to pre-determined changes as referred to under point (f); - (h) cybersecurity measures put in place;",
+              "references": [
+                {
+                  "type": "article",
+                  "target": "14"
+                },
+                {
+                  "type": "article",
+                  "target": "13",
+                  "paragraph": "3",
+                  "point": "d"
+                },
+                {
+                  "type": "chapter",
+                  "target": "III"
+                },
+                {
+                  "type": "chapter",
+                  "target": "III"
+                }
+              ]
+            }
+          ]
         },
         {
-          "index": 3,
-          "label": null,
-          "text": "(c) the versions of relevant software or firmware, and any requirements related to version updates;"
+          "number": "3",
+          "category": "Detailed information about the monitoring, functioning and control of the AI system, in particular with regard to",
+          "text": "Detailed information about the monitoring, functioning and control of the AI system, in particular with regard to: its capabilities and limitations in performance, including the degrees of accuracy for specific persons or groups of persons on which the system is intended to be used and the overall expected level of accuracy in relation to its intended purpose; the foreseeable unintended outcomes and sources of risks to health and safety, fundamental rights and discrimination in view of the intended purpose of the AI system; the human oversight measures needed in accordance with Article 14, including the technical measures put in place to facilitate the interpretation of the outputs of AI systems by the deployers; specifications on input data, as appropriate;",
+          "subpoints": [],
+          "references": [
+            {
+              "type": "article",
+              "target": "14"
+            }
+          ]
         },
         {
-          "index": 4,
-          "label": null,
-          "text": "(d) the description of all the forms in which the AI system is placed on the market or put into service, such as software packages embedded into hardware, downloads, or APIs;"
+          "number": "4",
+          "text": "A description of the appropriateness of the performance metrics for the specific AI system;",
+          "subpoints": []
         },
         {
-          "index": 5,
-          "label": null,
-          "text": "(e) the description of the hardware on which the AI system is intended to run;"
+          "number": "5",
+          "text": "A detailed description of the risk management system in accordance with Article 9;",
+          "subpoints": [],
+          "references": [
+            {
+              "type": "article",
+              "target": "9"
+            }
+          ]
         },
         {
-          "index": 6,
-          "label": null,
-          "text": "(f) where the AI system is a component of products, photographs or illustrations showing external features, the marking and internal layout of those products;"
+          "number": "6",
+          "text": "A description of relevant changes made by the provider to the system through its lifecycle;",
+          "subpoints": []
         },
         {
-          "index": 7,
-          "label": null,
-          "text": "(g) a basic description of the user-interface provided to the deployer;"
+          "number": "7",
+          "text": "A list of the harmonised standards applied in full or in part the references of which have been published in the _Official Journal of the European Union_ ; where no such harmonised standards have been applied, a detailed description of the solutions adopted to meet the requirements set out in Chapter III, Section 2, including a list of other relevant standards and technical specifications applied;",
+          "subpoints": [],
+          "references": [
+            {
+              "type": "chapter",
+              "target": "III"
+            }
+          ]
         },
         {
-          "index": 8,
-          "label": null,
-          "text": "(h) instructions for use for the deployer, and a basic description of the user-interface provided to the deployer, where applicable; 2. A detailed description of the elements of the AI system and of the process for its development, including:"
+          "number": "8",
+          "text": "A copy of the EU declaration of conformity referred to in Article 47;",
+          "subpoints": [],
+          "references": [
+            {
+              "type": "article",
+              "target": "47"
+            }
+          ]
         },
         {
-          "index": 9,
-          "label": null,
-          "text": "(a) the methods and steps performed for the development of the AI system, including, where relevant, recourse to pre-trained systems or tools provided by third parties and how those were used, integrated or modified by the provider;"
-        },
-        {
-          "index": 10,
-          "label": null,
-          "text": "(b) the design specifications of the system, namely the general logic of the AI system and of the algorithms; the key design choices including the rationale and assumptions made, including with regard to persons or groups of persons in respect of who, the system is intended to be used; the main classification choices; what the system is designed to optimise for, and the relevance of the different parameters; the description of the expected output and output quality of the system; the decisions about any possible trade-off made regarding the technical solutions adopted to comply with the requirements set out in Chapter III, Section 2;"
-        },
-        {
-          "index": 11,
-          "label": null,
-          "text": "(c) the description of the system architecture explaining how software components build on or feed into each other and integrate into the overall processing; the computational resources used to develop, train, test and validate the AI system;"
-        },
-        {
-          "index": 12,
-          "label": null,
-          "text": "(d) where relevant, the data requirements in terms of datasheets describing the training methodologies and techniques and the training data sets used, including a general description of these data sets, information about their provenance, scope and main characteristics; how the data was obtained and selected; labelling procedures (e.g. for supervised learning), data cleaning methodologies (e.g. outliers detection);"
-        },
-        {
-          "index": 13,
-          "label": null,
-          "text": "(e) assessment of the human oversight measures needed in accordance with Article 14, including an assessment of the technical measures needed to facilitate the interpretation of the outputs of AI systems by the deployers, in accordance with Article 13(3), point (d);"
-        },
-        {
-          "index": 14,
-          "label": null,
-          "text": "(f) where applicable, a detailed description of pre-determined changes to the AI system and its performance, together with all the relevant information related to the technical solutions adopted to ensure continuous compliance of the AI system with the relevant requirements set out in Chapter III, Section 2;"
-        },
-        {
-          "index": 15,
-          "label": null,
-          "text": "(g) the validation and testing procedures used, including information about the validation and testing data used and their main characteristics; metrics used to measure accuracy, robustness and compliance with other relevant requirements set out in Chapter III, Section 2, as well as potentially discriminatory impacts; test logs and all test reports dated and signed by the responsible persons, including with regard to pre-determined changes as referred to under point (f);"
-        },
-        {
-          "index": 16,
-          "label": null,
-          "text": "(h) cybersecurity measures put in place; 3. Detailed information about the monitoring, functioning and control of the AI system, in particular with regard to: its capabilities and limitations in performance, including the degrees of accuracy for specific persons or groups of persons on which the system is intended to be used and the overall expected level of accuracy in relation to its intended purpose; the foreseeable unintended outcomes and sources of risks to health and safety, fundamental rights and discrimination in view of the intended purpose of the AI system; the human oversight measures needed in accordance with Article 14, including the technical measures put in place to facilitate the interpretation of the outputs of AI systems by the deployers; specifications on input data, as appropriate; 4. A description of the appropriateness of the performance metrics for the specific AI system; 5. A detailed description of the risk management system in accordance with Article 9; 6. A description of relevant changes made by the provider to the system through its lifecycle; 7. A list of the harmonised standards applied in full or in part the references of which have been published in the _Official Journal of the European Union_ ; where no such harmonised standards have been applied, a detailed description of the solutions adopted to meet the requirements set out in Chapter III, Section 2, including a list of other relevant standards and technical specifications applied; 8. A copy of the EU declaration of conformity referred to in Article 47; 9. A detailed description of the system in place to evaluate the AI system performance in the post-market phase in accordance with Article 72, including the post-market monitoring plan referred to in Article 72(3)."
+          "number": "9",
+          "text": "A detailed description of the system in place to evaluate the AI system performance in the post-market phase in accordance with Article 72, including the post-market monitoring plan referred to in Article 72(3).",
+          "subpoints": [],
+          "references": [
+            {
+              "type": "article",
+              "target": "72"
+            },
+            {
+              "type": "article",
+              "target": "72",
+              "paragraph": "3"
+            }
+          ]
         }
       ]
     },
@@ -6639,38 +6619,65 @@
       "id": "aiact:annex5",
       "number": "V",
       "title": "EU declaration of conformity",
+      "intro": "The EU declaration of conformity referred to in Article 47, shall contain all of the following information:",
+      "references": [
+        {
+          "type": "article",
+          "target": "47"
+        }
+      ],
       "items": [
         {
           "number": "1",
-          "text": "AI system name and type and any additional unambiguous reference allowing the identification and traceability of the AI system;"
+          "text": "AI system name and type and any additional unambiguous reference allowing the identification and traceability of the AI system;",
+          "subpoints": []
         },
         {
           "number": "2",
-          "text": "The name and address of the provider or, where applicable, of their authorised representative;"
+          "text": "The name and address of the provider or, where applicable, of their authorised representative;",
+          "subpoints": []
         },
         {
           "number": "3",
-          "text": "A statement that the EU declaration of conformity referred to in Article 47 is issued under the sole responsibility of the provider;"
+          "text": "A statement that the EU declaration of conformity referred to in Article 47 is issued under the sole responsibility of the provider;",
+          "subpoints": [],
+          "references": [
+            {
+              "type": "article",
+              "target": "47"
+            }
+          ]
         },
         {
           "number": "4",
-          "text": "A statement that the AI system is in conformity with this Regulation and, if applicable, with any other relevant Union law that provides for the issuing of the EU declaration of conformity referred to in Article 47;"
+          "text": "A statement that the AI system is in conformity with this Regulation and, if applicable, with any other relevant Union law that provides for the issuing of the EU declaration of conformity referred to in Article 47;",
+          "subpoints": [],
+          "references": [
+            {
+              "type": "article",
+              "target": "47"
+            }
+          ]
         },
         {
           "number": "5",
-          "text": "Where an AI system involves the processing of personal data, a statement that that AI system complies with Regulations (EU) 2016/679 and (EU) 2018/1725 and Directive (EU) 2016/680;"
+          "text": "Where an AI system involves the processing of personal data, a statement that that AI system complies with Regulations (EU) 2016/679 and (EU) 2018/1725 and Directive (EU) 2016/680;",
+          "subpoints": []
         },
         {
           "number": "6",
-          "text": "References to any relevant harmonised standards used or any other common specification in relation to which conformity is declared;"
+          "text": "References to any relevant harmonised standards used or any other common specification in relation to which conformity is declared;",
+          "subpoints": []
         },
         {
           "number": "7",
-          "text": "Where applicable, the name and identification number of the notified body, a description of the conformity assessment procedure performed, and identification of the certificate issued;"
+          "text": "Where applicable, the name and identification number of the notified body, a description of the conformity assessment procedure performed, and identification of the certificate issued;",
+          "subpoints": []
         },
         {
           "number": "8",
-          "text": "The place and date of issue of the declaration, the name and function of the person who signed it, as well as an indication for, or on behalf of whom, that person signed, a signature."
+          "text": "The place and date of issue of the declaration, the name and function of the person who signed it, as well as an indication for, or on behalf of whom, that person signed, a signature.",
+          "subpoints": []
         }
       ]
     },
@@ -6682,19 +6689,35 @@
       "items": [
         {
           "number": "1",
-          "text": "The conformity assessment procedure based on internal control is the conformity assessment procedure based on points 2, 3 and"
+          "text": "The conformity assessment procedure based on internal control is the conformity assessment procedure based on points 2, 3 and",
+          "subpoints": []
         },
         {
           "number": "4",
-          "text": "2. The provider verifies that the established quality management system is in compliance with the requirements of Article"
+          "text": "2. The provider verifies that the established quality management system is in compliance with the requirements of Article",
+          "subpoints": []
         },
         {
           "number": "17",
-          "text": "3. The provider examines the information contained in the technical documentation in order to assess the compliance of the AI system with the relevant essential requirements set out in Chapter III, Section"
+          "text": "3. The provider examines the information contained in the technical documentation in order to assess the compliance of the AI system with the relevant essential requirements set out in Chapter III, Section",
+          "subpoints": [],
+          "references": [
+            {
+              "type": "chapter",
+              "target": "III"
+            }
+          ]
         },
         {
           "number": "2",
-          "text": "4. The provider also verifies that the design and development process of the AI system and its post-market monitoring as referred to in Article 72 is consistent with the technical documentation."
+          "text": "4. The provider also verifies that the design and development process of the AI system and its post-market monitoring as referred to in Article 72 is consistent with the technical documentation.",
+          "subpoints": [],
+          "references": [
+            {
+              "type": "article",
+              "target": "72"
+            }
+          ]
         }
       ]
     },
@@ -6703,133 +6726,126 @@
       "id": "aiact:annex7",
       "number": "VII",
       "title": "Conformity based on an assessment of the quality management system and an assessment of the technical documentation",
-      "intro": "1. Introduction Conformity based on an assessment of the quality management system and an assessment of the technical documentation is the conformity assessment procedure based on points 2 to 5. 2. Overview The approved quality management system for the design, development and testing of AI systems pursuant to Article 17 shall be examined in accordance with point 3 and shall be subject to surveillance as specified in point 5. The technical documentation of the AI system shall be examined in accordance with point 4. 3. Quality management system",
-      "references": [
-        {
-          "type": "article",
-          "target": "17"
-        }
-      ],
       "items": [
         {
-          "index": 1,
-          "label": null,
-          "text": "3.1. The application of the provider shall include:"
+          "number": "1",
+          "text": "Introduction Conformity based on an assessment of the quality management system and an assessment of the technical documentation is the conformity assessment procedure based on points 2 to",
+          "subpoints": []
         },
         {
-          "index": 2,
-          "label": null,
-          "text": "(a) the name and address of the provider and, if the application is lodged by an authorised representative, also their name and address;"
+          "number": "5",
+          "text": "2. Overview The approved quality management system for the design, development and testing of AI systems pursuant to Article 17 shall be examined in accordance with point 3 and shall be subject to surveillance as specified in point",
+          "subpoints": [],
+          "references": [
+            {
+              "type": "article",
+              "target": "17"
+            }
+          ]
         },
         {
-          "index": 3,
-          "label": null,
-          "text": "(b) the list of AI systems covered under the same quality management system;"
+          "number": "5",
+          "text": "The technical documentation of the AI system shall be examined in accordance with point",
+          "subpoints": []
         },
         {
-          "index": 4,
-          "label": null,
-          "text": "(c) the technical documentation for each AI system covered under the same quality management system;"
+          "number": "4",
+          "category": "3. Quality management system - 3.1. The application of the provider shall include: -",
+          "subpoints": [
+            {
+              "label": "a",
+              "text": "the name and address of the provider and, if the application is lodged by an authorised representative, also their name and address; -"
+            },
+            {
+              "label": "b",
+              "text": "the list of AI systems covered under the same quality management system; -"
+            },
+            {
+              "label": "c",
+              "text": "the technical documentation for each AI system covered under the same quality management system; -"
+            },
+            {
+              "label": "d",
+              "text": "the documentation concerning the quality management system which shall cover all the aspects listed under Article 17; -",
+              "references": [
+                {
+                  "type": "article",
+                  "target": "17"
+                }
+              ]
+            },
+            {
+              "label": "e",
+              "text": "a description of the procedures in place to ensure that the quality management system remains adequate and effective; -"
+            },
+            {
+              "label": "f",
+              "text": "a written declaration that the same application has not been lodged with any other notified body. - 3.2. The quality management system shall be assessed by the notified body, which shall determine whether it satisfies the requirements referred to in Article"
+            }
+          ]
         },
         {
-          "index": 5,
-          "label": null,
-          "text": "(d) the documentation concerning the quality management system which shall cover all the aspects listed under Article 17;"
+          "number": "17",
+          "text": "The decision shall be notified to the provider or its authorised representative. The notification shall contain the conclusions of the assessment of the quality management system and the reasoned assessment decision. - 3.3. The quality management system as approved shall continue to be implemented and maintained by the provider so that it remains adequate and efficient. - 3.4. Any intended change to the approved quality management system or the list of AI systems covered by the latter shall be brought to the attention of the notified body by the provider. The proposed changes shall be examined by the notified body, which shall decide whether the modified quality management system continues to satisfy the requirements referred to in point 3.2 or whether a reassessment is necessary. The notified body shall notify the provider of its decision. The notification shall contain the conclusions of the examination of the changes and the reasoned assessment decision.",
+          "subpoints": []
         },
         {
-          "index": 6,
-          "label": null,
-          "text": "(e) a description of the procedures in place to ensure that the quality management system remains adequate and effective;"
+          "number": "4",
+          "text": "Control of the technical documentation. - 4.1. In addition to the application referred to in point 3, an application with a notified body of their choice shall be lodged by the provider for the assessment of the technical documentation relating to the AI system which the provider intends to place on the market or put into service and which is covered by the quality management system referred to under point",
+          "subpoints": []
         },
         {
-          "index": 7,
-          "label": null,
-          "text": "(f) a written declaration that the same application has not been lodged with any other notified body."
+          "number": "3",
+          "category": "- 4.2. The application shall include: -",
+          "subpoints": [
+            {
+              "label": "a",
+              "text": "the name and address of the provider; -"
+            },
+            {
+              "label": "b",
+              "text": "a written declaration that the same application has not been lodged with any other notified body; -"
+            },
+            {
+              "label": "c",
+              "text": "the technical documentation referred to in Annex IV. - 4.3. The technical documentation shall be examined by the notified body. Where relevant, and limited to what is necessary to fulfil its tasks, the notified body shall be granted full access to the training, validation, and testing data sets used, including, where appropriate and subject to security safeguards, through API or other relevant technical means and tools enabling remote access. - 4.4. In examining the technical documentation, the notified body may require that the provider supply further evidence or carry out further tests so as to enable a proper assessment of the conformity of the AI system with the requirements set out in Chapter III, Section",
+              "references": [
+                {
+                  "type": "chapter",
+                  "target": "III"
+                }
+              ]
+            }
+          ]
         },
         {
-          "index": 8,
-          "label": null,
-          "text": "3.2. The quality management system shall be assessed by the notified body, which shall determine whether it satisfies the requirements referred to in Article 17. The decision shall be notified to the provider or its authorised representative. The notification shall contain the conclusions of the assessment of the quality management system and the reasoned assessment decision."
+          "number": "2",
+          "text": "Where the notified body is not satisfied with the tests carried out by the provider, the notified body shall itself directly carry out adequate tests, as appropriate. - 4.5. Where necessary to assess the conformity of the high-risk AI system with the requirements set out in Chapter III, Section 2, after all other reasonable means to verify conformity have been exhausted and have proven to be insufficient, and upon a reasoned request, the notified body shall also be granted access to the training and trained models of the AI system, including its relevant parameters. Such access shall be subject to existing Union law on the protection of intellectual property and trade secrets. - 4.6. The decision of the notified body shall be notified to the provider or its authorised representative. The notification shall contain the conclusions of the assessment of the technical documentation and the reasoned assessment decision. - Where the AI system is in conformity with the requirements set out in Chapter III, Section 2, the notified body shall issue a Union technical documentation assessment certificate. The certificate shall indicate the name and address of the provider, the conclusions of the examination, the conditions (if any) for its validity and the data necessary for the identification of the AI system. The certificate and its annexes shall contain all relevant information to allow the conformity of the AI system to be evaluated, and to allow for control of the AI system while in use, where applicable. Where the AI system is not in conformity with the requirements set out in Chapter III, Section 2, the notified body shall refuse to issue a Union technical documentation assessment certificate and shall inform the applicant accordingly, giving detailed reasons for its refusal. Where the AI system does not meet the requirement relating to the data used to train it, re-training of the AI system will be needed prior to the application for a new conformity assessment. In this case, the reasoned assessment decision of the notified body refusing to issue the Union technical documentation assessment certificate shall contain specific considerations on the quality data used to train the AI system, in particular on the reasons for non-compliance. - 4.7. Any change to the AI system that could affect the compliance of the AI system with the requirements or its intended purpose shall be assessed by the notified body which issued the Union technical documentation assessment certificate. The provider shall inform such notified body of its intention to introduce any of the abovementioned changes, or if it otherwise becomes aware of the occurrence of such changes. The intended changes shall be assessed by the notified body, which shall decide whether those changes require a new conformity assessment in accordance with Article 43(4) or whether they could be addressed by means of a supplement to the Union technical documentation assessment certificate. In the latter case, the notified body shall assess the changes, notify the provider of its decision and, where the changes are approved, issue to the provider a supplement to the Union technical documentation assessment certificate.",
+          "subpoints": [],
+          "references": [
+            {
+              "type": "article",
+              "target": "43",
+              "paragraph": "4"
+            },
+            {
+              "type": "chapter",
+              "target": "III"
+            },
+            {
+              "type": "chapter",
+              "target": "III"
+            },
+            {
+              "type": "chapter",
+              "target": "III"
+            }
+          ]
         },
         {
-          "index": 9,
-          "label": null,
-          "text": "3.3. The quality management system as approved shall continue to be implemented and maintained by the provider so that it remains adequate and efficient."
-        },
-        {
-          "index": 10,
-          "label": null,
-          "text": "3.4. Any intended change to the approved quality management system or the list of AI systems covered by the latter shall be brought to the attention of the notified body by the provider. The proposed changes shall be examined by the notified body, which shall decide whether the modified quality management system continues to satisfy the requirements referred to in point 3.2 or whether a reassessment is necessary. The notified body shall notify the provider of its decision. The notification shall contain the conclusions of the examination of the changes and the reasoned assessment decision. 4. Control of the technical documentation."
-        },
-        {
-          "index": 11,
-          "label": null,
-          "text": "4.1. In addition to the application referred to in point 3, an application with a notified body of their choice shall be lodged by the provider for the assessment of the technical documentation relating to the AI system which the provider intends to place on the market or put into service and which is covered by the quality management system referred to under point 3."
-        },
-        {
-          "index": 12,
-          "label": null,
-          "text": "4.2. The application shall include:"
-        },
-        {
-          "index": 13,
-          "label": null,
-          "text": "(a) the name and address of the provider;"
-        },
-        {
-          "index": 14,
-          "label": null,
-          "text": "(b) a written declaration that the same application has not been lodged with any other notified body;"
-        },
-        {
-          "index": 15,
-          "label": null,
-          "text": "(c) the technical documentation referred to in Annex IV."
-        },
-        {
-          "index": 16,
-          "label": null,
-          "text": "4.3. The technical documentation shall be examined by the notified body. Where relevant, and limited to what is necessary to fulfil its tasks, the notified body shall be granted full access to the training, validation, and testing data sets used, including, where appropriate and subject to security safeguards, through API or other relevant technical means and tools enabling remote access."
-        },
-        {
-          "index": 17,
-          "label": null,
-          "text": "4.4. In examining the technical documentation, the notified body may require that the provider supply further evidence or carry out further tests so as to enable a proper assessment of the conformity of the AI system with the requirements set out in Chapter III, Section 2. Where the notified body is not satisfied with the tests carried out by the provider, the notified body shall itself directly carry out adequate tests, as appropriate."
-        },
-        {
-          "index": 18,
-          "label": null,
-          "text": "4.5. Where necessary to assess the conformity of the high-risk AI system with the requirements set out in Chapter III, Section 2, after all other reasonable means to verify conformity have been exhausted and have proven to be insufficient, and upon a reasoned request, the notified body shall also be granted access to the training and trained models of the AI system, including its relevant parameters. Such access shall be subject to existing Union law on the protection of intellectual property and trade secrets."
-        },
-        {
-          "index": 19,
-          "label": null,
-          "text": "4.6. The decision of the notified body shall be notified to the provider or its authorised representative. The notification shall contain the conclusions of the assessment of the technical documentation and the reasoned assessment decision."
-        },
-        {
-          "index": 20,
-          "label": null,
-          "text": "Where the AI system is in conformity with the requirements set out in Chapter III, Section 2, the notified body shall issue a Union technical documentation assessment certificate. The certificate shall indicate the name and address of the provider, the conclusions of the examination, the conditions (if any) for its validity and the data necessary for the identification of the AI system. The certificate and its annexes shall contain all relevant information to allow the conformity of the AI system to be evaluated, and to allow for control of the AI system while in use, where applicable. Where the AI system is not in conformity with the requirements set out in Chapter III, Section 2, the notified body shall refuse to issue a Union technical documentation assessment certificate and shall inform the applicant accordingly, giving detailed reasons for its refusal. Where the AI system does not meet the requirement relating to the data used to train it, re-training of the AI system will be needed prior to the application for a new conformity assessment. In this case, the reasoned assessment decision of the notified body refusing to issue the Union technical documentation assessment certificate shall contain specific considerations on the quality data used to train the AI system, in particular on the reasons for non-compliance."
-        },
-        {
-          "index": 21,
-          "label": null,
-          "text": "4.7. Any change to the AI system that could affect the compliance of the AI system with the requirements or its intended purpose shall be assessed by the notified body which issued the Union technical documentation assessment certificate. The provider shall inform such notified body of its intention to introduce any of the abovementioned changes, or if it otherwise becomes aware of the occurrence of such changes. The intended changes shall be assessed by the notified body, which shall decide whether those changes require a new conformity assessment in accordance with Article 43(4) or whether they could be addressed by means of a supplement to the Union technical documentation assessment certificate. In the latter case, the notified body shall assess the changes, notify the provider of its decision and, where the changes are approved, issue to the provider a supplement to the Union technical documentation assessment certificate. 5. Surveillance of the approved quality management system."
-        },
-        {
-          "index": 22,
-          "label": null,
-          "text": "5.1. The purpose of the surveillance carried out by the notified body referred to in Point 3 is to make sure that the provider duly complies with the terms and conditions of the approved quality management system."
-        },
-        {
-          "index": 23,
-          "label": null,
-          "text": "5.2. For assessment purposes, the provider shall allow the notified body to access the premises where the design, development, testing of the AI systems is taking place. The provider shall further share with the notified body all necessary information."
-        },
-        {
-          "index": 24,
-          "label": null,
-          "text": "5.3. The notified body shall carry out periodic audits to make sure that the provider maintains and applies the quality management system and shall provide the provider with an audit report. In the context of those audits, the notified body may carry out additional tests of the AI systems for which a Union technical documentation assessment certificate was issued."
+          "number": "5",
+          "text": "Surveillance of the approved quality management system. - 5.1. The purpose of the surveillance carried out by the notified body referred to in Point 3 is to make sure that the provider duly complies with the terms and conditions of the approved quality management system. - 5.2. For assessment purposes, the provider shall allow the notified body to access the premises where the design, development, testing of the AI systems is taking place. The provider shall further share with the notified body all necessary information. - 5.3. The notified body shall carry out periodic audits to make sure that the provider maintains and applies the quality management system and shall provide the provider with an audit report. In the context of those audits, the notified body may carry out additional tests of the AI systems for which a Union technical documentation assessment certificate was issued.",
+          "subpoints": []
         }
       ]
     },
@@ -6838,22 +6854,219 @@
       "id": "aiact:annex8",
       "number": "VIII",
       "title": "Information to be submitted upon the registration of high-risk AI systems in accordance with Article 49",
-      "intro": "Section A",
+      "intro": "Section A — Information to be submitted by providers of high-risk AI systems in accordance with Article 49(1) The following information shall be provided and thereafter kept up to date with regard to high-risk AI systems to be registered in accordance with Article 49(1):",
+      "references": [
+        {
+          "type": "article",
+          "target": "49",
+          "paragraph": "1"
+        },
+        {
+          "type": "article",
+          "target": "49",
+          "paragraph": "1"
+        }
+      ],
       "items": [
         {
-          "index": 1,
-          "label": null,
-          "text": "Information to be submitted by providers of high-risk AI systems in accordance with Article 49(1) The following information shall be provided and thereafter kept up to date with regard to high-risk AI systems to be registered in accordance with Article 49(1): 1. The name, address and contact details of the provider; 2. Where submission of information is carried out by another person on behalf of the provider, the name, address and contact details of that person; 3. The name, address and contact details of the authorised representative, where applicable; 4. The AI system trade name and any additional unambiguous reference allowing the identification and traceability of the AI system; 5. A description of the intended purpose of the AI system and of the components and functions supported through this AI system; 6. A basic and concise description of the information used by the system (data, inputs) and its operating logic; 7. The status of the AI system (on the market, or in service; no longer placed on the market/in service, recalled); 8. The type, number and expiry date of the certificate issued by the notified body and the name or identification number of that notified body, where applicable; 9. A scanned copy of the certificate referred to in point 8, where applicable; 10. Any Member States in which the AI system has been placed on the market, put into service or made available in the Union; 11. A copy of the EU declaration of conformity referred to in Article 47; 12. Electronic instructions for use; this information shall not be provided for high-risk AI systems in the areas of law enforcement or migration, asylum and border control management referred to in Annex III, points 1, 6 and 7; 13. A URL for additional information (optional). Section B"
+          "number": "1",
+          "text": "The name, address and contact details of the provider;",
+          "subpoints": []
         },
         {
-          "index": 2,
-          "label": null,
-          "text": "Information to be submitted by providers of high-risk AI systems in accordance with Article 49(2) The following information shall be provided and thereafter kept up to date with regard to AI systems to be registered in accordance with Article 49(2): 1. The name, address and contact details of the provider; 2. Where submission of information is carried out by another person on behalf of the provider, the name, address and contact details of that person; 3. The name, address and contact details of the authorised representative, where applicable; 4. The AI system trade name and any additional unambiguous reference allowing the identification and traceability of the AI system; 5. A description of the intended purpose of the AI system; 6. The condition or conditions under Article 6(3)based on which the AI system is considered to be not-high-risk; 7. A short summary of the grounds on which the AI system is considered to be not-high-risk in application of the procedure under Article 6(3); 8. The status of the AI system (on the market, or in service; no longer placed on the market/in service, recalled); 9. Any Member States in which the AI system has been placed on the market, put into service or made available in the Union. Section C"
+          "number": "2",
+          "text": "Where submission of information is carried out by another person on behalf of the provider, the name, address and contact details of that person;",
+          "subpoints": []
         },
         {
-          "index": 3,
-          "label": null,
-          "text": "Information to be submitted by deployers of high-risk AI systems in accordance with Article 49(3) The following information shall be provided and thereafter kept up to date with regard to high-risk AI systems to be registered in accordance with Article 49(3): 1. The name, address and contact details of the deployer; 2. The name, address and contact details of the person submitting information on behalf of the deployer; 3. The URL of the entry of the AI system in the EU database by its provider; 4. A summary of the findings of the fundamental rights impact assessment conducted in accordance with Article 27; 5. A summary of the data protection impact assessment carried out in accordance with Article 35 of Regulation (EU) 2016/679 or Article 27 of Directive (EU) 2016/680 as specified in Article 26(8) of this Regulation, where applicable."
+          "number": "3",
+          "text": "The name, address and contact details of the authorised representative, where applicable;",
+          "subpoints": []
+        },
+        {
+          "number": "4",
+          "text": "The AI system trade name and any additional unambiguous reference allowing the identification and traceability of the AI system;",
+          "subpoints": []
+        },
+        {
+          "number": "5",
+          "text": "A description of the intended purpose of the AI system and of the components and functions supported through this AI system;",
+          "subpoints": []
+        },
+        {
+          "number": "6",
+          "text": "A basic and concise description of the information used by the system (data, inputs) and its operating logic;",
+          "subpoints": []
+        },
+        {
+          "number": "7",
+          "text": "The status of the AI system (on the market, or in service; no longer placed on the market/in service, recalled);",
+          "subpoints": []
+        },
+        {
+          "number": "8",
+          "text": "The type, number and expiry date of the certificate issued by the notified body and the name or identification number of that notified body, where applicable;",
+          "subpoints": []
+        },
+        {
+          "number": "9",
+          "text": "A scanned copy of the certificate referred to in point 8, where applicable;",
+          "subpoints": []
+        },
+        {
+          "number": "10",
+          "text": "Any Member States in which the AI system has been placed on the market, put into service or made available in the Union;",
+          "subpoints": []
+        },
+        {
+          "number": "11",
+          "text": "A copy of the EU declaration of conformity referred to in Article 47;",
+          "subpoints": [],
+          "references": [
+            {
+              "type": "article",
+              "target": "47"
+            }
+          ]
+        },
+        {
+          "number": "12",
+          "text": "Electronic instructions for use; this information shall not be provided for high-risk AI systems in the areas of law enforcement or migration, asylum and border control management referred to in Annex III, points 1, 6 and 7;",
+          "subpoints": []
+        },
+        {
+          "number": "13",
+          "text": "A URL for additional information (optional). Section B — Information to be submitted by providers of high-risk AI systems in accordance with Article 49(2) The following information shall be provided and thereafter kept up to date with regard to AI systems to be registered in accordance with Article 49(2):",
+          "subpoints": [],
+          "references": [
+            {
+              "type": "article",
+              "target": "49",
+              "paragraph": "2"
+            },
+            {
+              "type": "article",
+              "target": "49",
+              "paragraph": "2"
+            }
+          ]
+        },
+        {
+          "number": "1",
+          "text": "The name, address and contact details of the provider;",
+          "subpoints": []
+        },
+        {
+          "number": "2",
+          "text": "Where submission of information is carried out by another person on behalf of the provider, the name, address and contact details of that person;",
+          "subpoints": []
+        },
+        {
+          "number": "3",
+          "text": "The name, address and contact details of the authorised representative, where applicable;",
+          "subpoints": []
+        },
+        {
+          "number": "4",
+          "text": "The AI system trade name and any additional unambiguous reference allowing the identification and traceability of the AI system;",
+          "subpoints": []
+        },
+        {
+          "number": "5",
+          "text": "A description of the intended purpose of the AI system;",
+          "subpoints": []
+        },
+        {
+          "number": "6",
+          "text": "The condition or conditions under Article 6(3)based on which the AI system is considered to be not-high-risk;",
+          "subpoints": [],
+          "references": [
+            {
+              "type": "article",
+              "target": "6",
+              "paragraph": "3"
+            }
+          ]
+        },
+        {
+          "number": "7",
+          "text": "A short summary of the grounds on which the AI system is considered to be not-high-risk in application of the procedure under Article 6(3);",
+          "subpoints": [],
+          "references": [
+            {
+              "type": "article",
+              "target": "6",
+              "paragraph": "3"
+            }
+          ]
+        },
+        {
+          "number": "8",
+          "text": "The status of the AI system (on the market, or in service; no longer placed on the market/in service, recalled);",
+          "subpoints": []
+        },
+        {
+          "number": "9",
+          "text": "Any Member States in which the AI system has been placed on the market, put into service or made available in the Union. Section C — Information to be submitted by deployers of high-risk AI systems in accordance with Article 49(3) The following information shall be provided and thereafter kept up to date with regard to high-risk AI systems to be registered in accordance with Article 49(3):",
+          "subpoints": [],
+          "references": [
+            {
+              "type": "article",
+              "target": "49",
+              "paragraph": "3"
+            },
+            {
+              "type": "article",
+              "target": "49",
+              "paragraph": "3"
+            }
+          ]
+        },
+        {
+          "number": "1",
+          "text": "The name, address and contact details of the deployer;",
+          "subpoints": []
+        },
+        {
+          "number": "2",
+          "text": "The name, address and contact details of the person submitting information on behalf of the deployer;",
+          "subpoints": []
+        },
+        {
+          "number": "3",
+          "text": "The URL of the entry of the AI system in the EU database by its provider;",
+          "subpoints": []
+        },
+        {
+          "number": "4",
+          "text": "A summary of the findings of the fundamental rights impact assessment conducted in accordance with Article 27;",
+          "subpoints": [],
+          "references": [
+            {
+              "type": "article",
+              "target": "27"
+            }
+          ]
+        },
+        {
+          "number": "5",
+          "text": "A summary of the data protection impact assessment carried out in accordance with Article 35 of Regulation (EU) 2016/679 or Article 27 of Directive (EU) 2016/680 as specified in Article 26(8) of this Regulation, where applicable.",
+          "subpoints": [],
+          "references": [
+            {
+              "type": "article",
+              "target": "35"
+            },
+            {
+              "type": "article",
+              "target": "27"
+            },
+            {
+              "type": "article",
+              "target": "26",
+              "paragraph": "8"
+            }
+          ]
         }
       ]
     },
@@ -6862,26 +7075,38 @@
       "id": "aiact:annex9",
       "number": "IX",
       "title": "Information to be submitted upon the registration of high-risk AI systems listed in Annex III in relation to testing in real world conditions in accordance with Article 60",
+      "intro": "The following information shall be provided and thereafter kept up to date with regard to testing in real world conditions to be registered in accordance with Article 60:",
+      "references": [
+        {
+          "type": "article",
+          "target": "60"
+        }
+      ],
       "items": [
         {
           "number": "1",
-          "text": "A Union-wide unique single identification number of the testing in real world conditions;"
+          "text": "A Union-wide unique single identification number of the testing in real world conditions;",
+          "subpoints": []
         },
         {
           "number": "2",
-          "text": "The name and contact details of the provider or prospective provider and of the deployers involved in the testing in real world conditions;"
+          "text": "The name and contact details of the provider or prospective provider and of the deployers involved in the testing in real world conditions;",
+          "subpoints": []
         },
         {
           "number": "3",
-          "text": "A brief description of the AI system, its intended purpose, and other information necessary for the identification of the system;"
+          "text": "A brief description of the AI system, its intended purpose, and other information necessary for the identification of the system;",
+          "subpoints": []
         },
         {
           "number": "4",
-          "text": "A summary of the main characteristics of the plan for testing in real world conditions;"
+          "text": "A summary of the main characteristics of the plan for testing in real world conditions;",
+          "subpoints": []
         },
         {
           "number": "5",
-          "text": "Information on the suspension or termination of the testing in real world conditions."
+          "text": "Information on the suspension or termination of the testing in real world conditions.",
+          "subpoints": []
         }
       ]
     },
@@ -6890,52 +7115,85 @@
       "id": "aiact:annex10",
       "number": "X",
       "title": "Union legislative acts on large-scale IT systems in the area of Freedom, Security and Justice",
-      "intro": "1. Schengen Information System",
       "items": [
         {
-          "index": 1,
-          "label": null,
-          "text": "(a) Regulation (EU) 2018/1860 of the European Parliament and of the Council of 28 November 2018 on the use of the Schengen Information System for the return of illegally staying third-country nationals (OJ L 312, 7.12.2018, p. 1)."
+          "number": "1",
+          "category": "Schengen Information System -",
+          "subpoints": [
+            {
+              "label": "a",
+              "text": "Regulation (EU) 2018/1860 of the European Parliament and of the Council of 28 November 2018 on the use of the Schengen Information System for the return of illegally staying third-country nationals (OJ L 312, 7.12.2018, p. 1). -"
+            },
+            {
+              "label": "b",
+              "text": "Regulation (EU) 2018/1861 of the European Parliament and of the Council of 28 November 2018 on the establishment, operation and use of the Schengen Information System (SIS) in the field of border checks, and amending the Convention implementing the Schengen Agreement, and amending and repealing Regulation (EC) No 1987/2006 (OJ L 312, 7.12.2018, p. 14). -"
+            },
+            {
+              "label": "c",
+              "text": "Regulation (EU) 2018/1862 of the European Parliament and of the Council of 28 November 2018 on the establishment, operation and use of the Schengen Information System (SIS) in the field of police cooperation and judicial cooperation in criminal matters, amending and repealing Council Decision 2007/533/JHA, and repealing Regulation (EC) No 1986/2006 of the European Parliament and of the Council and Commission Decision 2010/261/EU (OJ L 312, 7.12.2018, p. 56)."
+            }
+          ]
         },
         {
-          "index": 2,
-          "label": null,
-          "text": "(b) Regulation (EU) 2018/1861 of the European Parliament and of the Council of 28 November 2018 on the establishment, operation and use of the Schengen Information System (SIS) in the field of border checks, and amending the Convention implementing the Schengen Agreement, and amending and repealing Regulation (EC) No 1987/2006 (OJ L 312, 7.12.2018, p. 14)."
+          "number": "2",
+          "category": "Visa Information System -",
+          "subpoints": [
+            {
+              "label": "a",
+              "text": "Regulation (EU) 2021/1133 of the European Parliament and of the Council of 7 July 2021 amending Regulations (EU) No 603/2013, (EU) 2016/794, (EU) 2018/1862, (EU) 2019/816 and (EU) 2019/818 as regards the establishment of the conditions for accessing other EU information systems for the purposes of the Visa Information System (OJ L 248, 13.7.2021, p. 1). -"
+            },
+            {
+              "label": "b",
+              "text": "Regulation (EU) 2021/1134 of the European Parliament and of the Council of 7 July 2021 amending Regulations (EC) No 767/2008, (EC) No 810/2009, (EU) 2016/399, (EU) 2017/2226, (EU) 2018/1240, (EU) 2018/1860, (EU) 2018/1861, (EU) 2019/817 and (EU) 2019/1896 of the European Parliament and of the Council and repealing Council Decisions 2004/512/EC and 2008/633/JHA, for the purpose of reforming the Visa Information System (OJ L 248, 13.7.2021, p. 11)."
+            }
+          ]
         },
         {
-          "index": 3,
-          "label": null,
-          "text": "(c) Regulation (EU) 2018/1862 of the European Parliament and of the Council of 28 November 2018 on the establishment, operation and use of the Schengen Information System (SIS) in the field of police cooperation and judicial cooperation in criminal matters, amending and repealing Council Decision 2007/533/JHA, and repealing Regulation (EC) No 1986/2006 of the European Parliament and of the Council and Commission Decision 2010/261/EU (OJ L 312, 7.12.2018, p. 56). 2. Visa Information System"
+          "number": "3",
+          "text": "Eurodac Regulation (EU) 2024/1358 of the European Parliament and of the Council of 14 May 2024 on the establishment of ‘Eurodac’ for the comparison of biometric data in order to effectively apply Regulations (EU) 2024/1315 and (EU) 2024/1350 of the European Parliament and of the Council and Council Directive 2001/55/EC and to identify illegally staying third-country nationals and stateless persons and on requests for the comparison with Eurodac data by Member States’ law enforcement authorities and Europol for law enforcement purposes, amending Regulations (EU) 2018/1240 and (EU) 2019/818 of the European Parliament and of the Council and repealing Regulation (EU) No 603/2013 of the European Parliament and of the Council (OJ L, 2024/1358, 22.5.2024, ELI: http://data.europa. eu/eli/reg/2024/1358/oj).",
+          "subpoints": [],
+          "cited_act": {
+            "kind": "directive",
+            "identifier": "2001/55/EC"
+          }
         },
         {
-          "index": 4,
-          "label": null,
-          "text": "(a) Regulation (EU) 2021/1133 of the European Parliament and of the Council of 7 July 2021 amending Regulations (EU) No 603/2013, (EU) 2016/794, (EU) 2018/1862, (EU) 2019/816 and (EU) 2019/818 as regards the establishment of the conditions for accessing other EU information systems for the purposes of the Visa Information System (OJ L 248, 13.7.2021, p. 1)."
+          "number": "4",
+          "text": "Entry/Exit System Regulation (EU) 2017/2226 of the European Parliament and of the Council of 30 November 2017 establishing an Entry/Exit System (EES) to register entry and exit data and refusal of entry data of third-country nationals crossing the external borders of the Member States and determining the conditions for access to the EES for law enforcement purposes, and amending the Convention implementing the Schengen Agreement and Regulations (EC) No 767/2008 and (EU) No 1077/2011 (OJ L 327, 9.12.2017, p. 20).",
+          "subpoints": []
         },
         {
-          "index": 5,
-          "label": null,
-          "text": "(b) Regulation (EU) 2021/1134 of the European Parliament and of the Council of 7 July 2021 amending Regulations (EC) No 767/2008, (EC) No 810/2009, (EU) 2016/399, (EU) 2017/2226, (EU) 2018/1240, (EU) 2018/1860, (EU) 2018/1861, (EU) 2019/817 and (EU) 2019/1896 of the European Parliament and of the Council and repealing Council Decisions 2004/512/EC and 2008/633/JHA, for the purpose of reforming the Visa Information System (OJ L 248, 13.7.2021, p. 11). 3. Eurodac Regulation (EU) 2024/1358 of the European Parliament and of the Council of 14 May 2024 on the establishment of ‘Eurodac’ for the comparison of biometric data in order to effectively apply Regulations (EU) 2024/1315 and (EU) 2024/1350 of the European Parliament and of the Council and Council Directive 2001/55/EC and to identify illegally staying third-country nationals and stateless persons and on requests for the comparison with Eurodac data by Member States’ law enforcement authorities and Europol for law enforcement purposes, amending Regulations (EU) 2018/1240 and (EU) 2019/818 of the European Parliament and of the Council and repealing Regulation (EU) No 603/2013 of the European Parliament and of the Council (OJ L, 2024/1358, 22.5.2024, ELI: http://data.europa. eu/eli/reg/2024/1358/oj). 4. Entry/Exit System Regulation (EU) 2017/2226 of the European Parliament and of the Council of 30 November 2017 establishing an Entry/Exit System (EES) to register entry and exit data and refusal of entry data of third-country nationals crossing the external borders of the Member States and determining the conditions for access to the EES for law enforcement purposes, and amending the Convention implementing the Schengen Agreement and Regulations (EC) No 767/2008 and (EU) No 1077/2011 (OJ L 327, 9.12.2017, p. 20). 5. European Travel Information and Authorisation System"
+          "number": "5",
+          "category": "European Travel Information and Authorisation System -",
+          "subpoints": [
+            {
+              "label": "a",
+              "text": "Regulation (EU) 2018/1240 of the European Parliament and of the Council of 12 September 2018 establishing a European Travel Information and Authorisation System (ETIAS) and amending Regulations (EU) No 1077/2011, (EU) No 515/2014, (EU) 2016/399, (EU) 2016/1624 and (EU) 2017/2226 (OJ L 236, 19.9.2018, p. 1). -"
+            },
+            {
+              "label": "b",
+              "text": "Regulation (EU) 2018/1241 of the European Parliament and of the Council of 12 September 2018 amending Regulation (EU) 2016/794 for the purpose of establishing a European Travel Information and Authorisation System (ETIAS) (OJ L 236, 19.9.2018, p. 72)."
+            }
+          ]
         },
         {
-          "index": 6,
-          "label": null,
-          "text": "(a) Regulation (EU) 2018/1240 of the European Parliament and of the Council of 12 September 2018 establishing a European Travel Information and Authorisation System (ETIAS) and amending Regulations (EU) No 1077/2011, (EU) No 515/2014, (EU) 2016/399, (EU) 2016/1624 and (EU) 2017/2226 (OJ L 236, 19.9.2018, p. 1)."
+          "number": "6",
+          "text": "European Criminal Records Information System on third-country nationals and stateless persons Regulation (EU) 2019/816 of the European Parliament and of the Council of 17 April 2019 establishing a centralised system for the identification of Member States holding conviction information on third-country nationals and stateless persons (ECRIS-TCN) to supplement the European Criminal Records Information System and amending Regulation (EU) 2018/1726 (OJ L 135, 22.5.2019, p. 1).",
+          "subpoints": []
         },
         {
-          "index": 7,
-          "label": null,
-          "text": "(b) Regulation (EU) 2018/1241 of the European Parliament and of the Council of 12 September 2018 amending Regulation (EU) 2016/794 for the purpose of establishing a European Travel Information and Authorisation System (ETIAS) (OJ L 236, 19.9.2018, p. 72). 6. European Criminal Records Information System on third-country nationals and stateless persons Regulation (EU) 2019/816 of the European Parliament and of the Council of 17 April 2019 establishing a centralised system for the identification of Member States holding conviction information on third-country nationals and stateless persons (ECRIS-TCN) to supplement the European Criminal Records Information System and amending Regulation (EU) 2018/1726 (OJ L 135, 22.5.2019, p. 1). 7. Interoperability"
-        },
-        {
-          "index": 8,
-          "label": null,
-          "text": "(a) Regulation (EU) 2019/817 of the European Parliament and of the Council of 20 May 2019 on establishing a framework for interoperability between EU information systems in the field of borders and visa and amending Regulations (EC) No 767/2008, (EU) 2016/399, (EU) 2017/2226, (EU) 2018/1240, (EU) 2018/1726 and (EU) 2018/1861 of the European Parliament and of the Council and Council Decisions 2004/512/EC and 2008/633/JHA (OJ L 135, 22.5.2019, p. 27)."
-        },
-        {
-          "index": 9,
-          "label": null,
-          "text": "(b) Regulation (EU) 2019/818 of the European Parliament and of the Council of 20 May 2019 on establishing a framework for interoperability between EU information systems in the field of police and judicial cooperation, asylum and migration and amending Regulations (EU) 2018/1726, (EU) 2018/1862 and (EU) 2019/816 (OJ L 135, 22.5.2019, p. 85)."
+          "number": "7",
+          "category": "Interoperability -",
+          "subpoints": [
+            {
+              "label": "a",
+              "text": "Regulation (EU) 2019/817 of the European Parliament and of the Council of 20 May 2019 on establishing a framework for interoperability between EU information systems in the field of borders and visa and amending Regulations (EC) No 767/2008, (EU) 2016/399, (EU) 2017/2226, (EU) 2018/1240, (EU) 2018/1726 and (EU) 2018/1861 of the European Parliament and of the Council and Council Decisions 2004/512/EC and 2008/633/JHA (OJ L 135, 22.5.2019, p. 27). -"
+            },
+            {
+              "label": "b",
+              "text": "Regulation (EU) 2019/818 of the European Parliament and of the Council of 20 May 2019 on establishing a framework for interoperability between EU information systems in the field of police and judicial cooperation, asylum and migration and amending Regulations (EU) 2018/1726, (EU) 2018/1862 and (EU) 2019/816 (OJ L 135, 22.5.2019, p. 85)."
+            }
+          ]
         }
       ]
     },
@@ -6944,7 +7202,7 @@
       "id": "aiact:annex11",
       "number": "XI",
       "title": "Technical documentation referred to in Article 53(1), point (a) — technical documentation for providers of general-purpose AI models",
-      "intro": "Section 1 Information to be provided by all providers of general-purpose AI models The technical documentation referred to in Article 53(1), point (a) shall contain at least the following information as appropriate to the size and risk profile of the model: 1. A general description of the general-purpose AI model including:",
+      "intro": "Section 1 Information to be provided by all providers of general-purpose AI models The technical documentation referred to in Article 53(1), point (a) shall contain at least the following information as appropriate to the size and risk profile of the model:",
       "references": [
         {
           "type": "article",
@@ -6955,59 +7213,75 @@
       ],
       "items": [
         {
-          "index": 1,
-          "label": null,
-          "text": "(a) the tasks that the model is intended to perform and the type and nature of AI systems in which it can be integrated;"
+          "number": "1",
+          "category": "A general description of the general-purpose AI model including: -",
+          "subpoints": [
+            {
+              "label": "a",
+              "text": "the tasks that the model is intended to perform and the type and nature of AI systems in which it can be integrated; -"
+            },
+            {
+              "label": "b",
+              "text": "the acceptable use policies applicable; -"
+            },
+            {
+              "label": "c",
+              "text": "the date of release and methods of distribution; -"
+            },
+            {
+              "label": "d",
+              "text": "the architecture and number of parameters; -"
+            },
+            {
+              "label": "e",
+              "text": "the modality (e.g. text, image) and format of inputs and outputs; -"
+            },
+            {
+              "label": "f",
+              "text": "the licence."
+            }
+          ]
         },
         {
-          "index": 2,
-          "label": null,
-          "text": "(b) the acceptable use policies applicable;"
+          "number": "2",
+          "category": "A detailed description of the elements of the model referred to in point 1, and relevant information of the process for the development, including the following elements: -",
+          "subpoints": [
+            {
+              "label": "a",
+              "text": "the technical means (e.g. instructions of use, infrastructure, tools) required for the general-purpose AI model to be integrated in AI systems; -"
+            },
+            {
+              "label": "b",
+              "text": "the design specifications of the model and training process, including training methodologies and techniques, the key design choices including the rationale and assumptions made; what the model is designed to optimise for and the relevance of the different parameters, as applicable; -"
+            },
+            {
+              "label": "c",
+              "text": "information on the data used for training, testing and validation, where applicable, including the type and provenance of data and curation methodologies (e.g. cleaning, filtering, etc.), the number of data points, their scope and main characteristics; how the data was obtained and selected as well as all other measures to detect the unsuitability of data sources and methods to detect identifiable biases, where applicable; -"
+            },
+            {
+              "label": "d",
+              "text": "the computational resources used to train the model (e.g. number of floating point operations), training time, and other relevant details related to the training; -"
+            },
+            {
+              "label": "e",
+              "text": "known or estimated energy consumption of the model. With regard to point (e), where the energy consumption of the model is unknown, the energy consumption may be based on information about computational resources used. Section 2 Additional information to be provided by providers of general-purpose AI models with systemic risk"
+            }
+          ]
         },
         {
-          "index": 3,
-          "label": null,
-          "text": "(c) the date of release and methods of distribution;"
+          "number": "1",
+          "text": "A detailed description of the evaluation strategies, including evaluation results, on the basis of available public evaluation protocols and tools or otherwise of other evaluation methodologies. Evaluation strategies shall include evaluation criteria, metrics and the methodology on the identification of limitations.",
+          "subpoints": []
         },
         {
-          "index": 4,
-          "label": null,
-          "text": "(d) the architecture and number of parameters;"
+          "number": "2",
+          "text": "Where applicable, a detailed description of the measures put in place for the purpose of conducting internal and/or external adversarial testing (e.g. red teaming), model adaptations, including alignment and fine-tuning.",
+          "subpoints": []
         },
         {
-          "index": 5,
-          "label": null,
-          "text": "(e) the modality (e.g. text, image) and format of inputs and outputs;"
-        },
-        {
-          "index": 6,
-          "label": null,
-          "text": "(f) the licence. 2. A detailed description of the elements of the model referred to in point 1, and relevant information of the process for the development, including the following elements:"
-        },
-        {
-          "index": 7,
-          "label": null,
-          "text": "(a) the technical means (e.g. instructions of use, infrastructure, tools) required for the general-purpose AI model to be integrated in AI systems;"
-        },
-        {
-          "index": 8,
-          "label": null,
-          "text": "(b) the design specifications of the model and training process, including training methodologies and techniques, the key design choices including the rationale and assumptions made; what the model is designed to optimise for and the relevance of the different parameters, as applicable;"
-        },
-        {
-          "index": 9,
-          "label": null,
-          "text": "(c) information on the data used for training, testing and validation, where applicable, including the type and provenance of data and curation methodologies (e.g. cleaning, filtering, etc.), the number of data points, their scope and main characteristics; how the data was obtained and selected as well as all other measures to detect the unsuitability of data sources and methods to detect identifiable biases, where applicable;"
-        },
-        {
-          "index": 10,
-          "label": null,
-          "text": "(d) the computational resources used to train the model (e.g. number of floating point operations), training time, and other relevant details related to the training;"
-        },
-        {
-          "index": 11,
-          "label": null,
-          "text": "(e) known or estimated energy consumption of the model. With regard to point (e), where the energy consumption of the model is unknown, the energy consumption may be based on information about computational resources used. Section 2 Additional information to be provided by providers of general-purpose AI models with systemic risk 1. A detailed description of the evaluation strategies, including evaluation results, on the basis of available public evaluation protocols and tools or otherwise of other evaluation methodologies. Evaluation strategies shall include evaluation criteria, metrics and the methodology on the identification of limitations. 2. Where applicable, a detailed description of the measures put in place for the purpose of conducting internal and/or external adversarial testing (e.g. red teaming), model adaptations, including alignment and fine-tuning. 3. Where applicable, a detailed description of the system architecture explaining how software components build or feed into each other and integrate into the overall processing."
+          "number": "3",
+          "text": "Where applicable, a detailed description of the system architecture explaining how software components build or feed into each other and integrate into the overall processing.",
+          "subpoints": []
         }
       ]
     },
@@ -7016,7 +7290,7 @@
       "id": "aiact:annex12",
       "number": "XII",
       "title": "Transparency information referred to in Article 53(1), point (b) — technical documentation for providers of general-purpose AI models to downstream providers that integrate the model into their AI system",
-      "intro": "The information referred to in Article 53(1), point (b) shall contain at least the following: 1. A general description of the general-purpose AI model including:",
+      "intro": "The information referred to in Article 53(1), point (b) shall contain at least the following:",
       "references": [
         {
           "type": "article",
@@ -7027,59 +7301,60 @@
       ],
       "items": [
         {
-          "index": 1,
-          "label": null,
-          "text": "(a) the tasks that the model is intended to perform and the type and nature of AI systems into which it can be integrated;"
+          "number": "1",
+          "category": "A general description of the general-purpose AI model including: -",
+          "subpoints": [
+            {
+              "label": "a",
+              "text": "the tasks that the model is intended to perform and the type and nature of AI systems into which it can be integrated; -"
+            },
+            {
+              "label": "b",
+              "text": "the acceptable use policies applicable; -"
+            },
+            {
+              "label": "c",
+              "text": "the date of release and methods of distribution; -"
+            },
+            {
+              "label": "d",
+              "text": "how the model interacts, or can be used to interact, with hardware or software that is not part of the model itself, where applicable; -"
+            },
+            {
+              "label": "e",
+              "text": "the versions of relevant software related to the use of the general-purpose AI model, where applicable; -"
+            },
+            {
+              "label": "f",
+              "text": "the architecture and number of parameters; -"
+            },
+            {
+              "label": "g",
+              "text": "the modality (e.g. text, image) and format of inputs and outputs; -"
+            },
+            {
+              "label": "h",
+              "text": "the licence for the model."
+            }
+          ]
         },
         {
-          "index": 2,
-          "label": null,
-          "text": "(b) the acceptable use policies applicable;"
-        },
-        {
-          "index": 3,
-          "label": null,
-          "text": "(c) the date of release and methods of distribution;"
-        },
-        {
-          "index": 4,
-          "label": null,
-          "text": "(d) how the model interacts, or can be used to interact, with hardware or software that is not part of the model itself, where applicable;"
-        },
-        {
-          "index": 5,
-          "label": null,
-          "text": "(e) the versions of relevant software related to the use of the general-purpose AI model, where applicable;"
-        },
-        {
-          "index": 6,
-          "label": null,
-          "text": "(f) the architecture and number of parameters;"
-        },
-        {
-          "index": 7,
-          "label": null,
-          "text": "(g) the modality (e.g. text, image) and format of inputs and outputs;"
-        },
-        {
-          "index": 8,
-          "label": null,
-          "text": "(h) the licence for the model. 2. A description of the elements of the model and of the process for its development, including:"
-        },
-        {
-          "index": 9,
-          "label": null,
-          "text": "(a) the technical means (e.g. instructions for use, infrastructure, tools) required for the general-purpose AI model to be integrated into AI systems;"
-        },
-        {
-          "index": 10,
-          "label": null,
-          "text": "(b) the modality (e.g. text, image, etc.) and format of the inputs and outputs and their maximum size (e.g. context window length, etc.);"
-        },
-        {
-          "index": 11,
-          "label": null,
-          "text": "(c) information on the data used for training, testing and validation, where applicable, including the type and provenance of data and curation methodologies."
+          "number": "2",
+          "category": "A description of the elements of the model and of the process for its development, including: -",
+          "subpoints": [
+            {
+              "label": "a",
+              "text": "the technical means (e.g. instructions for use, infrastructure, tools) required for the general-purpose AI model to be integrated into AI systems; -"
+            },
+            {
+              "label": "b",
+              "text": "the modality (e.g. text, image, etc.) and format of the inputs and outputs and their maximum size (e.g. context window length, etc.); -"
+            },
+            {
+              "label": "c",
+              "text": "information on the data used for training, testing and validation, where applicable, including the type and provenance of data and curation methodologies."
+            }
+          ]
         }
       ]
     },
