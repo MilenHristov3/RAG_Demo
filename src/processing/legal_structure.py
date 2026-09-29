@@ -1,21 +1,41 @@
+import argparse
+import sys
 from pathlib import Path
 import json
 import re
 from datetime import datetime
 
+# Allow `python src/processing/legal_structure.py` to import the
+# shared metadata module even though it's run as a loose script
+# rather than as part of the `src` package.
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+
+from src.common.docmeta import (  # noqa: E402
+    DocumentMetadata,
+    load_metadata,
+    list_source_stems,
+)
+from src.processing.generic_structure import parse_table  # noqa: E402
+
+EXTRACTED_DIR = Path("data/extracted")
+
+# A control character used as a placeholder for a Markdown table while
+# the surrounding text goes through clean_line()/normalize_text(). It
+# cannot occur in real document text, and survives clean_line() intact
+# (no '#', '*' or leading/trailing whitespace to strip), so a table's
+# position among chapters/articles/annexes is preserved until
+# parse_article()/parse_annex() pull the real table block back out.
+TABLE_PLACEHOLDER_RE = re.compile(r"^\x00TABLE(\d+)\x00$")
+
 
 # ============================================================
 # Document metadata
+#
+# NOTE: this used to be a hardcoded AI-Act-only constant here.
+# Document identity (title/celex/eli/id prefix/...) is now supplied
+# per-document via data/source/<stem>.meta.json and passed into
+# parse_document()/parse_structure_file() — see src/common/docmeta.py.
 # ============================================================
-
-
-INSTRUMENT = {
-    "celex": "32024R1689",
-    "eli": "http://data.europa.eu/eli/reg/2024/1689/oj",
-    "title": "Regulation (EU) 2024/1689 (AI Act)",
-    "language": "EN",
-    "publication_date": "2024-07-12",
-}
 
 
 # ============================================================
@@ -186,7 +206,7 @@ def roman_to_int(value: str) -> int:
 
     Used only for stable IDs such as:
 
-        ANNEX II -> aiact:annex2
+        ANNEX II -> <doc_id>:annex2
     """
 
     values = {
@@ -569,6 +589,283 @@ def parse_closing(
 
 
 # ============================================================
+# Embedded Markdown tables
+#
+# A legal document is not always pure prose: an Annex can carry a
+# genuine table (e.g. a list of items in tabular form). Tables are
+# pulled out of the raw Markdown *before* clean_line()/normalize_text()
+# run (which would destroy row/column structure and bold markers),
+# replaced with a placeholder line, and spliced back in as proper
+# "table" blocks once parse_article()/parse_annex() reach them.
+# ============================================================
+
+
+def extract_tables_from_markdown(
+    raw_lines: list[str],
+) -> tuple[list[str], dict[int, dict]]:
+    """
+    Replace every run of Markdown table lines ("| ... |") in
+    `raw_lines` with a single placeholder line, using the same
+    `parse_table` normalization as generic_structure.py (paired
+    grids, key/value pairs, ordinary header+rows).
+
+    Returns (lines_with_placeholders, {placeholder_id: table_block}).
+    """
+
+    tables: dict[int, dict] = {}
+    out_lines: list[str] = []
+    counter = 0
+    index = 0
+
+    while index < len(raw_lines):
+        line = raw_lines[index]
+
+        if line.strip().startswith("|"):
+            block_lines = []
+
+            while index < len(raw_lines) and raw_lines[index].strip().startswith("|"):
+                block_lines.append(raw_lines[index])
+                index += 1
+
+            table = parse_table(block_lines)
+
+            if table:
+                counter += 1
+                tables[counter] = table
+                out_lines.append(f"\x00TABLE{counter}\x00")
+
+            continue
+
+        out_lines.append(line)
+        index += 1
+
+    return out_lines, tables
+
+
+def pop_table_blocks(
+    lines: list[str],
+    tables: dict[int, dict],
+) -> tuple[list[str], list[dict]]:
+    """
+    Remove placeholder lines from `lines`, returning the remaining
+    lines plus the referenced table blocks, in document order.
+
+    Table blocks are appended at the end of an Article's/Annex's
+    other blocks rather than spliced back into their exact position:
+    the surrounding text is joined into one string for paragraph/point
+    parsing, and a table doesn't parse as legal prose. For a legal
+    element this ordering loss is minor (tables are rare inside
+    Articles/Annexes and usually stand alone); a document that is
+    mostly tabular should go through the generic structure path
+    instead (see src/processing/structure.py), which preserves order.
+    """
+
+    remaining = []
+    found: list[dict] = []
+
+    for line in lines:
+        match = TABLE_PLACEHOLDER_RE.match(line.strip())
+
+        if match:
+            table = tables.get(int(match.group(1)))
+
+            if table:
+                found.append(table)
+
+            continue
+
+        remaining.append(line)
+
+    return remaining, found
+
+
+# ============================================================
+# Unified block output
+#
+# Both legal elements (Article/Annex, parsed below into
+# paragraphs/points/items/sections) and generic elements (see
+# generic_structure.py, parsed into paragraph/list/table blocks
+# directly) end up exposing the *same* "blocks" field:
+#
+#     [{"type": "paragraph", "text": ...},
+#      {"type": "list", "ordered": bool, "items": [...]},
+#      {"type": "table", "kind": ..., "rows": [...]}]
+#
+# so a chunker can walk elements/blocks the same way regardless of
+# which parser produced them. This section only adapts the *existing*
+# legal parse tree (paragraphs/points/items/sections/closing, built by
+# parse_article/parse_annex below, unchanged) into that shape; it does
+# not reparse anything.
+# ============================================================
+
+
+def _item_label(node: dict) -> str | None:
+    if node.get("number") is not None:
+        return f"{node['number']}."
+
+    if node.get("label"):
+        return f"({node['label']})"
+
+    return None
+
+
+def _render_item_text(node: dict) -> str:
+    label = _item_label(node)
+    text = node.get("text") or ""
+
+    if node.get("note"):
+        text = f"{text} ({node['note']})" if text else str(node["note"])
+
+    return f"{label} {text}".strip() if label else text
+
+
+def _has_nested_structure(node: dict) -> bool:
+    return any(
+        node.get(key)
+        for key in ("items", "points", "subpoints", "sections")
+    )
+
+
+def _blocks_from_item_list(nodes: list[dict]) -> list[dict]:
+    """A list of point/item dicts -> one list block, or, if any item
+    has its own nested structure, a header + nested blocks per item."""
+
+    if not nodes:
+        return []
+
+    if not any(_has_nested_structure(n) for n in nodes):
+        ordered = any(n.get("number") is not None for n in nodes)
+        items = [_render_item_text(n) for n in nodes]
+        items = [i for i in items if i]
+
+        return (
+            [{"type": "list", "ordered": ordered, "items": items}]
+            if items
+            else []
+        )
+
+    blocks = []
+
+    for node in nodes:
+        blocks.extend(_blocks_from_node(node))
+
+    return blocks
+
+
+def _blocks_from_node(node: dict) -> list[dict]:
+    """A single item/section/paragraph dict -> its blocks, recursively."""
+
+    blocks = []
+    label = _item_label(node)
+    header_bits = [b for b in (label, node.get("title")) if b]
+
+    lead_text = node.get("intro") or (
+        node.get("text") if _has_nested_structure(node) else None
+    )
+
+    if lead_text:
+        header_bits.append(lead_text)
+
+    if header_bits:
+        blocks.append({"type": "paragraph", "text": " ".join(header_bits)})
+    elif node.get("text"):
+        blocks.append({"type": "paragraph", "text": _render_item_text(node)})
+
+    for key in ("points", "items", "subpoints"):
+        if node.get(key):
+            blocks.extend(_blocks_from_item_list(node[key]))
+
+    if node.get("sections"):
+        for section in node["sections"]:
+            blocks.extend(_blocks_from_node(section))
+
+    return blocks
+
+
+def legal_element_to_blocks(element: dict) -> list[dict]:
+    """
+    Convert an already-parsed Article or Annex dict (as built by
+    parse_article()/parse_annex()) into the common block list.
+    """
+
+    blocks = []
+
+    if element.get("intro"):
+        blocks.append({"type": "paragraph", "text": element["intro"]})
+
+    if element.get("text"):
+        blocks.append({"type": "paragraph", "text": element["text"]})
+
+    for paragraph in element.get("paragraphs", []):
+        label = f"{paragraph['number']}." if paragraph.get("number") else None
+
+        if paragraph.get("text"):
+            text = paragraph["text"]
+            blocks.append(
+                {
+                    "type": "paragraph",
+                    "text": f"{label} {text}".strip() if label else text,
+                }
+            )
+        elif paragraph.get("intro"):
+            text = paragraph["intro"]
+            blocks.append(
+                {
+                    "type": "paragraph",
+                    "text": f"{label} {text}".strip() if label else text,
+                }
+            )
+
+        if paragraph.get("points"):
+            blocks.extend(_blocks_from_item_list(paragraph["points"]))
+
+    if element.get("items"):
+        blocks.extend(_blocks_from_item_list(element["items"]))
+
+    for section in element.get("sections", []):
+        blocks.extend(_blocks_from_node(section))
+
+    if element.get("closing"):
+        blocks.append(
+            {"type": "paragraph", "text": render_closing_text(element["closing"])}
+        )
+
+    return blocks
+
+
+def render_closing_text(closing) -> str:
+    """parse_closing() returns either a plain string or a structured
+    dict ({"place", "date", "signatories", ...}); render either as text."""
+
+    if isinstance(closing, str):
+        return closing
+
+    if isinstance(closing, dict):
+        parts = []
+
+        if closing.get("place") or closing.get("date"):
+            parts.append(
+                f"Done at {closing.get('place', '')}, "
+                f"{closing.get('date', '')}".strip().strip(",")
+            )
+
+        for signatory in closing.get("signatories", []):
+            if isinstance(signatory, dict):
+                parts.append(", ".join(str(v) for v in signatory.values() if v))
+            else:
+                parts.append(str(signatory))
+
+        return " ".join(p for p in parts if p)
+
+    return str(closing)
+
+
+def assign_block_ids(element: dict) -> None:
+    for number, block in enumerate(element.get("blocks", []), start=1):
+        block["id"] = f"{element['id']}.b{number}"
+
+
+# ============================================================
 # Article parsing
 # ============================================================
 
@@ -577,6 +874,8 @@ def parse_article(
     lines: list[str],
     article_number: str,
     chapter: dict | None,
+    id_prefix: str,
+    tables: dict[int, dict] | None = None,
 ) -> dict:
     """
     Parse an Article block.
@@ -586,16 +885,23 @@ def parse_article(
         - unnumbered paragraphs
         - legal points
         - closing/signatures
+
+    `id_prefix` is the document's short slug (e.g. "aiact"), used to
+    build a stable, document-scoped element ID. `tables` (see
+    extract_tables_from_markdown) resolves any table placeholders in
+    `lines`; the resulting table blocks are appended to article["blocks"].
     """
 
     article = {
         "type": "article",
-        "id": f"aiact:art{article_number}",
+        "id": f"{id_prefix}:art{article_number}",
         "number": article_number,
     }
 
     if chapter:
         article["chapter"] = chapter
+
+    lines, table_blocks = pop_table_blocks(lines, tables or {})
 
     body_lines = []
 
@@ -687,6 +993,9 @@ def parse_article(
 
     if closing:
         article["closing"] = closing
+
+    article["blocks"] = legal_element_to_blocks(article) + table_blocks
+    assign_block_ids(article)
 
     return article
 
@@ -1529,6 +1838,8 @@ def parse_generic_nested_numbered_items(
 def parse_annex(
     lines: list[str],
     annex_number: str,
+    id_prefix: str,
+    tables: dict[int, dict] | None = None,
 ) -> dict:
     """
     Parse an Annex.
@@ -1544,6 +1855,11 @@ def parse_annex(
 
     The parser is generic and does not contain
     Annex-specific logic.
+
+    `id_prefix` is the document's short slug (e.g. "aiact"), used to
+    build a stable, document-scoped element ID. `tables` (see
+    extract_tables_from_markdown) resolves any table placeholders in
+    `lines`; the resulting table blocks are appended to annex["blocks"].
     """
 
     annex_id_number = roman_to_int(
@@ -1552,9 +1868,16 @@ def parse_annex(
 
     annex = {
         "type": "annex",
-        "id": f"aiact:annex{annex_id_number}",
+        "id": f"{id_prefix}:annex{annex_id_number}",
         "number": annex_number,
     }
+
+    lines, table_blocks = pop_table_blocks(lines, tables or {})
+
+    def finish(annex: dict) -> dict:
+        annex["blocks"] = legal_element_to_blocks(annex) + table_blocks
+        assign_block_ids(annex)
+        return annex
 
     cleaned_lines = [
         clean_line(line)
@@ -1563,7 +1886,7 @@ def parse_annex(
     ]
 
     if not cleaned_lines:
-        return annex
+        return finish(annex)
 
     # --------------------------------------------------------
     # Title
@@ -1576,7 +1899,7 @@ def parse_annex(
     remaining_lines = cleaned_lines[1:]
 
     if not remaining_lines:
-        return annex
+        return finish(annex)
 
     # --------------------------------------------------------
     # Section-based Annex
@@ -1662,7 +1985,7 @@ def parse_annex(
 
         annex["sections"] = sections
 
-        return annex
+        return finish(annex)
 
     # --------------------------------------------------------
     # IMPORTANT:
@@ -1740,7 +2063,7 @@ def parse_annex(
         if items:
             annex["items"] = items
 
-        return annex
+        return finish(annex)
 
     # --------------------------------------------------------
     # No numbered structure.
@@ -1788,7 +2111,7 @@ def parse_annex(
         if items:
             annex["items"] = items
 
-        return annex
+        return finish(annex)
 
     # --------------------------------------------------------
     # No recognized list structure.
@@ -1798,7 +2121,7 @@ def parse_annex(
 
     annex["text"] = remaining_text
 
-    return annex
+    return finish(annex)
 
 
 # ============================================================
@@ -1830,6 +2153,7 @@ def extract_chapter(
 
 def parse_document(
     markdown: str,
+    id_prefix: str,
 ) -> list[dict]:
     """
     Parse the complete Markdown document into legal elements.
@@ -1839,13 +2163,26 @@ def parse_document(
         CHAPTER
         Article
         ANNEX
+
+    `id_prefix` is the document's short slug (e.g. "aiact"), used to
+    build stable, document-scoped element IDs so multiple documents
+    in the same store never collide (e.g. "aiact:art5" vs "gdpr:art5").
     """
 
-    raw_lines = markdown.splitlines()
+    raw_lines, tables = extract_tables_from_markdown(
+        markdown.splitlines()
+    )
 
     lines = []
 
     for line in raw_lines:
+        # A table placeholder must survive untouched: clean_line()
+        # would otherwise be harmless here too, but skip it explicitly
+        # for clarity rather than relying on that.
+        if TABLE_PLACEHOLDER_RE.match(line.strip()):
+            lines.append(line.strip())
+            continue
+
         cleaned = clean_line(line)
 
         if cleaned:
@@ -1948,6 +2285,8 @@ def parse_document(
                 article_lines,
                 article_number,
                 current_chapter,
+                id_prefix,
+                tables,
             )
 
             elements.append(article)
@@ -1998,6 +2337,8 @@ def parse_document(
             annex = parse_annex(
                 annex_lines,
                 annex_number,
+                id_prefix,
+                tables,
             )
 
             elements.append(annex)
@@ -2017,10 +2358,16 @@ def parse_document(
 def parse_structure_file(
     input_path: Path,
     output_path: Path,
+    metadata: DocumentMetadata,
 ) -> None:
     """
     Read cleaned Markdown, parse legal structure,
     and save JSON.
+
+    `metadata` supplies both the "instrument" block written into the
+    output JSON and the `id_prefix` (metadata.doc_id) used to build
+    stable, document-scoped element IDs — see DocumentMetadata in
+    src/common/docmeta.py.
     """
 
     markdown = input_path.read_text(
@@ -2028,11 +2375,13 @@ def parse_structure_file(
     )
 
     elements = parse_document(
-        markdown
+        markdown,
+        id_prefix=metadata.doc_id,
     )
 
     output = {
-        "instrument": INSTRUMENT,
+        "instrument": metadata.as_instrument(),
+        "structure_type": "legal",
         "elements": elements,
     }
 
@@ -2052,6 +2401,7 @@ def parse_structure_file(
 
     print(f"Input:   {input_path}")
     print(f"Output:  {output_path}")
+    print(f"Doc ID:  {metadata.doc_id}")
     print(
         f"Elements parsed: {len(elements)}"
     )
@@ -2060,24 +2410,81 @@ def parse_structure_file(
     )
 
 
+def run_for_stem(stem: str, extracted_dir: Path = EXTRACTED_DIR) -> None:
+    """Run structure extraction for a single document stem."""
+
+    metadata = load_metadata(stem)
+
+    input_path = extracted_dir / f"{stem}.clean.md"
+    output_path = extracted_dir / f"{stem}.structure.json"
+
+    if not input_path.exists():
+        print(
+            f"SKIP {stem}: no cleaned Markdown at {input_path} "
+            "(run cleaner.py first)."
+        )
+        return
+
+    parse_structure_file(
+        input_path=input_path,
+        output_path=output_path,
+        metadata=metadata,
+    )
+
+
 # ============================================================
 # Main
 # ============================================================
 
 
+def build_arg_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        description=(
+            "Extract chapters/articles/annexes from a cleaned "
+            "Markdown document into structured JSON."
+        )
+    )
+
+    parser.add_argument(
+        "--stem",
+        help=(
+            "Document stem shared by data/source/<stem>.* and "
+            "data/extracted/<stem>.*, e.g. 'eli_reg_2024_1689_oj_EN_TXT'. "
+            "Its metadata is read from "
+            "data/source/<stem>.meta.json (see src/common/docmeta.py)."
+        ),
+    )
+    parser.add_argument(
+        "--all",
+        action="store_true",
+        help="Process every document stem found in data/source/.",
+    )
+    parser.add_argument(
+        "--extracted-dir",
+        default=str(EXTRACTED_DIR),
+        help="Directory holding *.clean.md input / *.structure.json output.",
+    )
+
+    return parser
+
+
 if __name__ == "__main__":
+    args = build_arg_parser().parse_args()
+    extracted_dir = Path(args.extracted_dir)
 
-    input_file = Path(
-        "data/extracted/"
-        "eli_reg_2024_1689_oj_EN_TXT.clean.md"
-    )
+    if args.all:
+        stems = list_source_stems()
 
-    output_file = Path(
-        "data/extracted/"
-        "eli_reg_2024_1689_oj_EN_TXT.structure.json"
-    )
+        if not stems:
+            print("No documents found in data/source/.")
 
-    parse_structure_file(
-        input_path=input_file,
-        output_path=output_file,
-    )
+        for stem in stems:
+            run_for_stem(stem, extracted_dir)
+
+    elif args.stem:
+        run_for_stem(args.stem, extracted_dir)
+
+    else:
+        build_arg_parser().error(
+            "Provide --stem <name> or --all."
+        )

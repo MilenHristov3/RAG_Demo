@@ -1,5 +1,15 @@
+import argparse
+import sys
 from pathlib import Path
 import re
+
+# Allow `python src/processing/cleaner.py` to import the shared
+# metadata helper even when run as a loose script.
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+
+from src.common.docmeta import list_source_stems  # noqa: E402
+
+EXTRACTED_DIR = Path("data/extracted")
 
 
 def normalize_unicode_whitespace(text: str) -> str:
@@ -159,13 +169,67 @@ def clean_markdown_file(
     print("Cleaning completed.")
 
 
-if __name__ == "__main__":
+def run_for_stem(stem: str, extracted_dir: Path = EXTRACTED_DIR) -> None:
+    """Clean the raw Markdown for a single document stem."""
 
-    input_file = Path("data/extracted/eli_reg_2024_1689_oj_EN_TXT.md")
+    input_path = extracted_dir / f"{stem}.md"
+    output_path = extracted_dir / f"{stem}.clean.md"
 
-    output_file = Path("data/extracted/eli_reg_2024_1689_oj_EN_TXT.clean.md")
+    if not input_path.exists():
+        print(
+            f"SKIP {stem}: no extracted Markdown at {input_path} "
+            "(run converter.py / pdf_parser.py first)."
+        )
+        return
 
     clean_markdown_file(
-        input_path=input_file,
-        output_path=output_file,
+        input_path=input_path,
+        output_path=output_path,
     )
+
+
+def build_arg_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        description="Conservatively clean raw extracted Markdown."
+    )
+
+    parser.add_argument(
+        "--stem",
+        help=(
+            "Document stem, e.g. 'eli_reg_2024_1689_oj_EN_TXT'. "
+            "Reads data/extracted/<stem>.md, "
+            "writes data/extracted/<stem>.clean.md."
+        ),
+    )
+    parser.add_argument(
+        "--all",
+        action="store_true",
+        help="Process every document stem found in data/source/.",
+    )
+    parser.add_argument(
+        "--extracted-dir",
+        default=str(EXTRACTED_DIR),
+        help="Directory holding *.md input / *.clean.md output.",
+    )
+
+    return parser
+
+
+if __name__ == "__main__":
+    args = build_arg_parser().parse_args()
+    extracted_dir = Path(args.extracted_dir)
+
+    if args.all:
+        stems = list_source_stems()
+
+        if not stems:
+            print("No documents found in data/source/.")
+
+        for stem in stems:
+            run_for_stem(stem, extracted_dir)
+
+    elif args.stem:
+        run_for_stem(args.stem, extracted_dir)
+
+    else:
+        build_arg_parser().error("Provide --stem <name> or --all.")
