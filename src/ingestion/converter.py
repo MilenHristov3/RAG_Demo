@@ -2,18 +2,21 @@ import argparse
 import sys
 from pathlib import Path
 
-from .pdf_parser import convert_pdf
+from .pdf_parser import convert_pdf  # noqa: F401 — kept for direct callers
 
 # Allow `python src/ingestion/converter.py` to import the shared
 # metadata helper even when run as a loose script.
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 from src.common.docmeta import list_source_stems, meta_path  # noqa: E402
+from src.ingestion.registry import PROVIDERS, get_provider_spec  # noqa: E402
 
 SOURCE_DIR = Path("data/source")
 OUTPUT_DIR = Path("data/extracted")
 
 SUPPORTED_TYPES = {"pdf", "html", "txt", "docx", "xml"}
+
+DEFAULT_PROVIDER_ID = PROVIDERS[0].id
 
 
 def choose_file_type() -> str:
@@ -66,21 +69,62 @@ def choose_file(extension: str) -> Path | None:
         return None
 
 
-def convert_pdf_file(input_path: Path) -> None:
+def print_provider_menu() -> None:
+    print()
+    print("PDF conversion methods:")
+
+    for index, spec in enumerate(PROVIDERS, start=1):
+        tag = "" if spec.implemented else "  [not yet implemented]"
+        print(f"  {index}. {spec.label}  (--provider {spec.id}){tag}")
+
+
+def prompt_for_provider() -> str:
+    """Interactive menu for picking a PDF conversion method. Returns
+    the chosen provider's id, or the default if the entry is empty or
+    invalid — a bad entry never silently aborts the conversion."""
+
+    print_provider_menu()
+    raw = input(f"Choose a method [1. {PROVIDERS[0].id}]: ").strip()
+
+    if not raw:
+        return DEFAULT_PROVIDER_ID
+
+    try:
+        index = int(raw) - 1
+
+        if index < 0:
+            raise ValueError
+
+        return PROVIDERS[index].id
+    except (ValueError, IndexError):
+        print(f"'{raw}' is not one of the options above. Using default.")
+        return DEFAULT_PROVIDER_ID
+
+
+def convert_pdf_file(input_path: Path, provider_id: str = DEFAULT_PROVIDER_ID) -> None:
     stem = input_path.stem
 
     markdown_path = OUTPUT_DIR / f"{stem}.md"
     json_path = OUTPUT_DIR / f"{stem}.json"
     links_path = OUTPUT_DIR / f"{stem}.links.json"
 
-    convert_pdf(
+    spec = get_provider_spec(provider_id)
+
+    # Setup (reading .env, creating an API client) happens here, not
+    # at import time — so selecting "pymupdf" never requires
+    # langchain_community to be installed, and vice versa, and this is
+    # where a missing API key/package surfaces as a clear message
+    # (RuntimeError, caught in main()) rather than a stack trace.
+    provider = spec.factory()
+
+    provider.convert(
         input_path=input_path,
         markdown_path=markdown_path,
         json_path=json_path,
         links_path=links_path,
     )
 
-    warn_if_no_metadata(input_path.stem)
+    warn_if_no_metadata(stem)
 
 
 def warn_if_no_metadata(stem: str) -> None:
@@ -103,15 +147,19 @@ def warn_if_no_metadata(stem: str) -> None:
         )
 
 
-def convert_file_by_type(input_path: Path, file_type: str) -> None:
+def convert_file_by_type(
+    input_path: Path,
+    file_type: str,
+    provider_id: str = DEFAULT_PROVIDER_ID,
+) -> None:
     if file_type == "pdf":
-        convert_pdf_file(input_path)
+        convert_pdf_file(input_path, provider_id=provider_id)
     else:
         print(f"\n{file_type.upper()} parser is not implemented yet.")
         print("We'll add it next.")
 
 
-def run_batch() -> None:
+def run_batch(provider_id: str = DEFAULT_PROVIDER_ID) -> None:
     """Convert every supported source file in data/source/."""
 
     stems = list_source_stems()
@@ -137,7 +185,7 @@ def run_batch() -> None:
         print()
         print(f"Converting: {input_path}")
 
-        convert_file_by_type(input_path, file_type)
+        convert_file_by_type(input_path, file_type, provider_id=provider_id)
 
 
 def run_interactive() -> None:
@@ -155,7 +203,12 @@ def run_interactive() -> None:
     print()
     print(f"Selected: {input_path}")
 
-    convert_file_by_type(input_path, file_type)
+    provider_id = DEFAULT_PROVIDER_ID
+
+    if file_type == "pdf":
+        provider_id = prompt_for_provider()
+
+    convert_file_by_type(input_path, file_type, provider_id=provider_id)
 
 
 def build_arg_parser() -> argparse.ArgumentParser:
@@ -175,6 +228,20 @@ def build_arg_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Convert every supported file found in data/source/.",
     )
+    parser.add_argument(
+        "--provider",
+        choices=[spec.id for spec in PROVIDERS],
+        help=(
+            "PDF conversion method for --file/--all (ignored for other "
+            "file types, which aren't implemented yet). With neither "
+            "--file nor --all, the interactive menu asks for this instead."
+        ),
+    )
+    parser.add_argument(
+        "--list-providers",
+        action="store_true",
+        help="Print the available PDF conversion methods and exit.",
+    )
 
     return parser
 
@@ -182,19 +249,33 @@ def build_arg_parser() -> argparse.ArgumentParser:
 def main():
     args = build_arg_parser().parse_args()
 
-    if args.all:
-        run_batch()
-    elif args.file:
-        input_path = Path(args.file)
+    if args.list_providers:
+        print_provider_menu()
+        sys.exit(0)
 
-        if not input_path.exists():
-            print(f"ERROR: file not found: {input_path}")
-            return
+    try:
+        if args.all:
+            run_batch(provider_id=args.provider or DEFAULT_PROVIDER_ID)
+        elif args.file:
+            input_path = Path(args.file)
 
-        file_type = input_path.suffix.lstrip(".").lower()
-        convert_file_by_type(input_path, file_type)
-    else:
-        run_interactive()
+            if not input_path.exists():
+                print(f"ERROR: file not found: {input_path}")
+                return
+
+            file_type = input_path.suffix.lstrip(".").lower()
+            convert_file_by_type(
+                input_path, file_type, provider_id=args.provider or DEFAULT_PROVIDER_ID
+            )
+        else:
+            run_interactive()
+    except (RuntimeError, NotImplementedError) as exc:
+        # Expected, actionable failures (missing API key, missing
+        # package, unimplemented placeholder option) — show just the
+        # message, not a full traceback. Same convention as
+        # src/embeddings/embedder.py.
+        print(f"ERROR: {exc}")
+        sys.exit(1)
 
 
 if __name__ == "__main__":

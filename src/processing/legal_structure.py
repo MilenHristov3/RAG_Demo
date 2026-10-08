@@ -76,6 +76,146 @@ POINT_MARKER_RE = re.compile(
     re.IGNORECASE,
 )
 
+# A nested sub-list inside a point (e.g. "(h) ... following: (i) ...;
+# (ii) ...;") uses lower-case roman numerals. "(i)" alone is
+# indistinguishable from the single letter "i" by regex, and can even
+# coincidentally be the alphabetically-expected next top-level letter
+# (e.g. straight after point "(h)"). It is only recognisable as a
+# nested list's *start* by what follows it: a genuine top-level point
+# is never followed shortly after by "(ii)" (two-letter parenthesised
+# roman numerals never occur as top-level point markers in this
+# document's convention). Used to keep such a match out of the
+# top-level sequence in get_sequential_point_matches() below.
+ROMAN_SUBLIST_CONTINUATION_RE = re.compile(
+    r"\((ii|iii|iv|vi{1,3}|ix|xi{1,3})\)",
+    re.IGNORECASE,
+)
+
+
+def _starts_roman_sublist(text: str, after: int, window: int = 400) -> bool:
+    return bool(
+        ROMAN_SUBLIST_CONTINUATION_RE.search(text[after : after + window])
+    )
+
+
+# A nested list's own markers, once correctly separated from the outer
+# a/b/c/... sequence above, need their own parser: roman numerals
+# don't start at "a" (POINT_MARKER_RE / get_sequential_point_matches
+# only recognise sequences starting at "a"), they start at "i".
+ROMAN_POINT_MARKER_RE = re.compile(
+    r"\((i|ii|iii|iv|v|vi|vii|viii|ix|x|xi|xii)\)\s*",
+    re.IGNORECASE,
+)
+
+ROMAN_NUMERAL_SEQUENCE = [
+    "i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix", "x", "xi", "xii",
+]
+
+
+def get_sequential_roman_matches(text: str) -> list[re.Match]:
+    """Same idea as get_sequential_point_matches(), for a nested
+    roman-numeral sub-list: "(i) ... (ii) ... (iii) ...". Only a run
+    starting at (i) and incrementing through the roman sequence
+    counts; anything else is skipped, not treated as a break."""
+
+    matches = list(ROMAN_POINT_MARKER_RE.finditer(text))
+
+    if not matches:
+        return []
+
+    valid_matches: list[re.Match] = []
+
+    for match in matches:
+        label = match.group(1).lower()
+
+        if not valid_matches:
+            if label == "i":
+                valid_matches.append(match)
+
+            continue
+
+        previous_label = valid_matches[-1].group(1).lower()
+        previous_index = ROMAN_NUMERAL_SEQUENCE.index(previous_label)
+
+        expected = (
+            ROMAN_NUMERAL_SEQUENCE[previous_index + 1]
+            if previous_index + 1 < len(ROMAN_NUMERAL_SEQUENCE)
+            else None
+        )
+
+        if expected and label == expected:
+            valid_matches.append(match)
+
+    return valid_matches
+
+
+def split_nested_roman_subpoints(text: str) -> tuple[str, list[dict]]:
+    """Roman-numeral counterpart of split_nested_subpoints()."""
+
+    text = normalize_text(text)
+    matches = get_sequential_roman_matches(text)
+
+    if not matches:
+        return text, []
+
+    prefix = text[: matches[0].start()].strip()
+    subpoints = []
+
+    for index, match in enumerate(matches):
+        start = match.end()
+        end = (
+            matches[index + 1].start()
+            if index + 1 < len(matches)
+            else len(text)
+        )
+
+        subpoint_text = text[start:end].strip()
+
+        if not subpoint_text:
+            continue
+
+        subpoint = {
+            "label": match.group(1).lower(),
+            "text": normalize_text(subpoint_text),
+        }
+
+        references = extract_references(subpoint_text)
+
+        if references:
+            subpoint["references"] = references
+
+        subpoints.append(subpoint)
+
+    return prefix, subpoints
+
+
+def split_nested_subpoints_any(text: str) -> tuple[str, list[dict]]:
+    """
+    Try a lettered nested sub-list first ("(a) ... (b) ..."), then a
+    roman-numeral one ("(i) ... (ii) ..."), which is the other marker
+    convention this document uses for a point's own nested list.
+    Returns whichever actually found subpoints.
+    """
+
+    prefix, subpoints = split_nested_subpoints(text)
+
+    if subpoints:
+        return prefix, subpoints
+
+    return split_nested_roman_subpoints(text)
+
+# The PDF->Markdown conversion sometimes renders a point marker as a
+# Markdown bullet, e.g. "- (b) prohibitions ...", even though the
+# source PDF has no such bullet (only the first point in a sequence,
+# "(a) ...", is spared). Left in place, that leading "- " sits right
+# before POINT_MARKER_RE's match and gets sliced onto the END of the
+# *previous* point's text instead of being dropped, e.g. "...Union; -"
+# where the source just says "...Union;". Stripped before point
+# splitting runs, on the joined body text.
+BULLET_BEFORE_POINT_RE = re.compile(
+    r"[-\u2013\u2014\u2022\u00b7]\s+(?=\([a-zA-Z0-9]+\)\s)"
+)
+
 ANNEX_DASH_MARKER_RE = re.compile(
     r"(?<!\w)(?:—|–|-|•|·)\s*"
 )
@@ -172,12 +312,20 @@ def clean_line(line: str) -> str:
 def normalize_text(text: str) -> str:
     """
     Normalize whitespace without changing legal wording.
+
+    Also drops a spurious Markdown bullet inserted by the PDF->Markdown
+    conversion directly before a point marker (see BULLET_BEFORE_POINT_RE)
+    — this is conversion noise, not legal wording, and left in place it
+    gets sliced onto the end of the *previous* point's text by
+    split_legal_points() below.
     """
 
     text = text.replace("\u00a0", " ")
     text = text.replace("\u2009", " ")
     text = text.replace("\u200a", " ")
     text = text.replace("\u202f", " ")
+
+    text = BULLET_BEFORE_POINT_RE.sub("", text)
 
     text = re.sub(
         r"\s+",
@@ -400,10 +548,31 @@ def get_sequential_point_matches(
             ord(previous_label) + 1
         )
 
-        if label == expected:
+        is_ambiguous_roman_start = (
+            label in ("i", "v", "x")
+            and _starts_roman_sublist(text, match.end())
+        )
+
+        if label == expected and not is_ambiguous_roman_start:
             valid_matches.append(match)
-        else:
-            break
+
+        # Otherwise, do NOT break — just skip this match. A point can
+        # contain its own nested sub-list, e.g.
+        # "(h) ... following: (i) ...; (ii) ...". Two things can go
+        # wrong if a nested marker isn't a genuine continuation:
+        #   - its label doesn't match `expected` at all (e.g. a
+        #     nested "(i)" appearing right after point "(c)", where
+        #     "(d)" is expected), or
+        #   - its label *does* coincidentally match `expected` (e.g.
+        #     "(i)" straight after point "(h)"), but it's followed
+        #     shortly by "(ii)", which never happens for a genuine
+        #     top-level point in this document's convention.
+        # Either way, skipping it (instead of aborting the whole scan)
+        # lets the real continuation — wherever it occurs — still be
+        # found, and leaves the nested marker to be re-detected as a
+        # sub-list inside the *containing* point's own text by
+        # split_legal_points() below, instead of being lost or
+        # truncating everything after it.
 
     return valid_matches
 
@@ -455,8 +624,25 @@ def split_legal_points(
 
         point = {
             "label": label,
-            "text": normalize_text(point_text),
         }
+
+        # A point can itself introduce a nested roman-numeral sub-list
+        # (see ROMAN_SUBLIST_CONTINUATION_RE): "(h) ... following:
+        # (i) ...; (ii) ...". get_sequential_point_matches() above
+        # keeps such nested markers out of the *outer* a/b/c/...
+        # sequence, so they end up here, inside this point's own
+        # sliced text — recurse into it the same way an Annex's
+        # numbered item detects its own nested subpoints (see
+        # split_nested_subpoints / parse_nested_numbered_item).
+        nested_prefix, subpoints = split_nested_subpoints_any(
+            point_text
+        )
+
+        if subpoints:
+            point["text"] = normalize_text(nested_prefix)
+            point["subpoints"] = subpoints
+        else:
+            point["text"] = normalize_text(point_text)
 
         references = extract_references(
             point_text
@@ -709,9 +895,22 @@ def _item_label(node: dict) -> str | None:
     return None
 
 
+def _node_text(node: dict) -> str:
+    """
+    The descriptive text of a point/item/section node. Different
+    parsers in this file name it differently depending on structure
+    (a plain point: "text"; an annex numbered item: "category" —
+    see parse_nested_numbered_item() below; a dash/section intro:
+    "intro"), so every reader of a node's text goes through here
+    instead of picking one key and silently dropping the others.
+    """
+
+    return node.get("text") or node.get("category") or node.get("intro") or ""
+
+
 def _render_item_text(node: dict) -> str:
     label = _item_label(node)
-    text = node.get("text") or ""
+    text = _node_text(node)
 
     if node.get("note"):
         text = f"{text} ({node['note']})" if text else str(node["note"])
@@ -753,23 +952,41 @@ def _blocks_from_item_list(nodes: list[dict]) -> list[dict]:
 
 
 def _blocks_from_node(node: dict) -> list[dict]:
-    """A single item/section/paragraph dict -> its blocks, recursively."""
+    """
+    A single item/section/paragraph dict -> its blocks, recursively.
+
+    A node with nested content (points/items/subpoints/sections) gets a
+    header paragraph (label + title/intro) followed by its children's
+    blocks. A leaf node (no nested content) — even one sitting next to
+    siblings that *do* have nested content, e.g. a numbered list where
+    only some items have subpoints — gets a single paragraph with its
+    label and its own text; that text must not be dropped here just
+    because a sibling has children.
+    """
 
     blocks = []
     label = _item_label(node)
-    header_bits = [b for b in (label, node.get("title")) if b]
+    has_nested = _has_nested_structure(node)
 
-    lead_text = node.get("intro") or (
-        node.get("text") if _has_nested_structure(node) else None
-    )
+    if has_nested:
+        header_bits = [b for b in (label, node.get("title"), _node_text(node)) if b]
 
-    if lead_text:
-        header_bits.append(lead_text)
+        if header_bits:
+            blocks.append({"type": "paragraph", "text": " ".join(header_bits)})
+    elif node.get("title") and not _node_text(node):
+        # A leaf with a heading but no body text of its own (e.g. an
+        # empty section/point that was only ever a label + title).
+        bits = [b for b in (label, node.get("title")) if b]
 
-    if header_bits:
-        blocks.append({"type": "paragraph", "text": " ".join(header_bits)})
-    elif node.get("text"):
-        blocks.append({"type": "paragraph", "text": _render_item_text(node)})
+        if bits:
+            blocks.append({"type": "paragraph", "text": " ".join(bits)})
+    else:
+        # Plain leaf item: _render_item_text() already prepends the
+        # label ("1." / "(a)") to node["text"].
+        text = _render_item_text(node)
+
+        if text.strip():
+            blocks.append({"type": "paragraph", "text": text})
 
     for key in ("points", "items", "subpoints"):
         if node.get(key):
@@ -982,11 +1199,27 @@ def parse_article(
             )
 
     else:
-        paragraphs = (
-            parse_unnumbered_article_body(
-                body
+        # Some articles (e.g. Article 3, "Definitions") have no "1."
+        # paragraph numbering at all — the whole body is a top-level
+        # "(1) ... (2) ... (3) ..." list. Left to
+        # parse_unnumbered_article_body(), a lettered sub-list nested
+        # inside just ONE of those numbered items (e.g. definition
+        # (44) has its own "(a) ...; (b) ...;") gets mistaken for the
+        # *entire article's* point structure, since that's the first
+        # "(a)" found anywhere in the text — corrupting/duplicating
+        # everything from there to the end of the article. Prefer the
+        # numbered-list reading whenever one is actually present.
+        intro, items = parse_paren_numbered_items(body)
+
+        if items:
+            article["intro"] = intro
+            article["items"] = items
+        else:
+            paragraphs = (
+                parse_unnumbered_article_body(
+                    body
+                )
             )
-        )
 
     if paragraphs:
         article["paragraphs"] = paragraphs
@@ -1384,6 +1617,97 @@ def find_numbered_items(
     )
 
 
+PAREN_NUMBERED_ITEM_RE = re.compile(r"(?:^|\s)\((\d+)\)\s+")
+
+
+def get_sequential_paren_number_matches(
+    text: str,
+    minimum_length: int = 3,
+) -> list[re.Match]:
+    """
+    Find a genuine "(1) ... (2) ... (3) ..." top-level list, e.g. the
+    definitions in Article 3. Mirrors get_sequential_point_matches():
+    only a run starting at (1) and incrementing by exactly 1 each time
+    counts; a mismatched number (e.g. an unrelated cross-reference like
+    "Article 4, point (1)") is skipped rather than aborting the scan,
+    so the real continuation can still be found.
+
+    `minimum_length` guards against a body that merely happens to
+    contain one or two incidental "(N)" references — e.g. "(1) of
+    Article 4" — being mistaken for a real top-level numbered list.
+    Requiring several in a row is what distinguishes an actual
+    definitions-style list from citation noise.
+    """
+
+    matches = list(PAREN_NUMBERED_ITEM_RE.finditer(text))
+
+    if not matches:
+        return []
+
+    valid_matches: list[re.Match] = []
+
+    for match in matches:
+        number = int(match.group(1))
+
+        if not valid_matches:
+            if number == 1:
+                valid_matches.append(match)
+
+            continue
+
+        expected = int(valid_matches[-1].group(1)) + 1
+
+        if number == expected:
+            valid_matches.append(match)
+
+        # else: skip, don't abort — an incidental "(N)" reference
+        # elsewhere in the text shouldn't derail a real list that
+        # resumes later at the correct number.
+
+    if len(valid_matches) < minimum_length:
+        return []
+
+    return valid_matches
+
+
+def parse_paren_numbered_items(text: str) -> tuple[str, list[dict]]:
+    """
+    Parse a "(1) ... (2) ... (3) ..." top-level list (e.g. Article 3's
+    definitions), returning (intro, items). Each item is parsed with
+    parse_nested_numbered_item(), which already generically detects
+    whether that single item contains its own nested (a)/(b)/(c)
+    sub-list (e.g. definition (44) in Article 3) — no document- or
+    article-specific knowledge is used here.
+    """
+
+    matches = get_sequential_paren_number_matches(text)
+
+    if not matches:
+        return text.strip(), []
+
+    intro = text[: matches[0].start()].strip()
+    items = []
+
+    for index, match in enumerate(matches):
+        start = match.end()
+        end = (
+            matches[index + 1].start()
+            if index + 1 < len(matches)
+            else len(text)
+        )
+
+        body = text[start:end].strip()
+
+        if not body:
+            continue
+
+        items.append(
+            parse_nested_numbered_item(match.group(1), body)
+        )
+
+    return intro, items
+
+
 def split_nested_subpoints(
     text: str,
 ) -> tuple[str, list[dict]]:
@@ -1655,7 +1979,7 @@ def parse_nested_numbered_item(
     # --------------------------------------------------------
 
     prefix, subpoints = (
-        split_nested_subpoints(body)
+        split_nested_subpoints_any(body)
     )
 
     if subpoints:
